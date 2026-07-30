@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    transition: all 200ms;
+  }
+
+  .light-select::selection {
+    background-color: #22252f;
+    color: white;
+  }
+
+  .dark-select::selection {
+    background-color: white;
+    color: #22252f;
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+  }
+}
+
+@layer components {
+  .text-stroke {
+    -webkit-text-stroke: 0.6px #7777776e;
+  }
+}
+
+@layer utilities {
+  @keyframes managerDescriptionAnimation {
+    from {
+      background-position-x: 0%;
+    }
+    to {
+      background-position-x: 200%;
+    }
+  }
+
+  @keyframes loadingAnimation {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  #manager-description {
+    background-size: 200%;
+    animation: managerDescriptionAnimation 4s ease-in-out infinite;
+  }
+
+  .loadingAnimation {
+    animation: loadingAnimation 3.5s linear infinite;
+  }
+
+  .my-scroll {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #6c7fd8 transparent;
+  }
+
+  .my-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .my-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .my-scroll::-webkit-scrollbar-thumb {
+    background: #6c7fd8;
+    border-radius: 999px;
+    border: 1px solid transparent;
+  }
+}

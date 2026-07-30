@@ -1,0 +1,293 @@
+{
+    "links": {
+        "home": "Home",
+        "blog": "Blog",
+        "shop": "Shop",
+        "faq": "FAQ",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "user": {
+        "login": "Login",
+        "logout": "Log out",
+        "account": "Account",
+        "wishlist": "Wishlist",
+        "cart": "Cart",
+        "items": "Items"
+    },
+    "searchInputPlaceholder": "Search Products...",
+    "heroSection": {
+        "text1": "Explore <1>Healthy</1> & Fresh Fruits",
+        "text2": "Explore <1>Warm</1> Fast Food & Snacks",
+        "text3": "Explore <1>Organic</1> & Fresh Vegetables",
+        "discountText1": "Flat 30% off",
+        "discountText2": "Flat 20% off",
+        "discountText3": "Flat 30% off",
+        "btnText": "Shop now"
+    },
+    "categories": {
+        "items": "Items",
+        "vegetables": "Vegetables",
+        "fruits": "Fruits",
+        "coldDrinks": "Cold Drinks",
+        "bakery": "Bakery",
+        "fastFood": "Fast Food",
+        "snacks": "Snacks",
+        "exploreCategories1": "Explore",
+        "exploreCategories2": "Categories"
+    },
+    "dayOfTheDealSection": {
+        "text": "Day of the <1>deal</1>",
+        "secondaryText": "Don’t wait. The time will never be just right."
+    },
+    "productsCategory": {
+        "chocos": "Chocos",
+        "fruits": "Fruits",
+        "juice": "Juice",
+        "leaves": "Leaves",
+        "snacks": "Snacks",
+        "spices": "Spices",
+        "vegetable": "Vegetable",
+        "tuberRoot": "Tuber Root",
+        "chips": "Chips",
+        "sauces": "Sauces "
+    },
+    "specialCategories": {
+        "box1": {
+            "text1": "Tasty Snack & Fast Food",
+            "text2": "The Flavour of something special"
+        },
+        "box2": {
+            "text1": "Fresh Fruits & Vegetables",
+            "text2": "A healthy meal for every one"
+        },
+        "btnText": "Shop now"
+    },
+    "organicSection": {
+        "discount": "25% off",
+        "text": "Fresh & Organic Vegetables",
+        "btnText": "Shop Now"
+    },
+    "services": {
+        "box1": {
+            "text1": "Free Shipping",
+            "text2": "Free shipping on all Us order or above $200"
+        },
+        "box2": {
+            "text1": "24×7 Support",
+            "text2": "Contact us 24 hours a day, 7 days a week"
+        },
+        "box3": {
+            "text1": "30 Days Returnt",
+            "text2": "Simply return it within 30 days for an exchange"
+        },
+        "box4": {
+            "text1": "Payment Secure",
+            "text2": "Contact us 24 hours a day, 7 days a week"
+        }
+    },
+    "topVendors": {
+        "text": "Top <1>Vendors</1>",
+        "secondaryText": "Discover Our Trusted Partners: Excllence & Reliability in Every choice",
+        "box1": {
+            "title": "Mario Fashion Pvt. Ltd."
+        },
+        "box2": {
+            "title": "Mira Fashion Pvt. Ltd."
+        },
+        "box3": {
+            "title": "Ealna Fashion Pvt. Ltd."
+        },
+        "box4": {
+            "title": "Mario Fashion Pvt. Ltd."
+        },
+        "fruits": "Fruits",
+        "vegetables": "Vegetables",
+        "snacks": "Snacks",
+        "sales": "Sales"
+    },
+    "managerSection": {
+        "managerName": "Isabella Oliver",
+        "manager": "Manager",
+        "description": "We're thrilled that you've visited our store! We're committed to providing you with the best products at high quality and affordable prices. We believe that your satisfaction with your purchase is our top priority. If you have any questions or need assistance, please don't hesitate to contact us. We're always here to help and strive to make your shopping experience the best it can be."
+    },
+    "articlesSection": {
+        "box1": {
+            "text": "Marketing Guide: 5 Steps to Success."
+        },
+        "box2": {
+            "text": "Best way to solve business deal issue."
+        },
+        "box3": {
+            "text": "Business ideas to grow your business."
+        },
+        "box4": {
+            "text": "31 customer stats know in 2020."
+        },
+        "organic": "organic"
+    },
+    "footer": {
+        "headerText": "Blueberry is the largest grocery supermarket. Get your daily necessities from our store.",
+        "text": "This website was created by <1>Alireza Shabani</1>. All rights reserved. No part of this site may be reproduced or used without written permission.",
+        "category": "Category",
+        "company": "Company",
+        "account": "Account",
+        "contact": "Contact",
+        "links": {
+            "company": {
+                "aboutUs": "About us",
+                "contactUs": "Contact us",
+                "delivery": "Delivery",
+                "terms&Conditions": "Terms & conditions",
+                "legelNotice": "Legal Notice",
+                "securePayment": "Secure payment"
+            },
+            "account": {
+                "signIn": "Sign In",
+                "viewCart": "View Cart",
+                "returnPolicy": "Return Policy",
+                "becomeAVendor": "Become a Vendor",
+                "payments": "Payments"
+            },
+            "contact": {
+                "contactText": "123 London Street, Flat 4B, Westminster, London, SW1A 1AA, United Kingdom"
+            }
+        }
+    },
+    "loginPage": {
+        "login": "Log <1>In</1>",
+        "register": "Register",
+        "description": "Best place to buy and sell digital products",
+        "email": {
+            "label": "Email*",
+            "placeholder": "Enter Your Email"
+        },
+        "password": {
+            "label": "Password*",
+            "placeholder": "Enter Your Password"
+        },
+        "forgotPassword": "Forgot Password?"
+    },
+    "registerPage": {
+        "register": "Register",
+        "description": "Best place to buy and sell digital products",
+        "firstName": {
+            "label": "First Name*",
+            "placeholder": "Enter your first name"
+        },
+        "lastName": {
+            "label": "Last Name*",
+            "placeholder": "Enter your last name"
+        },
+        "email": {
+            "label": "Email*",
+            "placeholder": "Enter Your Email"
+        },
+        "phoneNumber": {
+            "label": "Phone Number*",
+            "placeholder": "Enter your phone number"
+        },
+        "password": {
+            "label": "Password*",
+            "placeholder": "Enter Your Password"
+        },
+        "confirmPassword": {
+            "label": "Confirm Password*",
+            "placeholder": "Confirm Password"
+        },
+        "address": {
+            "label": "Address*",
+            "placeholder": "Address Line 1"
+        },
+        "city": {
+            "label": "City*",
+            "placeholder": "Select City"
+        },
+        "postCode": {
+            "label": "Post Code*",
+            "placeholder": "Post Code"
+        },
+        "submit": "Register"
+    },
+    "FAQPage": {
+        "h1": "Frequently Asked <1>Questions</1>",
+        "description": "Customer Service Management",
+        "title1": "What is the multi-vendor services?",
+        "title2": "How to buy many products at a time?",
+        "title3": "Refund policy for customer",
+        "title4": "Exchange policy for customer",
+        "title5": "Give away products available",
+        "title6": "Exchange policy for customer"
+    },
+    "contactPage": {
+        "title": "Get In <1>Touch</1>",
+        "description": "Please select a topic below related to your inquiry. If you don't find what you need, fill out our contact form.",
+        "firstName": "Enter Your First Name",
+        "lastName": "Enter Your Last Name",
+        "email": "Enter Your Email",
+        "phoneNumber": "Enter Your Phone Number",
+        "comment": "Please leave your comments here…",
+        "submit": "Submit"
+    },
+    "validation": {
+        "firstNameRequired": "First name is required",
+        "lastNameRequired": "Last name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneRequired": "Phone number is required",
+        "passwordRequired": "Password is required",
+        "passwordMin": "Password must be at least 8 characters",
+        "confirmPasswordRequired": "Please confirm your password",
+        "passwordsMustMatch": "Passwords must match",
+        "addressRequired": "Address is required",
+        "cityRequired": "Please select a city",
+        "postCodeRequired": "Post code is required",
+        "loginErrorMessage": "Invalid email or password. Please try again.",
+        "registerErrorMessage": "Registration failed. Please try again.",
+        "profileErrorMessage": "Failed to save your profile information. Please try again.",
+        "loggingIn": "Logging in...",
+        "registering": "Creating account...",
+        "success": {
+            "login": "Logged in successfully.",
+            "register": "Account created successfully.",
+            "logout": "You have been logged out successfully."
+        },
+        "serverError": "Something went wrong. Please try again."
+    },
+    "summary": {
+        "summary": "Summary",
+        "country": "Country",
+        "region/state": "Region/State",
+        "sub-total": "Sub-Total",
+        "deliveryCharges": "Delivery Charges",
+        "couponDiscount": "Coupon Discount",
+        "couponCode": "Coupon Code",
+        "totalAmount": "Total Amount",
+        "estimatedDelivery": "Estimated Delivery",
+        "applyCoupon": "Apply Coupon",
+        "apply": "Apply",
+        "couponCodePlaceholder": "Enter Your Coupon Code"
+    },
+    "cartProducts": {
+        "product": "Product",
+        "quantity": "Quantity",
+        "price": "Price",
+        "total": "Total",
+        "successAddedToCart": "Item added to cart successfully.",
+        "cartItemUpdate": "Cart item quantity updated.",
+        "failedToIncreaseQuantity": "Failed to increase item quantity.",
+        "failedToDecreaseQuantity": "Failed to decrease item quantity.",
+        "addToCart": "Add to Cart"
+    },
+    "about": {
+        "h1": "About the <1>BlueBerry</1>",
+        "h2": "Farm-fresh Goodness, just a click Away.",
+        "vendors": "Vendors",
+        "sales": "Sales",
+        "customers": "Customers",
+        "ourServices": "Our <1>Services</1>",
+        "ourServicesDescription": "Customer service should not be a department. It should be the entire company.",
+        "ourTeam": "Our <1>Team</1>",
+        "ourTeamDescription": "Meet our expert team members."
+    }
+}

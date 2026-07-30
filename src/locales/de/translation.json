@@ -1,0 +1,293 @@
+{
+    "links": {
+        "home": "Startseite",
+        "blog": "Blog",
+        "shop": "Geschäft",
+        "faq": "FAQ",
+        "about": "Über uns",
+        "contact": "Kontakt"
+    },
+    "user": {
+        "login": "Anmelden",
+        "logout": "Abmelden",
+        "account": "Mein Konto",
+        "wishlist": "Wunschliste",
+        "cart": "Warenkorb",
+        "items": "Artikel"
+    },
+    "searchInputPlaceholder": "Produkte suchen...",
+    "heroSection": {
+        "text1": "Entdecke <1>gesunde</1> und frische Früchte",
+        "text2": "Entdecke <1>warmes</1> Fast Food und Snacks",
+        "text3": "Entdecke <1>biologische</1> und frische Gemüse",
+        "discountText1": "30 % Rabatt",
+        "discountText2": "20 % Rabatt",
+        "discountText3": "30 % Rabatt",
+        "btnText": "Jetzt shoppen"
+    },
+    "categories": {
+        "items": "Artikel",
+        "vegetables": "Gemüse",
+        "fruits": "Obst",
+        "coldDrinks": "Kaltgetränke",
+        "bakery": "Bäckerei",
+        "fastFood": "Fast Food",
+        "snacks": "Snacks",
+        "exploreCategories1": "Kategorien",
+        "exploreCategories2": "Erkunden"
+    },
+    "dayOfTheDealSection": {
+        "text": "Tag des <1>Angebots</1>",
+        "secondaryText": "Warte nicht. Die Zeit wird nie genau richtig sein."
+    },
+    "productsCategories": {
+        "chocos": "Chocos",
+        "fruits": "Früchte",
+        "juice": "Saft",
+        "leaves": "Blätter",
+        "snacks": "Knabbereien",
+        "spices": "Gewürze",
+        "vegetable": "Gemüse",
+        "tuberRoot": "Knollen & Wurzeln",
+        "chips": "Chips",
+        "sauces": "Soßen "
+    },
+    "specialCategories": {
+        "box1": {
+            "text1": "Leckere Snacks & Fast Food",
+            "text2": "Der Geschmack von etwas Besonderem"
+        },
+        "box2": {
+            "text1": "Frisches Obst & Gemüse",
+            "text2": "Eine gesunde Mahlzeit für alle"
+        },
+        "btnText": "Jetzt shoppen"
+    },
+    "organicSection": {
+        "discount": "25% Rabatt",
+        "text": "Frisches & Bio-Gemüse",
+        "btnText": "Jetzt Shoppen"
+    },
+    "services": {
+        "box1": {
+            "text1": "Kostenfreie Lieferung",
+            "text2": "Kostenfreie Lieferung für alle US-Bestellungen über $200"
+        },
+        "box2": {
+            "text1": "24 Stunden × 7 Tage Support",
+            "text2": "Kontaktieren Sie uns 24 Stunden täglich, 7 Tage die Woche"
+        },
+        "box3": {
+            "text1": "30-Tage-Rückgaberecht",
+            "text2": "Einfacher Umtausch innerhalb von 30 Tagen"
+        },
+        "box4": {
+            "text1": "Sichere Zahlung",
+            "text2": "Kontaktieren Sie uns 24 Stunden täglich, 7 Tage die Woche"
+        }
+    },
+    "topVendors": {
+        "text": "Top-<1>Anbieter</1>",
+        "secondaryText": "Entdecken Sie unsere vertrauenswürdigen Partner: Exzellenz und Zuverlässigkeit bei jeder Wahl",
+        "box1": {
+            "title": "Mario Fashion Pvt. Ltd."
+        },
+        "box2": {
+            "title": "Mira Fashion Pvt. Ltd."
+        },
+        "box3": {
+            "title": "Ealna Fashion Pvt. Ltd."
+        },
+        "box4": {
+            "title": "Mario Fashion Pvt. Ltd."
+        },
+        "fruits": "Früchte",
+        "vegetables": "Gemüse",
+        "snacks": "Snacks",
+        "sales": "Verkauf"
+    },
+    "managerSection": {
+        "managerName": "Isabella Oliver",
+        "manager": "Manager",
+        "description": "Wir freuen uns sehr, dass Sie unseren Shop besuchen! Wir bemühen uns, Ihnen die besten Produkte in hoher Qualität und zu fairen Preisen anzubieten. Wir glauben, dass Ihre Zufriedenheit mit Ihrem Kauf unser wichtigstes Ziel ist. Wenn Sie Fragen haben oder Hilfe benötigen, zögern Sie bitte nicht, uns zu kontaktieren. Wir sind immer bereit, Ihnen zu helfen und bemühen uns, Ihr Einkaufserlebnis zu einem unvergesslichen Erlebnis zu machen."
+    },
+    "articlesSection": {
+        "box1": {
+            "text": "Marketing-Leitfaden: 5 Schritte zum Erfolg."
+        },
+        "box2": {
+            "text": "Beste Weg, um Geschäftsprobleme zu lösen."
+        },
+        "box3": {
+            "text": "Geschäftsideen, um Ihr Unternehmen zu wachsen."
+        },
+        "box4": {
+            "text": "31 Kundenstatistiken, die Sie 2020 kennen sollten."
+        },
+        "organic": "Organisch"
+    },
+    "footer": {
+        "headerText": "Blueberry ist der größte Supermarkt. Besorgen Sie sich bei uns alles für den täglichen Bedarf.",
+        "text": "Diese Website wurde von <1>Alireza Shabani</1> erstellt. Alle Rechte vorbehalten. Kein Teil dieser Seite darf ohne schriftliche Genehmigung reproduziert oder verwendet werden.",
+        "category": "Kategorien",
+        "company": "Unternehmen",
+        "account": "Konto",
+        "contact": "Kontakt",
+        "links": {
+            "company": {
+                "aboutUs": "Über uns",
+                "contactUs": "Kontaktieren Sie uns",
+                "delivery": "Lieferung",
+                "terms&Conditions": "Geschäftsbedingungen",
+                "legelNotice": "Rechtshinweis",
+                "securePayment": "Sichere Zahlung"
+            },
+            "account": {
+                "signIn": "Anmelden",
+                "viewCart": "Warenkorb anzeigen",
+                "returnPolicy": "Rückgaberecht",
+                "becomeAVendor": "Verkäufer werden",
+                "payments": "Zahlungen"
+            },
+            "contact": {
+                "contactText": "123 London Street, Flat 4B, Westminster, London, SW1A 1AA, United Kingdom"
+            }
+        }
+    },
+    "loginPage": {
+        "login": "Anmelden",
+        "register": "Registrieren",
+        "description": "Der beste Ort zum Kaufen und Verkaufen digitaler Produkte",
+        "email": {
+            "label": "E-Mail*",
+            "placeholder": "Geben Sie Ihre E-Mail ein"
+        },
+        "password": {
+            "label": "Passwort*",
+            "placeholder": "Geben Sie Ihr Passwort ein"
+        },
+        "forgotPassword": "Passwort vergessen?"
+    },
+    "registerPage": {
+        "register": "Registrieren",
+        "description": "Der beste Ort zum Kaufen und Verkaufen digitaler Produkte",
+        "firstName": {
+            "label": "Vorname*",
+            "placeholder": "Geben Sie Ihren Vornamen ein"
+        },
+        "lastName": {
+            "label": "Nachname*",
+            "placeholder": "Geben Sie Ihren Nachnamen ein"
+        },
+        "email": {
+            "label": "E-Mail*",
+            "placeholder": "Geben Sie Ihre E-Mail ein"
+        },
+        "phoneNumber": {
+            "label": "Telefonnummer*",
+            "placeholder": "Geben Sie Ihre Telefonnummer ein"
+        },
+        "password": {
+            "label": "Passwort*",
+            "placeholder": "Geben Sie Ihr Passwort ein"
+        },
+        "confirmPassword": {
+            "label": "Passwort bestätigen*",
+            "placeholder": "Bestätigen Sie Ihr Passwort"
+        },
+        "address": {
+            "label": "Adresse*",
+            "placeholder": "Adresse Zeile 1"
+        },
+        "city": {
+            "label": "Stadt*",
+            "placeholder": "Stadt wählen"
+        },
+        "postCode": {
+            "label": "Postleitzahl*",
+            "placeholder": "Postleitzahl"
+        },
+        "submit": "Registrieren"
+    },
+    "FAQPage": {
+        "h1": "Häufig gestellte <1>Fragen</1>",
+        "description": "Kunden-Service-Management",
+        "title1": "Was sind Multi-Vendor-Dienste?",
+        "title2": "Wie kann ich mehrere Produkte auf einmal kaufen?",
+        "title3": "Rückgaberichtlinie für Kunden",
+        "title4": "Umtauschrichtlinie für Kunden",
+        "title5": "Kostenlose Produkte verfügbar",
+        "title6": "Umtauschrichtlinie für Kunden"
+    },
+    "contactPage": {
+        "title": "Kontakt <1>aufnehmen</1>",
+        "description": "Bitte wählen Sie unten ein Thema aus, das mit Ihrer Anfrage zusammenhängt. Wenn Sie nicht finden, was Sie benötigen, füllen Sie bitte unser Kontaktformular aus.",
+        "firstName": "Vorname eingeben",
+        "lastName": "Nachname eingeben",
+        "email": "E-Mail-Adresse eingeben",
+        "phoneNumber": "Telefonnummer eingeben",
+        "comment": "Bitte hinterlassen Sie hier Ihre Kommentare…",
+        "submit": "Senden"
+    },
+    "validation": {
+        "firstNameRequired": "Vorname ist erforderlich",
+        "lastNameRequired": "Nachname ist erforderlich",
+        "emailRequired": "E-Mail-Adresse ist erforderlich",
+        "emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+        "phoneRequired": "Telefonnummer ist erforderlich",
+        "passwordRequired": "Passwort ist erforderlich",
+        "passwordMin": "Das Passwort muss mindestens 8 Zeichen lang sein",
+        "confirmPasswordRequired": "Bitte bestätigen Sie Ihr Passwort",
+        "passwordsMustMatch": "Die Passwörter stimmen nicht überein",
+        "addressRequired": "Adresse ist erforderlich",
+        "cityRequired": "Bitte wählen Sie eine Stadt aus",
+        "postCodeRequired": "Postleitzahl ist erforderlich",
+        "loginErrorMessage": "Ungültige E-Mail-Adresse oder falsches Passwort. Bitte versuchen Sie es erneut.",
+        "registerErrorMessage": "Die Registrierung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        "profileErrorMessage": "Ihre Profildaten konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+        "loggingIn": "Anmeldung läuft...",
+        "registering": "Konto wird erstellt...",
+        "success": {
+            "login": "Erfolgreich angemeldet.",
+            "register": "Konto erfolgreich erstellt.",
+            "logout": "Sie wurden erfolgreich abgemeldet."
+        },
+        "serverError": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut."
+    },
+    "summary": {
+        "summary": "Zusammenfassung",
+        "country": "Land",
+        "region/state": "Region/Bundesland",
+        "sub-total": "Zwischensumme",
+        "deliveryCharges": "Versandkosten",
+        "couponDiscount": "Gutscheinrabatt",
+        "couponCode": "Gutscheincode",
+        "totalAmount": "Gesamtsumme",
+        "estimatedDelivery": "Voraussichtliche Lieferung",
+        "applyCoupon": "Gutschein anwenden",
+        "apply": "Anwenden",
+        "couponCodePlaceholder": "Gutscheincode eingeben"
+    },
+    "cartProducts": {
+        "product": "Produkt",
+        "quantity": "Menge",
+        "price": "Preis",
+        "total": "Gesamt",
+        "successAddedToCart": "Artikel wurde erfolgreich zum Warenkorb hinzugefügt.",
+        "cartItemUpdate": "Artikelmenge im Warenkorb wurde aktualisiert.",
+        "failedToIncreaseQuantity": "Die Artikelmenge konnte nicht erhöht werden.",
+        "failedToDecreaseQuantity": "Die Artikelmenge konnte nicht verringert werden.",
+        "addToCart": "In den Warenkorb"
+    },
+    "about": {
+        "h1": "Über <1>BlueBerry</1>",
+        "h2": "Frische vom Bauernhof – nur einen Klick entfernt.",
+        "vendors": "Lieferanten",
+        "sales": "Verkäufe",
+        "customers": "Kunden",
+        "ourServices": "Unsere <1>Dienstleistungen</1>",
+        "ourServicesDescription": "Kundenservice sollte keine Abteilung sein. Er sollte das gesamte Unternehmen sein.",
+        "ourTeam": "Unser <1>Team</1>",
+        "ourTeamDescription": "Lernen Sie unsere erfahrenen Teammitglieder kennen."
+    }
+}
