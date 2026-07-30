@@ -227,7 +227,17 @@
         "email": "E-Mail-Adresse eingeben",
         "phoneNumber": "Telefonnummer eingeben",
         "comment": "Bitte hinterlassen Sie hier Ihre Kommentare…",
-        "submit": "Senden"
+        "submit": "Senden",
+        "messages": {
+            "firstNameRequired": "Vorname ist erforderlich.",
+            "lastNameRequired": "Nachname ist erforderlich.",
+            "emailRequired": "E-Mail ist erforderlich.",
+            "messageRequired": "Nachricht ist erforderlich.",
+            "invalidFirstName": "Der Vorname muss zwischen 3 und 40 Zeichen lang sein.",
+            "invalidLastName": "Der Nachname muss zwischen 3 und 40 Zeichen lang sein.",
+            "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+            "invalidMessage": "Die Nachricht muss mindestens 10 Zeichen lang sein."
+        }
     },
     "validation": {
         "firstNameRequired": "Vorname ist erforderlich",

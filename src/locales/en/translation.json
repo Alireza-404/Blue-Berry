@@ -227,7 +227,17 @@
         "email": "Enter Your Email",
         "phoneNumber": "Enter Your Phone Number",
         "comment": "Please leave your comments here…",
-        "submit": "Submit"
+        "submit": "Submit",
+        "messages": {
+            "firstNameRequired": "First name is required.",
+            "lastNameRequired": "Last name is required.",
+            "emailRequired": "Email is required.",
+            "messageRequired": "Message is required.",
+            "invalidFirstName": "First name must be between 3 and 40 characters.",
+            "invalidLastName": "Last name must be between 3 and 40 characters.",
+            "invalidEmail": "Please enter a valid email address.",
+            "invalidMessage": "Message must be at least 10 characters."
+        }
     },
     "validation": {
         "firstNameRequired": "First name is required",
