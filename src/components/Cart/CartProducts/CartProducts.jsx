@@ -1,7 +1,12 @@
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
 
 import { useEffect, useState } from "react";
-import { AiOutlineDelete, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
+import {
+  AiOutlineDelete,
+  AiOutlineMinus,
+  AiOutlinePlus,
+  AiOutlineShoppingCart,
+} from "react-icons/ai";
 import { IoTrash, IoTrashOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -65,13 +70,13 @@ export default function CartProducts() {
 
     const success = await updateCartItemQuantity(id, newQuantity);
     if (!success) {
-      setIdsForUpdateQuantity((prev) => prev.filter((id) => id !== item.id));
+      removeUpdatingId(id);
 
       dispatch(
         showToast({
           type: "error",
           message: t("cartProducts.failedToIncreaseQuantity"),
-        }),
+        })
       );
 
       return;
@@ -81,9 +86,9 @@ export default function CartProducts() {
       updateQuantity({
         cartId: id,
         quantity: newQuantity,
-      }),
+      })
     );
-    setIdsForUpdateQuantity((prev) => prev.filter((id) => id !== item.id));
+    removeUpdatingId(id);
   };
 
   const handleDecreaseQuantity = async (item) => {
@@ -105,7 +110,7 @@ export default function CartProducts() {
         showToast({
           type: "error",
           message: t("cartProducts.failedToDecreaseQuantity"),
-        }),
+        })
       );
 
       return;
@@ -115,7 +120,7 @@ export default function CartProducts() {
       updateQuantity({
         cartId: id,
         quantity: newQuantity,
-      }),
+      })
     );
     removeUpdatingId(id);
   };
@@ -294,7 +299,23 @@ export default function CartProducts() {
                   </tr>
                 ))
               ) : (
-                <tr></tr>
+                <tr>
+                  <td colSpan={5} className="h-72">
+                    <div className="flex flex-col items-center justify-center h-full gap-y-3">
+                      <span className="text-6xl text-primary">
+                        <AiOutlineShoppingCart />
+                      </span>
+
+                      <h3 className="text-2xl font-bold text-TB dark:text-white">
+                        {t("cartProducts.emptyCart")}
+                      </h3>
+
+                      <p className="max-w-sm text-center text-secondary dark:text-secondary-D">
+                        {t("cartProducts.emptyCartDescription")}
+                      </p>
+                    </div>
+                  </td>
+                </tr>
               )}
             </tbody>
           )}

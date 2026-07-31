@@ -21,6 +21,7 @@ import { clearCart, setCartItems } from "./redux/Slices/CartItemsSlice";
 
 import "./App.css";
 import { useTranslation } from "react-i18next";
+import SingleProduct from "./pages/SingleProduct";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -81,6 +82,7 @@ function App() {
   return (
     <BrowserRouter>
       <Toast />
+
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
@@ -117,6 +119,7 @@ function App() {
           }
         />
         <Route path="/about" element={<AboutPage />} />
+        <Route path="/products/:id" element={<SingleProduct />} />
       </Routes>
     </BrowserRouter>
   );

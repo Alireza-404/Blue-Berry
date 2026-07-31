@@ -58,7 +58,7 @@ export default function Navbar() {
 
     dispatch(clearUser());
     dispatch(
-      showToast({ type: "success", message: t("validation.success.logout") }),
+      showToast({ type: "success", message: t("validation.success.logout") })
     );
     navigate("/", { replace: true });
   };
@@ -130,7 +130,7 @@ export default function Navbar() {
                   <span
                     key={i}
                     className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
-                    cursor-pointer flex items-center gap-x-1.5 h-full animate-pulse"
+                    flex items-center gap-x-1.5 h-full animate-pulse"
                   >
                     <div
                       className="w-10 h-10 bg-secondary/50 dark:bg-secondary-D/50

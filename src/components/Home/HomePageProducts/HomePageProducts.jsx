@@ -16,6 +16,11 @@ import { replace, useNavigate } from "react-router-dom";
 import { showToast } from "../../../redux/Slices/ToastSlice";
 import { setCartItems } from "../../../redux/Slices/CartItemsSlice";
 import { getCartItems } from "../../../services/CartService";
+import ShowProductModal from "../ShowProductModal/ShowProductModal";
+import {
+  addProductToCart,
+  getProducts,
+} from "../../../services/ProductsService";
 
 export default function HomePageProducts() {
   const { t } = useTranslation();
@@ -25,9 +30,11 @@ export default function HomePageProducts() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showProduct, setShowProduct] = useState(false);
+  const [productForShow, setProductForShow] = useState([]);
 
   useEffect(() => {
-    getProducts();
+    handleGetProducts();
   }, []);
 
   useEffect(() => {
@@ -50,74 +57,60 @@ export default function HomePageProducts() {
     ScrollTrigger.refresh();
   }, [loading]);
 
-  const getProducts = async () => {
+  const handleGetProducts = async () => {
     setLoading(true);
-    const { data, error } = await supabase.from("products").select("*");
 
-    if (error) {
+    const result = await getProducts();
+
+    if (!result.success) {
       console.log(error);
       setLoading(false);
     } else {
-      setProducts(data);
+      setProducts(result.data);
       setLoading(false);
     }
   };
 
-  const addToCart = async (product) => {
+  const handleAddToCart = async () => {
     if (!user) {
       navigate("/auth/login", { replace: true });
       return;
     }
 
-    const { data: item, error: fetchError } = await supabase
-      .from("cart")
-      .select("*")
-      .eq("user_id", user.id)
-      .eq("product_id", product.id)
-      .maybeSingle();
+    const result = await addProductToCart(user.id, product.id);
 
-    if (fetchError) {
-      console.log(fetchError.message);
+    if (result.type === "fetch_error") {
       return;
     }
 
-    if (item) {
-      const { error } = await supabase
-        .from("cart")
-        .update({ quantity: item.quantity + 1 })
-        .eq("id", item.id);
+    if (result.type === "updated_error") {
+      return;
+    }
 
-      if (error) {
-        console.log(error.message);
-        return;
-      }
+    if (result.type === "insert_error") {
+      return;
+    }
 
+    if (result.type === "unknown_error") {
+      return;
+    }
+
+    if (result.type === "added") {
+      dispatch(
+        showToast({
+          type: "success",
+          message: t("cartProducts.successAddedToCart"),
+        })
+      );
+    }
+
+    if (result.type === "updated") {
       dispatch(
         showToast({
           type: "success",
           message: t("cartProducts.cartItemUpdate"),
-        }),
+        })
       );
-
-      return;
-    }
-
-    dispatch(
-      showToast({
-        type: "success",
-        message: t("cartProducts.successAddedToCart"),
-      }),
-    );
-
-    const { error } = await supabase.from("cart").insert({
-      user_id: user.id,
-      product_id: product.id,
-      quantity: 1,
-    });
-
-    if (error) {
-      console.log(error.message);
-      return;
     }
 
     const data = await getCartItems(user.id);
@@ -126,8 +119,9 @@ export default function HomePageProducts() {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {!loading
-        ? products.map((product) => (
+      {!loading ? (
+        <>
+          {products.map((product) => (
             <div
               key={product.id}
               className="group rounded-3xl overflow-hidden border border-TB/15
@@ -185,6 +179,10 @@ export default function HomePageProducts() {
                       dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                       dark:hover:border-primary hover:border-primary
                         group-hover:opacity-100 group-hover:visible"
+                        onClick={() => {
+                          setShowProduct((prev) => !prev);
+                          setProductForShow(product);
+                        }}
                       >
                         <AiOutlineEye />
                       </button>
@@ -200,7 +198,7 @@ export default function HomePageProducts() {
                       dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                       dark:hover:border-primary hover:border-primary
                         group-hover:opacity-100 group-hover:visible"
-                        onClick={() => addToCart(product)}
+                        onClick={() => handleAddToCart(product)}
                       >
                         <AiOutlineShopping />
                       </button>
@@ -232,8 +230,8 @@ export default function HomePageProducts() {
                   <h3>
                     <a
                       className="text-TB dark:text-white text-lg line-clamp-1 tracking-widest
-                  hover:text-primary"
-                      href="#"
+                    hover:text-primary"
+                      href={`/products/${product.id}`}
                     >
                       {product.title}
                     </a>
@@ -246,19 +244,20 @@ export default function HomePageProducts() {
                           $
                           {Math.floor(
                             product.price -
-                              (product.price * product.discount) / 100,
-                          )}
+                              (product.price * product.discount) / 100
+                          ).toFixed(2)}
                         </span>
 
                         <span className="text-secondary dark:text-secondary-D line-through">
-                          ${product.price}
+                          ${product.price.toFixed(2)}
                         </span>
                       </div>
                     ) : (
                       <span className="text-TB dark:text-white font-bold text-lg">
-                        ${product.price}
+                        ${product.price.toFixed(2)}
                       </span>
                     )}
+
                     <span className="text-secondary dark:text-secondary-D">
                       {product.unit}
                     </span>
@@ -278,16 +277,25 @@ export default function HomePageProducts() {
                 </div>
               )}
             </div>
-          ))
-        : Array.from({ length: 4 }).map((_, i) => {
-            return (
-              <div
-                key={i}
-                className="h-[421px] bg-secondary/50 dark:bg-secondary-D/50 rounded-3xl
+          ))}
+
+          <ShowProductModal
+            showProduct={showProduct}
+            setShowProduct={setShowProduct}
+            product={productForShow}
+          />
+        </>
+      ) : (
+        Array.from({ length: 4 }).map((_, i) => {
+          return (
+            <div
+              key={i}
+              className="h-[421px] bg-secondary/50 dark:bg-secondary-D/50 rounded-3xl
                 animate-pulse"
-              ></div>
-            );
-          })}
+            ></div>
+          );
+        })
+      )}
     </div>
   );
 }

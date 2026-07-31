@@ -287,7 +287,9 @@
         "cartItemUpdate": "Artikelmenge im Warenkorb wurde aktualisiert.",
         "failedToIncreaseQuantity": "Die Artikelmenge konnte nicht erhöht werden.",
         "failedToDecreaseQuantity": "Die Artikelmenge konnte nicht verringert werden.",
-        "addToCart": "In den Warenkorb"
+        "addToCart": "In den Warenkorb",
+        "emptyCart": "Ihr Warenkorb ist derzeit leer.",
+        "emptyCartDescription": "Es wurden noch keine Artikel hinzugefügt. Produkte, die Sie Ihrem Warenkorb hinzufügen, werden hier angezeigt."
     },
     "about": {
         "h1": "Über <1>BlueBerry</1>",
@@ -299,5 +301,11 @@
         "ourServicesDescription": "Kundenservice sollte keine Abteilung sein. Er sollte das gesamte Unternehmen sein.",
         "ourTeam": "Unser <1>Team</1>",
         "ourTeamDescription": "Lernen Sie unsere erfahrenen Teammitglieder kennen."
+    },
+    "singleProduct": {
+        "text1": "Qualität : Hochwertige Qualität",
+        "text2": "Zutaten : Sorgfältig ausgewählte Zutaten",
+        "text3": "Lagerung : Kühl und trocken lagern",
+        "text4": "Verpackung : Hygienisch verpackt"
     }
 }

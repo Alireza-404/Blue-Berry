@@ -92,7 +92,9 @@ export default function HeroSection() {
                   <h1
                     className={`text-[2.2rem] sm:text-[2.5rem] md:text-[2.8rem] xl:text-[3.3rem]
                     w-80 sm:w-96 md:w-[480px] text-TB dark:text-white font-bold text-center
-                    lg:text-start ${i18n.language === "de" ? "lg:w-[525px]" : "lg:w-[500px]"}`}
+                    lg:text-start ${
+                      i18n.language === "de" ? "lg:w-[525px]" : "lg:w-[500px]"
+                    }`}
                   >
                     <Trans
                       i18nKey={slidesArray[index].text}
@@ -105,7 +107,9 @@ export default function HeroSection() {
                   <p
                     className={`text-[2.2rem] sm:text-[2.5rem] md:text-[2.8rem] xl:text-[3.3rem]
                     w-80 sm:w-96 md:w-[480px] text-TB dark:text-white font-bold text-center
-                    lg:text-start ${i18n.language === "de" ? "lg:w-[525px]" : "lg:w-[500px]"}`}
+                    lg:text-start ${
+                      i18n.language === "de" ? "lg:w-[525px]" : "lg:w-[500px]"
+                    }`}
                   >
                     <Trans
                       i18nKey={slidesArray[index].text}
