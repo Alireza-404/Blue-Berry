@@ -63,7 +63,7 @@ export default function HomePageProducts() {
     const result = await getProducts();
 
     if (!result.success) {
-      console.log(error);
+      console.log(result.error);
       setLoading(false);
     } else {
       setProducts(result.data);

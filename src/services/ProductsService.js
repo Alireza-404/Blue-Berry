@@ -7,12 +7,14 @@ export const getProducts = async () => {
     if (error) {
       return {
         data: null,
+        error: error.message,
         success: false,
       };
     }
 
     return {
       data,
+      error: null,
       success: true,
     };
   } catch (error) {
@@ -20,6 +22,7 @@ export const getProducts = async () => {
 
     return {
       data: null,
+      error: error.message,
       success: false,
     };
   }
@@ -59,6 +62,52 @@ export const addProductToCart = async (userId, productId) => {
     });
 
     if (error) {
+      return { type: "insert_error" };
+    }
+
+    return { type: "added" };
+  } catch (error) {
+    console.log(error.message);
+
+    return {
+      type: "unknown_error",
+    };
+  }
+};
+
+export const toggleWishlistItem = async (userId, productId) => {
+  try {
+    const { data: item, error: fetchError } = await supabase
+      .from("wishlists")
+      .select("id")
+      .eq("user_id", userId)
+      .eq("product_id", productId)
+      .maybeSingle();
+
+    if (fetchError) {
+      console.log(fetchError.message);
+      return { type: "fetch_error" };
+    }
+
+    if (item) {
+      const { error } = await supabase
+        .from("wishlists")
+        .delete()
+        .eq("id", item.id);
+
+      if (error) {
+        return { type: "delete_error" };
+      }
+
+      return { type: "deleted" };
+    }
+
+    const { error: insertError } = await supabase.from("wishlists").insert({
+      user_id: userId,
+      product_id: productId,
+    });
+
+    if (insertError) {
       return { type: "insert_error" };
     }
 

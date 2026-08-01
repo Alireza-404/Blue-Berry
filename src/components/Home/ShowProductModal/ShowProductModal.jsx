@@ -8,9 +8,10 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { LuShoppingBag } from "react-icons/lu";
+import { BiX } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addProductToCart } from "../../../services/ProductsService";
@@ -34,6 +35,7 @@ export default function ShowProductModal({
   const cartItems = useSelector((state) => state.cart.cartItems);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const root = window.document.documentElement;
 
   const [isCursorInImage, setIsCursorInImage] = useState(false);
   const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
@@ -43,6 +45,14 @@ export default function ShowProductModal({
   });
 
   const cartItem = cartItems.find((item) => item.product_id === product.id);
+
+  useEffect(() => {
+    if (showProduct) {
+      root.classList.add("overflow-y-hidden");
+    } else {
+      root.classList.remove("overflow-y-hidden");
+    }
+  }, [showProduct]);
 
   const handleMouseMove = (event) => {
     setIsCursorInImage(true);
@@ -170,16 +180,21 @@ export default function ShowProductModal({
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.6, opacity: 0, y: 40 }}
                 transition={{ duration: 0.3 }}
-                className="duration-0 p-4 bg-white dark:bg-box-D flex items-start gap-x-4
-                rounded-2xl z-40 w-[666px]"
+                className="relative duration-0 px-4 pb-4 pt-9 md:px-5 md:pb-4
+                bg-white dark:bg-box-D rounded-2xl z-40 w-80 sm:w-96 md:w-[666px] h-fit 
+                flex flex-col gap-y-4 md:flex-row gap-x-4  overflow-hidden"
               >
-                <div className="overflow-hidden shrink-0 rounded-3xl">
+                <div
+                  className="overflow-hidden shrink-0 rounded-3xl w-fit border
+                  border-TB/15 dark:border-box-border-D"
+                >
                   <img
                     src={product.image}
                     alt={`Product-Image-${product.id}`}
-                    className={`w-60 h-[320px] object-cover transition-transform duration-300 ${
-                      isCursorInImage ? "scale-[1.8]" : "scale-100"
-                    }`}
+                    className={`w-full md:w-[260px] md:h-full object-cover transition-transform 
+                      duration-300 ${
+                        isCursorInImage ? "scale-[1.8]" : "scale-100"
+                      }`}
                     style={
                       isCursorInImage
                         ? { transformOrigin: `${position.x}% ${position.y}%` }
@@ -292,6 +307,14 @@ export default function ShowProductModal({
                     </PrimaryButton>
                   </div>
                 </div>
+
+                <span
+                  className="w-9 h-16 bg-red-600 rounded-full flex items-end justify-center
+                  p-1 absolute top-0 right-4 -translate-y-1/2 cursor-pointer"
+                  onClick={() => setShowProduct(false)}
+                >
+                  <BiX className="text-white text-3xl" />
+                </span>
               </motion.div>
             </div>
 

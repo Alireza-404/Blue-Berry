@@ -306,6 +306,14 @@
         "text1": "Quality : Premium Quality",
         "text2": "Ingredients : Carefully Selected Ingredients",
         "text3": "Storage : Store in a cool and dry place",
-        "text4": "Packaging : Hygienically Packed"
+        "text4": "Packaging : Hygienically Packed",
+        "detail": "Detail",
+        "information": "Information",
+        "productDetail1": "Premium quality guaranteed.",
+        "productDetail2": "Carefully inspected before dispatch.",
+        "productDetail3": "Secure packaging for safe delivery.",
+        "productDetail4": "Suitable for personal and professional use.",
+        "productDetail5": "Manufactured to high-quality standards.",
+        "productDetail6": "Easy maintenance and long-lasting performance."
     }
 }

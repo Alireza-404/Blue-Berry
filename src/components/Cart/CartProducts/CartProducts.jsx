@@ -223,7 +223,11 @@ export default function CartProducts() {
                     <td>
                       <div className="p-4">
                         <span className="text-TB dark:text-white text-lg">
-                          ${item.product.price}
+                          $
+                          {Math.floor(
+                            item.product.price -
+                              (item.product.price * item.product.discount) / 100
+                          )}
                         </span>
                       </div>
                     </td>
@@ -274,7 +278,13 @@ export default function CartProducts() {
                     <td>
                       <div className="p-4">
                         <span className="text-TB dark:text-white text-lg">
-                          ${item.quantity * item.product.price}
+                          $
+                          {item.quantity *
+                            Math.floor(
+                              item.product.price -
+                                (item.product.price * item.product.discount) /
+                                  100
+                            )}
                         </span>
                       </div>
                     </td>

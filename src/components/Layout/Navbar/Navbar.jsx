@@ -33,9 +33,9 @@ export default function Navbar() {
 
   useEffect(() => {
     if (menu) {
-      window.document.documentElement.classList.add("overflow-hidden");
+      window.document.documentElement.classList.add("overflow-y-hidden");
     } else {
-      window.document.documentElement.classList.remove("overflow-hidden");
+      window.document.documentElement.classList.remove("overflow-y-hidden");
     }
   }, [menu]);
 

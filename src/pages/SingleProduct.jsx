@@ -8,6 +8,7 @@ import FullScreenLoader from "../components/Ui/FullScreenLoader/FullScreenLoader
 import Product from "../components/SingleProduct/Product/Product";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
+import InfoAndDetail from "../components/SingleProduct/InfoAndDetail/InfoAndDetail";
 
 export default function SingleProduct() {
   const { id } = useParams();
@@ -64,13 +65,17 @@ export default function SingleProduct() {
         <section id="single-product-section">
           <div
             className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
-                    lg:py-28 flex flex-col gap-y-8"
+                    lg:py-28 "
           >
             {product && (
               <>
-                <Image src={product.image} />
+                <div className="flex flex-col gap-y-8 lg:flex-row lg:gap-x-8">
+                  <Image src={product.image} title={product.title} />
 
-                <Product product={product} />
+                  <Product product={product} />
+                </div>
+
+                <InfoAndDetail />
               </>
             )}
           </div>

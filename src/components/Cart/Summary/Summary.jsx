@@ -11,7 +11,12 @@ export default function Summary() {
   const { cartItems, loading } = useSelector((state) => state.cart);
 
   const subTotal = cartItems.reduce((total, item) => {
-    return total + item.product.price * item.quantity;
+    return (
+      total +
+      (item.product.price -
+        (item.product.price * item.product.discount) / 100) *
+        item.quantity
+    );
   }, 0);
 
   const { t } = useTranslation();
