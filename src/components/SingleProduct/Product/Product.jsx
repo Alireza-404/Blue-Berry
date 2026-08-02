@@ -29,6 +29,7 @@ export default function Product({ product }) {
   const { t, i18n } = useTranslation();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const wishlist = useSelector((state) => state.wishlist.items);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -36,6 +37,7 @@ export default function Product({ product }) {
   const [showProduct, setShowProduct] = useState(false);
 
   const cartItem = cartItems.find((item) => item.product_id === product.id);
+  const wishlistItem = wishlist.find((item) => item.product_id === product.id);
 
   const handleAddToCart = async () => {
     if (!user) {
@@ -224,6 +226,14 @@ export default function Product({ product }) {
         </ul>
 
         <div className="flex items-center gap-2 flex-wrap mt-4">
+          <SecondaryButton
+            type={"button"}
+            className={"px-4 h-11 w-fit"}
+            click={handleAddToCart}
+          >
+            {t("cartProducts.addToCart")}
+          </SecondaryButton>
+
           {cartItem && (
             <div
               className={`flex items-center gap-x-1 border rounded-lg w-fit
@@ -266,17 +276,14 @@ export default function Product({ product }) {
             </div>
           )}
 
-          <SecondaryButton
-            type={"button"}
-            className={"px-4 h-11 w-fit"}
-            click={handleAddToCart}
-          >
-            {t("cartProducts.addToCart")}
-          </SecondaryButton>
-
           <PrimaryButton
             type={"button"}
-            className={"px-4 h-11 dark:text-secondary-D"}
+            className={`px-4 h-11 ${
+              wishlist
+                ? "text-red-500 dark:text-red-600"
+                : "dark:text-secondary-D"
+            }`}
+            heart={wishlistItem}
           >
             <AiOutlineHeart className="text-xl" />
           </PrimaryButton>
