@@ -315,5 +315,9 @@
         "productDetail4": "Für den privaten und professionellen Gebrauch geeignet.",
         "productDetail5": "Nach hohen Qualitätsstandards hergestellt.",
         "productDetail6": "Pflegeleicht und langlebig."
+    },
+    "wishlist": {
+        "addedToWishlist": "Das Produkt wurde zu Ihrer Wunschliste hinzugefügt.",
+        "removedFromWishlist": "Das Produkt wurde aus Ihrer Wunschliste entfernt."
     }
 }

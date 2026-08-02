@@ -28,6 +28,7 @@ export default function Navbar() {
   const [menu, setMenu] = useState(false);
 
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const wishlist = useSelector((state) => state.wishlist.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -190,7 +191,8 @@ export default function Navbar() {
                   </Link>
                 )}
 
-                <span
+                <Link
+                  to={"/wishlist"}
                   className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
                   cursor-pointer flex items-end gap-x-1.5"
                 >
@@ -198,13 +200,13 @@ export default function Navbar() {
 
                   <div className="hidden xl:flex flex-col">
                     <span className="text-secondary dark:text-secondary-D text-sm leading-3">
-                      3 {t("user.items")}
+                      {wishlist.length} {t("user.items")}
                     </span>
                     <span className="text-TB dark:text-white text-base font-bold">
                       {t("user.wishlist")}
                     </span>
                   </div>
-                </span>
+                </Link>
 
                 <Link
                   to={"/cart"}

@@ -16,7 +16,6 @@ const toastSlice = createSlice({
     },
     closeToast: (state) => {
       state.isOpen = false;
-      state.type = "success";
     },
   },
 });

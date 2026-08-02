@@ -99,24 +99,59 @@ export const toggleWishlistItem = async (userId, productId) => {
         return { type: "delete_error" };
       }
 
-      return { type: "deleted" };
+      return { type: "deleted", product_id: productId };
     }
 
-    const { error: insertError } = await supabase.from("wishlists").insert({
-      user_id: userId,
-      product_id: productId,
-    });
+    const { data, error: insertError } = await supabase
+      .from("wishlists")
+      .insert({
+        user_id: userId,
+        product_id: productId,
+      })
+      .select()
+      .single();
 
     if (insertError) {
       return { type: "insert_error" };
     }
 
-    return { type: "added" };
+    return { type: "added", item: data };
   } catch (error) {
     console.log(error.message);
 
     return {
       type: "unknown_error",
+    };
+  }
+};
+
+export const getWishlistItems = async (userId) => {
+  try {
+    const { data, error } = await supabase
+      .from("wishlists")
+      .select("*")
+      .eq("user_id", userId);
+
+    if (error) {
+      return {
+        data: null,
+        success: false,
+        error: error.message,
+      };
+    }
+
+    return {
+      success: true,
+      error: null,
+      data,
+    };
+  } catch (error) {
+    console.log(error.message);
+
+    return {
+      data: null,
+      success: false,
+      error: error.message,
     };
   }
 };

@@ -39,6 +39,7 @@ export default function ShowProductModal({
 
   const [isCursorInImage, setIsCursorInImage] = useState(false);
   const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [position, setPosition] = useState({
     x: 50,
     y: 50,
@@ -74,7 +75,9 @@ export default function ShowProductModal({
       return;
     }
 
+    setAddToCartLoading(true);
     const result = await addProductToCart(user.id, product.id);
+    setAddToCartLoading(false);
 
     if (result.type === "fetch_error") {
       return;
@@ -253,6 +256,18 @@ export default function ShowProductModal({
                   )}
 
                   <div className="flex items-center gap-x-4">
+                    <PrimaryButton
+                      type={"button"}
+                      className={
+                        "px-4 h-11 w-fit dark:text-secondary-D flex items-center gap-x-2"
+                      }
+                      click={handleAddToCart}
+                      disabled={addToCartLoading}
+                    >
+                      <LuShoppingBag className="text-lg" />
+                      {t("cartProducts.addToCart")}
+                    </PrimaryButton>
+
                     {cartItem && (
                       <div
                         className={`flex items-center gap-x-1 border rounded-lg w-fit
@@ -294,17 +309,6 @@ export default function ShowProductModal({
                         </button>
                       </div>
                     )}
-
-                    <PrimaryButton
-                      type={"button"}
-                      className={
-                        "px-4 h-11 w-fit dark:text-secondary-D flex items-center gap-x-2"
-                      }
-                      click={handleAddToCart}
-                    >
-                      <LuShoppingBag className="text-lg" />
-                      {t("cartProducts.addToCart")}
-                    </PrimaryButton>
                   </div>
                 </div>
 

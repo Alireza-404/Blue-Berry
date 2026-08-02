@@ -22,6 +22,8 @@ import { clearCart, setCartItems } from "./redux/Slices/CartItemsSlice";
 import "./App.css";
 import { useTranslation } from "react-i18next";
 import SingleProduct from "./pages/SingleProduct";
+import { getWishlistItems } from "./services/ProductsService";
+import { clearWishlist, setWishlistItem } from "./redux/Slices/WishlistSlice";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -72,7 +74,19 @@ function App() {
       }
     };
 
+    const wishlistHandler = async () => {
+      if (user) {
+        const wishlistItems = await getWishlistItems(user.id);
+        if (wishlistItems.success) {
+          dispatch(setWishlistItem(wishlistItems.data));
+        }
+      } else {
+        dispatch(clearWishlist());
+      }
+    };
+
     cartHandler();
+    wishlistHandler();
   }, [user]);
 
   useEffect(() => {

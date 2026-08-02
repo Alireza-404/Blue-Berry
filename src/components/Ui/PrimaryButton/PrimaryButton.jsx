@@ -1,4 +1,10 @@
-export default function PrimaryButton({ className, click, type, children }) {
+export default function PrimaryButton({
+  className,
+  click,
+  type,
+  disabled,
+  children,
+}) {
   return (
     <button
       type={type}
@@ -8,6 +14,7 @@ export default function PrimaryButton({ className, click, type, children }) {
             transition-all duration-200 select-none
          ${className || ""}`}
       onClick={click}
+      disabled={disabled}
     >
       {children}
     </button>

@@ -315,5 +315,9 @@
         "productDetail4": "Suitable for personal and professional use.",
         "productDetail5": "Manufactured to high-quality standards.",
         "productDetail6": "Easy maintenance and long-lasting performance."
+    },
+    "wishlist": {
+        "addedToWishlist": "The product has been added to your wishlist.",
+        "removedFromWishlist": "The product has been removed from your wishlist."
     }
 }

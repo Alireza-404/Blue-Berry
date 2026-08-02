@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeToast } from "../../../redux/Slices/ToastSlice";
-import { AiFillCheckCircle } from "react-icons/ai";
+import { AiFillCheckCircle, AiFillCloseCircle } from "react-icons/ai";
 
 export default function Toast() {
   const dispatch = useDispatch();
@@ -42,11 +42,13 @@ export default function Toast() {
     ${
       type === "success"
         ? "bg-gradient-to-r from-emerald-600 via-green-500 to-emerald-400"
-        : "bg-gradient-to-r from-red-600 via-rose-500 to-red-400"
+        : type === "error"
+        ? "bg-gradient-to-r from-red-600 via-rose-500 to-red-400"
+        : "bg-gradient-to-r from-purple-600 via-primary to-purple-400"
     }`}
     >
       <div className="relative flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15">
-        {type === "success" ? (
+        {type === "success" || type === "primary" ? (
           <AiFillCheckCircle className="text-3xl text-white" />
         ) : (
           <AiFillCloseCircle className="text-3xl text-white" />
@@ -55,7 +57,7 @@ export default function Toast() {
 
       <div className="relative flex flex-col">
         <span className="text-base font-semibold text-white">
-          {type === "success" ? "Success" : "Error"}
+          {type === "success" || type === "primary" ? "Success" : "Error"}
         </span>
 
         <span className="text-sm leading-5 text-white/90">{message}</span>
