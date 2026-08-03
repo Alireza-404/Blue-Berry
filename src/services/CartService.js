@@ -9,11 +9,11 @@ export const getCartItems = async (userId) => {
 
     if (cartError) {
       console.log(cartError.message);
-      return [];
+      return { data: [], sucess: false };
     }
 
     if (cartItems.length === 0) {
-      return [];
+      return { data: [], sucess: true };
     }
 
     const productsId = cartItems.map((item) => item.product_id);
@@ -25,7 +25,7 @@ export const getCartItems = async (userId) => {
 
     if (productsError) {
       console.log(productsError.message);
-      return [];
+      return { data: [], sucess: false };
     }
 
     const cartWithProducts = cartItems.map((item) => {
@@ -35,10 +35,10 @@ export const getCartItems = async (userId) => {
       };
     });
 
-    return cartWithProducts;
+    return { data: cartWithProducts, success: true };
   } catch (error) {
     console.log(error);
-    return [];
+    return { data: [], sucess: false };
   }
 };
 

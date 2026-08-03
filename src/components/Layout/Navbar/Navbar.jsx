@@ -21,16 +21,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { supabase } from "../../../lib/supabase";
 import { clearUser, setLoading } from "../../../redux/Slices/AuthSlice";
 import { showToast } from "../../../redux/Slices/ToastSlice";
+import useUserData from "../../../hooks/useUserData";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
-  const { user, loading } = useSelector((state) => state.auth);
-  const [menu, setMenu] = useState(false);
+  const { user, initialized } = useSelector((state) => state.auth);
+  const {
+    cartItems,
+    loading: cartLoading,
+    error: cartError,
+  } = useSelector((state) => state.cart);
+  const {
+    items: wishlist,
+    loading: wishlistLoading,
+    error: wishlistError,
+  } = useSelector((state) => state.wishlist);
+  const { getCart, getWishlist } = useUserData();
 
-  const cartItems = useSelector((state) => state.cart.cartItems);
-  const wishlist = useSelector((state) => state.wishlist.items);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const [menu, setMenu] = useState(false);
 
   useEffect(() => {
     if (menu) {
@@ -125,114 +136,147 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center xl:items-end justify-end gap-x-6 xl:w-[460px]">
-            {loading ? (
-              [1, 2, 3].map((i) => {
-                return (
-                  <span
-                    key={i}
-                    className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
-                    flex items-center gap-x-1.5 h-full animate-pulse"
-                  >
-                    <div
-                      className="w-10 h-10 bg-secondary/50 dark:bg-secondary-D/50
-                      rounded-lg"
-                    ></div>
-
-                    <div className="hidden xl:flex flex-col gap-y-1">
-                      <span
-                        className="bg-secondary/50 dark:bg-secondary-D/50 w-14 h-3 rounded
-                        text-sm leading-3"
-                      ></span>
-
-                      <span
-                        className="bg-TB/50 dark:bg-white/50 w-14 h-3 rounded
-                        font-bold"
-                      ></span>
-                    </div>
-                  </span>
-                );
-              })
-            ) : (
-              <>
-                {user ? (
-                  <button
-                    type="button"
-                    className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
-                    cursor-pointer flex items-end gap-x-1.5"
-                    onClick={logout}
-                  >
-                    <AiOutlineLogout />
-
-                    <div className="hidden xl:flex flex-col">
-                      <span className="text-secondary dark:text-secondary-D text-sm leading-3">
-                        {t("user.account")}
-                      </span>
-                      <span className="text-TB dark:text-white text-base font-bold">
-                        {t("user.logout")}
-                      </span>
-                    </div>
-                  </button>
-                ) : (
-                  <Link
-                    to={"/auth/login"}
-                    className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
-                    cursor-pointer flex items-end gap-x-1.5"
-                  >
-                    <AiOutlineUser />
-
-                    <div className="hidden xl:flex flex-col">
-                      <span className="text-secondary dark:text-secondary-D text-sm leading-3">
-                        {t("user.account")}
-                      </span>
-                      <span className="text-TB dark:text-white text-base font-bold">
-                        {t("user.login")}
-                      </span>
-                    </div>
-                  </Link>
-                )}
-
-                <Link
-                  to={"/wishlist"}
+            <>
+              {initialized ? (
+                <span
                   className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
-                  cursor-pointer flex items-end gap-x-1.5"
+                    flex items-center gap-x-1.5 h-full animate-pulse"
                 >
-                  <AiOutlineStar />
+                  <div
+                    className="w-10 h-10 bg-secondary/50 dark:bg-secondary-D/50
+                      rounded-lg"
+                  ></div>
 
-                  <div className="hidden xl:flex flex-col">
+                  <div className="hidden xl:flex flex-col gap-y-1">
+                    <span
+                      className="bg-secondary/50 dark:bg-secondary-D/50 w-14 h-3 rounded
+                        text-sm leading-3"
+                    ></span>
+
+                    <span
+                      className="bg-TB/50 dark:bg-white/50 w-14 h-3 rounded
+                        font-bold"
+                    ></span>
+                  </div>
+                </span>
+              ) : (
+                <>
+                  {user ? (
+                    <button
+                      type="button"
+                      className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
+                      cursor-pointer flex items-end gap-x-1.5"
+                      onClick={logout}
+                    >
+                      <AiOutlineLogout />
+
+                      <div className="hidden xl:flex flex-col">
+                        <span className="text-secondary dark:text-secondary-D text-sm leading-3">
+                          {t("user.account")}
+                        </span>
+                        <span className="text-TB dark:text-white text-base font-bold">
+                          {t("user.logout")}
+                        </span>
+                      </div>
+                    </button>
+                  ) : (
+                    <Link
+                      to={"/auth/login"}
+                      className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
+                      cursor-pointer flex items-end gap-x-1.5"
+                    >
+                      <AiOutlineUser />
+
+                      <div className="hidden xl:flex flex-col">
+                        <span className="text-secondary dark:text-secondary-D text-sm leading-3">
+                          {t("user.account")}
+                        </span>
+                        <span className="text-TB dark:text-white text-base font-bold">
+                          {t("user.login")}
+                        </span>
+                      </div>
+                    </Link>
+                  )}
+                </>
+              )}
+
+              <Link
+                to={"/wishlist"}
+                className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
+                  cursor-pointer flex items-end gap-x-1.5"
+              >
+                <AiOutlineStar />
+
+                <div className="hidden xl:flex flex-col">
+                  {wishlistLoading ? (
+                    <span className="text-secondary dark:text-secondary-D text-sm leading-3">
+                      {t("loading")}
+                    </span>
+                  ) : wishlistError ? (
+                    <span
+                      className="text-red-500 dark:text-red-600 text-sm leading-3 cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        getWishlist();
+                      }}
+                    >
+                      {t("retry")}
+                    </span>
+                  ) : (
                     <span className="text-secondary dark:text-secondary-D text-sm leading-3">
                       {wishlist.length} {t("user.items")}
                     </span>
-                    <span className="text-TB dark:text-white text-base font-bold">
-                      {t("user.wishlist")}
-                    </span>
-                  </div>
-                </Link>
+                  )}
 
-                <Link
-                  to={"/cart"}
-                  className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
+                  <span className="text-TB dark:text-white text-base font-bold">
+                    {t("user.wishlist")}
+                  </span>
+                </div>
+              </Link>
+
+              <Link
+                to={"/cart"}
+                className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
                   cursor-pointer flex items-end gap-x-1.5"
-                >
-                  <AiOutlineShoppingCart />
+              >
+                <AiOutlineShoppingCart />
 
-                  <div className="hidden xl:flex flex-col">
+                <div className="hidden xl:flex flex-col">
+                  {cartLoading ? (
+                    <span className="text-secondary dark:text-secondary-D text-sm leading-3">
+                      {t("loading")}
+                    </span>
+                  ) : cartError ? (
+                    <span
+                      className="text-red-500 dark:text-red-600 text-sm leading-3 cursor-pointer"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        getCart();
+                      }}
+                    >
+                      {t("retry")}
+                    </span>
+                  ) : (
                     <span className="text-secondary dark:text-secondary-D text-sm leading-3">
                       {cartItems.length} {t("user.items")}
                     </span>
-                    <span className="text-TB dark:text-white text-base font-bold">
-                      {t("user.cart")}
-                    </span>
-                  </div>
-                </Link>
+                  )}
 
-                <span
-                  className="text-primary text-[26px] md:text-[28px] lg:hidden cursor-pointer"
-                  onClick={() => setMenu(true)}
-                >
-                  <AiOutlineMenu />
-                </span>
-              </>
-            )}
+                  <span className="text-TB dark:text-white text-base font-bold">
+                    {t("user.cart")}
+                  </span>
+                </div>
+              </Link>
+
+              <span
+                className="text-primary text-[26px] md:text-[28px] lg:hidden cursor-pointer"
+                onClick={() => setMenu(true)}
+              >
+                <AiOutlineMenu />
+              </span>
+            </>
           </div>
         </div>
       </div>

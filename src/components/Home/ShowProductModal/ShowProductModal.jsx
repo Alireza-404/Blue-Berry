@@ -71,7 +71,7 @@ export default function ShowProductModal({
 
   const handleAddToCart = async () => {
     if (!user) {
-      navigate("/auth/login", { replace: true });
+      navigate("/auth/login");
       return;
     }
 

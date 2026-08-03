@@ -3,7 +3,6 @@ import Footer from "../components/Layout/Footer/Footer";
 import Image from "../components/SingleProduct/Image/Image";
 
 import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
 import FullScreenLoader from "../components/Ui/FullScreenLoader/FullScreenLoader";
 import Product from "../components/SingleProduct/Product/Product";
 import { useEffect, useState } from "react";

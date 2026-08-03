@@ -319,5 +319,11 @@
     "wishlist": {
         "addedToWishlist": "Das Produkt wurde zu Ihrer Wunschliste hinzugefügt.",
         "removedFromWishlist": "Das Produkt wurde aus Ihrer Wunschliste entfernt."
-    }
+    },
+    "homePageProducts": {
+        "productsLoadError": "Die Produkte konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
+        "failedToLoadProducts": "Produkte konnten nicht geladen werden."
+    },
+    "retry": "Erneut versuchen",
+    "loading": "Wird geladen..."
 }

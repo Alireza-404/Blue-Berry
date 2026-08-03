@@ -11,7 +11,10 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
-import { addProductToCart } from "../../../services/ProductsService";
+import {
+  addProductToCart,
+  toggleWishlistItem,
+} from "../../../services/ProductsService";
 import { showToast } from "../../../redux/Slices/ToastSlice";
 import {
   getCartItems,
@@ -23,7 +26,11 @@ import {
 } from "../../../redux/Slices/CartItemsSlice";
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
-import InfoAndDetail from "../InfoAndDetail/InfoAndDetail";
+import {
+  addWishlistItem,
+  removeWishlist,
+} from "../../../redux/Slices/WishlistSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function Product({ product }) {
   const { t, i18n } = useTranslation();
@@ -32,16 +39,18 @@ export default function Product({ product }) {
   const wishlist = useSelector((state) => state.wishlist.items);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
   const [showProduct, setShowProduct] = useState(false);
+  const [heartLoading, setHeartLoading] = useState(false);
 
   const cartItem = cartItems.find((item) => item.product_id === product.id);
   const wishlistItem = wishlist.find((item) => item.product_id === product.id);
 
   const handleAddToCart = async () => {
     if (!user) {
-      navigate("/auth/login", { replace: true });
+      navigate("/auth/login");
       return;
     }
 
@@ -137,6 +146,51 @@ export default function Product({ product }) {
 
   const removeUpdatingId = () => {
     setIdsForUpdateQuantity((prev) => prev.filter((id) => id !== cartItem.id));
+  };
+
+  const handleToggleWishlist = async () => {
+    if (!user) {
+      navigate("/auth/login");
+      return;
+    }
+
+    setHeartLoading(true);
+    const result = await toggleWishlistItem(user.id, product.id);
+    setHeartLoading(false);
+
+    if (result.type === "fetch_error") {
+      return;
+    }
+
+    if (result.type === "insert_error") {
+      return;
+    }
+
+    if (result.type === "unknown_error") {
+      return;
+    }
+
+    if (result.type === "added") {
+      dispatch(
+        showToast({
+          type: "primary",
+          message: t("wishlist.addedToWishlist"),
+        })
+      );
+
+      dispatch(addWishlistItem(result.item));
+    }
+
+    if (result.type === "deleted") {
+      dispatch(
+        showToast({
+          type: "primary",
+          message: t("wishlist.removedFromWishlist"),
+        })
+      );
+
+      dispatch(removeWishlist(result.product_id));
+    }
   };
 
   return (
@@ -279,11 +333,12 @@ export default function Product({ product }) {
           <PrimaryButton
             type={"button"}
             className={`px-4 h-11 ${
-              wishlist
+              wishlistItem
                 ? "text-red-500 dark:text-red-600"
                 : "dark:text-secondary-D"
             }`}
-            heart={wishlistItem}
+            disabled={heartLoading}
+            click={handleToggleWishlist}
           >
             <AiOutlineHeart className="text-xl" />
           </PrimaryButton>

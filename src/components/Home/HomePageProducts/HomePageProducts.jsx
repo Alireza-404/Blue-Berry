@@ -24,6 +24,8 @@ import {
   addWishlistItem,
   removeWishlist,
 } from "../../../redux/Slices/WishlistSlice";
+import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
+import ProductsError from "../../Ui/ProductsError/ProductsError";
 
 export default function HomePageProducts() {
   const { t } = useTranslation();
@@ -34,6 +36,7 @@ export default function HomePageProducts() {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [heartLoading, setHeartLoading] = useState(false);
   const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [showProduct, setShowProduct] = useState(false);
@@ -69,21 +72,29 @@ export default function HomePageProducts() {
 
   const handleGetProducts = async () => {
     setLoading(true);
+    setError(false);
 
     const result = await getProducts();
 
     if (!result.success) {
       console.log(result.error);
-      setLoading(false);
+      setError(true);
+      dispatch(
+        showToast({
+          type: "error",
+          message: t("homePageProducts.failedToLoadProducts"),
+        })
+      );
     } else {
+      setError(false);
       setProducts(result.data);
-      setLoading(false);
     }
+    setLoading(false);
   };
 
   const handleAddToCart = async (product) => {
     if (!user) {
-      navigate("/auth/login", { replace: true });
+      navigate("/auth/login");
       return;
     }
 
@@ -130,6 +141,11 @@ export default function HomePageProducts() {
   };
 
   const handleToggleWishlist = async (productId) => {
+    if (!user) {
+      navigate("/auth/login");
+      return;
+    }
+
     setHeartLoading(true);
     const result = await toggleWishlistItem(user.id, productId);
     setHeartLoading(false);
@@ -171,7 +187,11 @@ export default function HomePageProducts() {
 
   return (
     <div className="grid grid-cols-4 gap-4">
-      {!loading ? (
+      {loading ? (
+        <ProductsSkeleton />
+      ) : error ? (
+        <ProductsError getProducts={handleGetProducts} />
+      ) : (
         <>
           {products.map((product) => {
             const isWishlisted = wishlistIds.has(product.id);
@@ -346,16 +366,6 @@ export default function HomePageProducts() {
             product={productForShow}
           />
         </>
-      ) : (
-        Array.from({ length: 4 }).map((_, i) => {
-          return (
-            <div
-              key={i}
-              className="h-[421px] bg-secondary/50 dark:bg-secondary-D/50 rounded-3xl
-                animate-pulse"
-            ></div>
-          );
-        })
       )}
     </div>
   );

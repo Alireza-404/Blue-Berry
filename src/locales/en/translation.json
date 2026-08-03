@@ -319,5 +319,11 @@
     "wishlist": {
         "addedToWishlist": "The product has been added to your wishlist.",
         "removedFromWishlist": "The product has been removed from your wishlist."
-    }
+    },
+    "homePageProducts": {
+        "productsLoadError": "We couldn't load the products. Please try again.",
+        "failedToLoadProducts": "Failed to load products."
+    },
+    "retry": "Try Again",
+    "loading": "Loading..."
 }
