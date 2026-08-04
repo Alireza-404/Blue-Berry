@@ -24,19 +24,20 @@ import {
 } from "../../../redux/Slices/WishlistSlice";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import ProductsError from "../../Ui/ProductsError/ProductsError";
+import useCart from "../../../hooks/useCart";
+import useWishlist from "../../../hooks/useWishlist";
 
 export default function HomePageProducts() {
   const { t } = useTranslation();
-  const { user } = useSelector((state) => state.auth);
+  const { handleAddToCart, addToCartLoading } = useCart();
+  const { handleToggleWishlist, heartLoading } = useWishlist();
+
   const wishlist = useSelector((state) => state.wishlist.items);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [heartLoading, setHeartLoading] = useState(false);
-  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
 
@@ -88,103 +89,6 @@ export default function HomePageProducts() {
       setProducts(result.data);
     }
     setLoading(false);
-  };
-
-  const handleAddToCart = async (product) => {
-    if (!user) {
-      navigate("/auth/login");
-      return;
-    }
-
-    setAddToCartLoading(true);
-    const result = await addProductToCart(user.id, product.id);
-
-    if (result.type === "fetch_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "updated_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "insert_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "unknown_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "added") {
-      dispatch(
-        showToast({
-          type: "success",
-          message: t("cartProducts.successAddedToCart"),
-        })
-      );
-    }
-
-    if (result.type === "updated") {
-      dispatch(
-        showToast({
-          type: "success",
-          message: t("cartProducts.cartItemUpdate"),
-        })
-      );
-    }
-
-    const { data } = await getCartItems(user.id);
-    dispatch(setCartItems(data));
-    setAddToCartLoading(false);
-  };
-
-  const handleToggleWishlist = async (productId) => {
-    if (!user) {
-      navigate("/auth/login");
-      return;
-    }
-
-    setHeartLoading(true);
-    const result = await toggleWishlistItem(user.id, productId);
-    setHeartLoading(false);
-
-    if (result.type === "fetch_error") {
-      return;
-    }
-
-    if (result.type === "insert_error") {
-      return;
-    }
-
-    if (result.type === "unknown_error") {
-      return;
-    }
-
-    if (result.type === "added") {
-      dispatch(
-        showToast({
-          type: "primary",
-          message: t("wishlist.addedToWishlist"),
-        })
-      );
-
-      dispatch(addWishlistItem(result.item));
-    }
-
-    if (result.type === "deleted") {
-      dispatch(
-        showToast({
-          type: "primary",
-          message: t("wishlist.removedFromWishlist"),
-        })
-      );
-
-      dispatch(removeWishlist(result.product_id));
-    }
   };
 
   return (
@@ -288,7 +192,7 @@ export default function HomePageProducts() {
                         dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                         dark:hover:border-primary hover:border-primary group-hover:opacity-100
                           group-hover:visible"
-                          onClick={() => handleAddToCart(product)}
+                          onClick={() => handleAddToCart(product.id)}
                         >
                           {addToCartLoading ? (
                             <div

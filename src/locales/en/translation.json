@@ -287,10 +287,10 @@
         "cartItemUpdate": "Cart item quantity updated.",
         "failedToIncreaseQuantity": "Failed to increase item quantity.",
         "failedToDecreaseQuantity": "Failed to decrease item quantity.",
-        "fetchCartError": "Failed to retrieve your cart. Please try again.",
-        "updateCartError": "Failed to update your cart. Please try again.",
-        "addToCartError": "Failed to add the product to your cart. Please try again.",
-        "unknownError": "Something went wrong. Please try again later.",
+        "fetchCartError": "Failed to load your cart.",
+        "updateCartError": "Failed to update your cart.",
+        "addToCartError": "Failed to add the product to your cart.",
+        "unknownError": "An unexpected error occurred.",
         "addToCart": "Add to Cart",
         "emptyCart": "Your cart is currently empty.",
         "emptyCartDescription": "No items have been added yet. Products you add to your cart will appear here."
@@ -322,7 +322,11 @@
     },
     "wishlist": {
         "addedToWishlist": "The product has been added to your wishlist.",
-        "removedFromWishlist": "The product has been removed from your wishlist."
+        "removedFromWishlist": "The product has been removed from your wishlist.",
+        "fetchWishlistError": "Failed to load your wishlist.",
+        "addToWishlistError": "Failed to add the product to your wishlist.",
+        "removeFromWishlistError": "Failed to remove the product from your wishlist.",
+        "unknownWishlistError": "An unexpected error occurred."
     },
     "homePageProducts": {
         "productsLoadError": "We couldn't load the products. Please try again.",

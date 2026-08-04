@@ -9,27 +9,17 @@ import {
   AiOutlinePlus,
   AiOutlineStar,
 } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getWishlistItems,
-  toggleWishlistItem,
-} from "../../../services/ProductsService";
-import { showToast } from "../../../redux/Slices/ToastSlice";
+import { useSelector } from "react-redux";
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
-import {
-  removeWishlist,
-  setWishlistItem,
-} from "../../../redux/Slices/WishlistSlice";
-import { useNavigate } from "react-router-dom";
 import useCart from "../../../hooks/useCart";
+import useWishlist from "../../../hooks/useWishlist";
 
 export default function Product({ product }) {
   const { t, i18n } = useTranslation();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const wishlist = useSelector((state) => state.wishlist.items);
-  const user = useSelector((state) => state.auth.user);
   const {
     handleAddToCart,
     handleIncreaseQuantity,
@@ -37,68 +27,12 @@ export default function Product({ product }) {
     idsForUpdateQuantity,
     addToCartLoading,
   } = useCart();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { handleToggleWishlist, heartLoading } = useWishlist();
 
   const [showProduct, setShowProduct] = useState(false);
-  const [heartLoading, setHeartLoading] = useState(false);
 
   const cartItem = cartItems.find((item) => item.product_id === product.id);
   const isWishlisted = wishlist.some((item) => item.product_id === product.id);
-
-  const handleToggleWishlist = async () => {
-    if (!user) {
-      navigate("/auth/login");
-      return;
-    }
-
-    setHeartLoading(true);
-    const result = await toggleWishlistItem(user.id, product.id);
-
-    if (result.type === "fetch_error") {
-      setHeartLoading(false);
-      return;
-    }
-
-    if (result.type === "insert_error") {
-      setHeartLoading(false);
-      return;
-    }
-
-    if (result.type === "unknown_error") {
-      setHeartLoading(false);
-      return;
-    }
-
-    if (result.type === "added") {
-      dispatch(
-        showToast({
-          type: "primary",
-          message: t("wishlist.addedToWishlist"),
-        })
-      );
-
-      const { data } = await getWishlistItems(user.id);
-      dispatch(setWishlistItem(data));
-      setTimeout(() => {
-        setHeartLoading(false);
-      }, 100);
-    }
-
-    if (result.type === "deleted") {
-      dispatch(
-        showToast({
-          type: "primary",
-          message: t("wishlist.removedFromWishlist"),
-        })
-      );
-
-      dispatch(removeWishlist(result.product_id));
-      setTimeout(() => {
-        setHeartLoading(false);
-      }, 100);
-    }
-  };
 
   return (
     <>
@@ -252,7 +186,7 @@ export default function Product({ product }) {
                 : "dark:text-secondary-D"
             }`}
             disabled={heartLoading}
-            click={handleToggleWishlist}
+            click={() => handleToggleWishlist(product.id)}
           >
             {heartLoading ? (
               <div

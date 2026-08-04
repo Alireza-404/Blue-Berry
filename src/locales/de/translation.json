@@ -287,10 +287,10 @@
         "cartItemUpdate": "Artikelmenge im Warenkorb wurde aktualisiert.",
         "failedToIncreaseQuantity": "Die Artikelmenge konnte nicht erhöht werden.",
         "failedToDecreaseQuantity": "Die Artikelmenge konnte nicht verringert werden.",
-        "fetchCartError": "Ihr Warenkorb konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
-        "updateCartError": "Ihr Warenkorb konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
-        "addToCartError": "Das Produkt konnte nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es erneut.",
-        "unknownError": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
+        "fetchCartError": "Ihr Warenkorb konnte nicht geladen werden.",
+        "updateCartError": "Ihr Warenkorb konnte nicht aktualisiert werden.",
+        "addToCartError": "Das Produkt konnte nicht zum Warenkorb hinzugefügt werden.",
+        "unknownError": "Ein unerwarteter Fehler ist aufgetreten.",
         "addToCart": "In den Warenkorb",
         "emptyCart": "Ihr Warenkorb ist derzeit leer.",
         "emptyCartDescription": "Es wurden noch keine Artikel hinzugefügt. Produkte, die Sie Ihrem Warenkorb hinzufügen, werden hier angezeigt."
@@ -322,7 +322,11 @@
     },
     "wishlist": {
         "addedToWishlist": "Das Produkt wurde zu Ihrer Wunschliste hinzugefügt.",
-        "removedFromWishlist": "Das Produkt wurde aus Ihrer Wunschliste entfernt."
+        "removedFromWishlist": "Das Produkt wurde aus Ihrer Wunschliste entfernt.",
+        "fetchWishlistError": "Ihre Wunschliste konnte nicht geladen werden.",
+        "addToWishlistError": "Das Produkt konnte nicht zu Ihrer Wunschliste hinzugefügt werden.",
+        "removeFromWishlistError": "Das Produkt konnte nicht aus Ihrer Wunschliste entfernt werden.",
+        "unknownWishlistError": "Ein unerwarteter Fehler ist aufgetreten."
     },
     "homePageProducts": {
         "productsLoadError": "Die Produkte konnten nicht geladen werden. Bitte versuchen Sie es erneut.",
