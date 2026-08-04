@@ -94,7 +94,7 @@ export default function TopVendors() {
             ease: "power3.out",
             duration: 0.3,
           },
-          "<",
+          "<"
         );
 
       mm.add("(min-width: 1024px)", () => {
@@ -157,12 +157,13 @@ export default function TopVendors() {
             ></div>
 
             <div id="vendor-images-elem" className="relative w-fit duration-0">
-              <img
-                src={topVendorsImagesArray[index].mainImg}
-                alt={`main-image-${index + 1}`}
-                className="rounded-3xl sm:rounded-none h-96 md:h-[550px] object-cover
-                lg:h-96 xl:h-[490px] select-none"
-              />
+              <div className="h-96 md:h-[550px] lg:h-96 xl:h-[490px]">
+                <img
+                  src={topVendorsImagesArray[index].mainImg}
+                  alt={`main-image-${index + 1}`}
+                  className="rounded-3xl sm:rounded-none object-cover select-none h-full w-full"
+                />
+              </div>
 
               <img
                 src={topVendorsImagesArray[index].vendorImg}
@@ -196,7 +197,9 @@ export default function TopVendors() {
             >
               <div className="lg:hidden flex flex-col gap-y-2.5">
                 <h3
-                  className={`text-xl font-bold ${active ? "text-primary" : "text-TB dark:text-white"}`}
+                  className={`text-xl font-bold ${
+                    active ? "text-primary" : "text-TB dark:text-white"
+                  }`}
                 >
                   {t(item.title)}
                 </h3>
@@ -215,7 +218,9 @@ export default function TopVendors() {
               <div className="hidden lg:flex items-center justify-between">
                 <div className="flex flex-col gap-y-2.5">
                   <h3
-                    className={`text-xl font-bold ${active ? "text-primary" : "text-TB dark:text-white"}`}
+                    className={`text-xl font-bold ${
+                      active ? "text-primary" : "text-TB dark:text-white"
+                    }`}
                   >
                     {t(item.title)}
                   </h3>
