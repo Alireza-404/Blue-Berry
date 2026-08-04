@@ -287,6 +287,10 @@
         "cartItemUpdate": "Artikelmenge im Warenkorb wurde aktualisiert.",
         "failedToIncreaseQuantity": "Die Artikelmenge konnte nicht erhöht werden.",
         "failedToDecreaseQuantity": "Die Artikelmenge konnte nicht verringert werden.",
+        "fetchCartError": "Ihr Warenkorb konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+        "updateCartError": "Ihr Warenkorb konnte nicht aktualisiert werden. Bitte versuchen Sie es erneut.",
+        "addToCartError": "Das Produkt konnte nicht zum Warenkorb hinzugefügt werden. Bitte versuchen Sie es erneut.",
+        "unknownError": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut.",
         "addToCart": "In den Warenkorb",
         "emptyCart": "Ihr Warenkorb ist derzeit leer.",
         "emptyCartDescription": "Es wurden noch keine Artikel hinzugefügt. Produkte, die Sie Ihrem Warenkorb hinzufügen, werden hier angezeigt."

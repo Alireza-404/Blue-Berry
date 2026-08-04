@@ -12,18 +12,8 @@ import { BiX } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { showToast } from "../../../redux/Slices/ToastSlice";
-import {
-  getCartItems,
-  updateCartItemQuantity,
-  addProductToCart,
-} from "../../../services/CartService";
-import {
-  setCartItems,
-  updateQuantity,
-} from "../../../redux/Slices/CartItemsSlice";
+import useCart from "../../../hooks/useCart";
+import { useSelector } from "react-redux";
 
 export default function ShowProductModal({
   showProduct,
@@ -31,15 +21,18 @@ export default function ShowProductModal({
   product,
 }) {
   const { t } = useTranslation();
-  const user = useSelector((state) => state.auth.user);
+  const {
+    handleAddToCart,
+    handleIncreaseQuantity,
+    handleDecreaseQuantity,
+    idsForUpdateQuantity,
+    addToCartLoading,
+  } = useCart();
+
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const root = window.document.documentElement;
 
   const [isCursorInImage, setIsCursorInImage] = useState(false);
-  const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
-  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [position, setPosition] = useState({
     x: 50,
     y: 50,
@@ -67,109 +60,6 @@ export default function ShowProductModal({
       x,
       y,
     });
-  };
-
-  const handleAddToCart = async () => {
-    if (!user) {
-      navigate("/auth/login");
-      return;
-    }
-
-    setAddToCartLoading(true);
-    const result = await addProductToCart(user.id, product.id);
-    setAddToCartLoading(false);
-
-    if (result.type === "fetch_error") {
-      return;
-    }
-
-    if (result.type === "updated_error") {
-      return;
-    }
-
-    if (result.type === "insert_error") {
-      return;
-    }
-
-    if (result.type === "unknown_error") {
-      return;
-    }
-
-    if (result.type === "added") {
-      dispatch(
-        showToast({
-          type: "success",
-          message: t("cartProducts.successAddedToCart"),
-        })
-      );
-    }
-
-    if (result.type === "updated") {
-      dispatch(
-        showToast({
-          type: "success",
-          message: t("cartProducts.cartItemUpdate"),
-        })
-      );
-    }
-
-    const { data } = await getCartItems(user.id);
-    dispatch(setCartItems(data));
-  };
-
-  const handleIncreaseQuantity = async () => {
-    setIdsForUpdateQuantity((prev) => [...prev, cartItem.id]);
-    const newQuantity = cartItem.quantity + 1;
-
-    const success = await updateCartItemQuantity(cartItem.id, newQuantity);
-
-    if (!success) {
-      removeUpdatingId();
-
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("cartProducts.failedToIncreaseQuantity"),
-        })
-      );
-
-      return;
-    }
-
-    dispatch(updateQuantity({ cartId: cartItem.id, quantity: newQuantity }));
-    removeUpdatingId();
-  };
-
-  const handleDecreaseQuantity = async () => {
-    setIdsForUpdateQuantity((prev) => [...prev, cartItem.id]);
-    const newQuantity = cartItem.quantity - 1;
-
-    if (newQuantity <= 0) {
-      removeUpdatingId(cartItem.id);
-      return;
-    }
-
-    const success = updateCartItemQuantity(cartItem.id, newQuantity);
-
-    if (!success) {
-      removeUpdatingId();
-
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("cartProducts.failedToIncreaseQuantity"),
-        })
-      );
-
-      return;
-    }
-
-    dispatch(updateQuantity({ cartId: cartItem.id, quantity: newQuantity }));
-    removeUpdatingId();
-  };
-
-  const removeUpdatingId = () => {
-    setIdsForUpdateQuantity((prev) => prev.filter((id) => id !== cartItem.id));
   };
 
   return (
@@ -261,7 +151,7 @@ export default function ShowProductModal({
                       className={
                         "group px-4 h-11 w-fit dark:text-secondary-D flex items-center gap-x-2"
                       }
-                      click={handleAddToCart}
+                      click={() => handleAddToCart(product.id)}
                       disabled={addToCartLoading}
                     >
                       <LuShoppingBag className="text-lg" />
@@ -294,7 +184,7 @@ export default function ShowProductModal({
                               : "text-secondary dark:text-secondary-D cursor-pointer"
                           }`}
                           disabled={idsForUpdateQuantity.includes(cartItem.id)}
-                          onClick={() => handleDecreaseQuantity()}
+                          onClick={() => handleDecreaseQuantity(cartItem)}
                         >
                           <AiOutlineMinus />
                         </button>
@@ -311,7 +201,7 @@ export default function ShowProductModal({
                               ? "text-secondary/50 dark:text-secondary-D/50 cursor-default"
                               : "text-secondary dark:text-secondary-D cursor-pointer"
                           }`}
-                          onClick={() => handleIncreaseQuantity()}
+                          onClick={() => handleIncreaseQuantity(cartItem)}
                         >
                           <AiOutlinePlus />
                         </button>

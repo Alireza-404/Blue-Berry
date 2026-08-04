@@ -1,5 +1,4 @@
 import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
-
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -16,15 +15,6 @@ import {
   toggleWishlistItem,
 } from "../../../services/ProductsService";
 import { showToast } from "../../../redux/Slices/ToastSlice";
-import {
-  getCartItems,
-  updateCartItemQuantity,
-  addProductToCart,
-} from "../../../services/CartService";
-import {
-  setCartItems,
-  updateQuantity,
-} from "../../../redux/Slices/CartItemsSlice";
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
 import {
@@ -32,6 +22,7 @@ import {
   setWishlistItem,
 } from "../../../redux/Slices/WishlistSlice";
 import { useNavigate } from "react-router-dom";
+import useCart from "../../../hooks/useCart";
 
 export default function Product({ product }) {
   const { t, i18n } = useTranslation();
@@ -39,122 +30,21 @@ export default function Product({ product }) {
   const cartItems = useSelector((state) => state.cart.cartItems);
   const wishlist = useSelector((state) => state.wishlist.items);
   const user = useSelector((state) => state.auth.user);
+  const {
+    handleAddToCart,
+    handleIncreaseQuantity,
+    handleDecreaseQuantity,
+    idsForUpdateQuantity,
+    addToCartLoading,
+  } = useCart();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
   const [showProduct, setShowProduct] = useState(false);
-  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [heartLoading, setHeartLoading] = useState(false);
 
   const cartItem = cartItems.find((item) => item.product_id === product.id);
   const isWishlisted = wishlist.some((item) => item.product_id === product.id);
-
-  const handleAddToCart = async () => {
-    if (!user) {
-      navigate("/auth/login");
-      return;
-    }
-
-    setAddToCartLoading(true);
-    const result = await addProductToCart(user.id, product.id);
-
-    if (result.type === "fetch_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "updated_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "insert_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "unknown_error") {
-      setAddToCartLoading(false);
-      return;
-    }
-
-    if (result.type === "added") {
-      dispatch(
-        showToast({
-          type: "success",
-          message: t("cartProducts.successAddedToCart"),
-        })
-      );
-    }
-
-    if (result.type === "updated") {
-      dispatch(
-        showToast({
-          type: "success",
-          message: t("cartProducts.cartItemUpdate"),
-        })
-      );
-    }
-
-    const { data } = await getCartItems(user.id);
-    dispatch(setCartItems(data));
-    setAddToCartLoading(false);
-  };
-
-  const handleIncreaseQuantity = async () => {
-    setIdsForUpdateQuantity((prev) => [...prev, cartItem.id]);
-    const newQuantity = cartItem.quantity + 1;
-
-    const success = await updateCartItemQuantity(cartItem.id, newQuantity);
-
-    if (!success) {
-      removeUpdatingId();
-
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("cartProducts.failedToIncreaseQuantity"),
-        })
-      );
-
-      return;
-    }
-
-    dispatch(updateQuantity({ cartId: cartItem.id, quantity: newQuantity }));
-    removeUpdatingId();
-  };
-
-  const handleDecreaseQuantity = async () => {
-    setIdsForUpdateQuantity((prev) => [...prev, cartItem.id]);
-    const newQuantity = cartItem.quantity - 1;
-
-    if (newQuantity <= 0) {
-      return;
-    }
-
-    const success = await updateCartItemQuantity(cartItem.id, newQuantity);
-
-    if (!success) {
-      removeUpdatingId();
-
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("cartProducts.failedToIncreaseQuantity"),
-        })
-      );
-
-      return;
-    }
-
-    dispatch(updateQuantity({ cartId: cartItem.id, quantity: newQuantity }));
-    removeUpdatingId();
-  };
-
-  const removeUpdatingId = () => {
-    setIdsForUpdateQuantity((prev) => prev.filter((id) => id !== cartItem.id));
-  };
 
   const handleToggleWishlist = async () => {
     if (!user) {
@@ -300,7 +190,7 @@ export default function Product({ product }) {
           <SecondaryButton
             type={"button"}
             className={"px-4 h-11 flex items-center gap-x-2 w-fit"}
-            click={handleAddToCart}
+            click={() => handleAddToCart(product.id)}
             disabled={addToCartLoading}
           >
             {t("cartProducts.addToCart")}
@@ -330,7 +220,7 @@ export default function Product({ product }) {
                     : "text-secondary dark:text-secondary-D cursor-pointer"
                 }`}
                 disabled={idsForUpdateQuantity.includes(cartItem.id)}
-                onClick={() => handleDecreaseQuantity()}
+                onClick={() => handleDecreaseQuantity(cartItem)}
               >
                 <AiOutlineMinus />
               </button>
@@ -347,7 +237,7 @@ export default function Product({ product }) {
                     ? "text-secondary/50 dark:text-secondary-D/50 cursor-default"
                     : "text-secondary dark:text-secondary-D cursor-pointer"
                 }`}
-                onClick={() => handleIncreaseQuantity()}
+                onClick={() => handleIncreaseQuantity(cartItem)}
               >
                 <AiOutlinePlus />
               </button>

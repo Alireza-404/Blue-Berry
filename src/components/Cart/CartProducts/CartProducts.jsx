@@ -2,132 +2,36 @@ import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
 
 import { useEffect, useState } from "react";
 import {
-  AiOutlineDelete,
   AiOutlineMinus,
   AiOutlinePlus,
   AiOutlineShoppingCart,
 } from "react-icons/ai";
-import { IoTrash, IoTrashOutline } from "react-icons/io5";
+import { IoTrashOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  deleteCartItem,
   getCartItems,
   updateCartItemQuantity,
 } from "../../../services/CartService";
 import {
-  removeCartItem,
   setCartItems,
   updateQuantity,
 } from "../../../redux/Slices/CartItemsSlice";
 import { showToast } from "../../../redux/Slices/ToastSlice";
+import useCart from "../../../hooks/useCart";
 
 export default function CartProducts() {
-  const user = useSelector((state) => state.auth.user);
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const dispatch = useDispatch();
+  const {
+    handleRemoveCartItem,
+    handleIncreaseQuantity,
+    handleDecreaseQuantity,
+    loading,
+    idsForUpdateQuantity,
+    idsForDelete,
+  } = useCart();
 
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const [idsForDelete, setIdsForDelete] = useState([]);
-  const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
-
-  useEffect(() => {
-    if (user?.id) {
-      fetchCartItems();
-    }
-  }, [user?.id]);
-
-  const fetchCartItems = async () => {
-    if (!user.id) {
-      setLoading(false);
-      return;
-    }
-
-    setLoading(true);
-
-    const { data } = await getCartItems(user.id);
-    dispatch(setCartItems(data));
-
-    setLoading(false);
-  };
-
-  const handleRemoveCartItem = async (cartId) => {
-    setIdsForDelete((prev) => [...prev, cartId]);
-
-    const success = await deleteCartItem(cartId);
-
-    if (!success) return;
-
-    dispatch(removeCartItem(cartId));
-    setIdsForDelete((prev) => prev.filter((id) => id !== cartId));
-  };
-
-  const handleIncreaseQuantity = async (item) => {
-    setIdsForUpdateQuantity((prev) => [...prev, item.id]);
-    const { id, quantity } = item;
-    const newQuantity = quantity + 1;
-
-    const success = await updateCartItemQuantity(id, newQuantity);
-    if (!success) {
-      removeUpdatingId(id);
-
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("cartProducts.failedToIncreaseQuantity"),
-        })
-      );
-
-      return;
-    }
-
-    dispatch(
-      updateQuantity({
-        cartId: id,
-        quantity: newQuantity,
-      })
-    );
-    removeUpdatingId(id);
-  };
-
-  const handleDecreaseQuantity = async (item) => {
-    setIdsForUpdateQuantity((prev) => [...prev, item.id]);
-    const { id, quantity } = item;
-    const newQuantity = quantity - 1;
-
-    if (newQuantity <= 0) {
-      removeUpdatingId(id);
-      return;
-    }
-
-    const success = await updateCartItemQuantity(id, newQuantity);
-
-    if (!success) {
-      removeUpdatingId(id);
-
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("cartProducts.failedToDecreaseQuantity"),
-        })
-      );
-
-      return;
-    }
-
-    dispatch(
-      updateQuantity({
-        cartId: id,
-        quantity: newQuantity,
-      })
-    );
-    removeUpdatingId(id);
-  };
-
-  const removeUpdatingId = (cartId) => {
-    setIdsForUpdateQuantity((prev) => prev.filter((id) => id !== cartId));
-  };
 
   return (
     <div className="flex flex-col gap-y-4">

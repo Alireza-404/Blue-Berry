@@ -287,6 +287,10 @@
         "cartItemUpdate": "Cart item quantity updated.",
         "failedToIncreaseQuantity": "Failed to increase item quantity.",
         "failedToDecreaseQuantity": "Failed to decrease item quantity.",
+        "fetchCartError": "Failed to retrieve your cart. Please try again.",
+        "updateCartError": "Failed to update your cart. Please try again.",
+        "addToCartError": "Failed to add the product to your cart. Please try again.",
+        "unknownError": "Something went wrong. Please try again later.",
         "addToCart": "Add to Cart",
         "emptyCart": "Your cart is currently empty.",
         "emptyCartDescription": "No items have been added yet. Products you add to your cart will appear here."
