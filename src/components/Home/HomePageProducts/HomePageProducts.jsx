@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  AiFillHeart,
   AiFillStar,
   AiOutlineEye,
   AiOutlineHeart,
@@ -13,10 +12,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { showToast } from "../../../redux/Slices/ToastSlice";
 import { setCartItems } from "../../../redux/Slices/CartItemsSlice";
-import { getCartItems } from "../../../services/CartService";
+import { getCartItems, addProductToCart } from "../../../services/CartService";
 import ShowProductModal from "../ShowProductModal/ShowProductModal";
 import {
-  addProductToCart,
   getProducts,
   toggleWishlistItem,
 } from "../../../services/ProductsService";
@@ -100,21 +98,24 @@ export default function HomePageProducts() {
 
     setAddToCartLoading(true);
     const result = await addProductToCart(user.id, product.id);
-    setAddToCartLoading(false);
 
     if (result.type === "fetch_error") {
+      setAddToCartLoading(false);
       return;
     }
 
     if (result.type === "updated_error") {
+      setAddToCartLoading(false);
       return;
     }
 
     if (result.type === "insert_error") {
+      setAddToCartLoading(false);
       return;
     }
 
     if (result.type === "unknown_error") {
+      setAddToCartLoading(false);
       return;
     }
 
@@ -136,8 +137,9 @@ export default function HomePageProducts() {
       );
     }
 
-    const data = await getCartItems(user.id);
+    const { data } = await getCartItems(user.id);
     dispatch(setCartItems(data));
+    setAddToCartLoading(false);
   };
 
   const handleToggleWishlist = async (productId) => {
@@ -200,7 +202,7 @@ export default function HomePageProducts() {
               <div
                 key={product.id}
                 className="group rounded-3xl overflow-hidden border border-TB/15
-              relative dark:border-box-border-D"
+                relative dark:border-box-border-D"
               >
                 <div className="divide-y divide-TB/15 dark:divide-box-border-D">
                   <div className="overflow-hidden relative flex justify-center items-center">
@@ -233,9 +235,9 @@ export default function HomePageProducts() {
                         <button
                           type="button"
                           disabled={heartLoading}
-                          className={`bg-white dark:bg-body border border-TB/15 
-                        dark:border-box-border-D text-[22px] rounded-lg inline-block p-2.5
-                        hover:text-white hover:bg-primary
+                          className={`group/button bg-white dark:bg-body border border-TB/15 
+                        dark:border-box-border-D text-[22px] rounded-lg w-11 h-11
+                        hover:text-white hover:bg-primary flex items-center justify-center
                         dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                         dark:hover:border-primary hover:border-primary
                           group-hover:opacity-100 group-hover:visible ${
@@ -245,19 +247,27 @@ export default function HomePageProducts() {
                           }`}
                           onClick={() => handleToggleWishlist(product.id)}
                         >
-                          <AiOutlineHeart />
+                          {heartLoading ? (
+                            <div
+                              className="w-4 h-4 border-x-2 border-b-2 border-secondary
+                            dark:border-secondary-D rounded-full animate-spin 
+                            group-hover/button:border-white"
+                            ></div>
+                          ) : (
+                            <AiOutlineHeart />
+                          )}
                         </button>
                       </li>
 
                       <li>
                         <button
                           type="button"
-                          className="bg-white dark:bg-body border border-TB/15 
-                        dark:border-box-border-D text-[22px] rounded-lg inline-block p-2.5
+                          className="bg-white dark:bg-body border border-TB/15 w-11 h-11
+                        dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
                         text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
                         dark:hover:bg-primary dark:hover:text-white invisible opacity-0
-                        dark:hover:border-primary hover:border-primary
-                          group-hover:opacity-100 group-hover:visible"
+                        dark:hover:border-primary hover:border-primary group-hover:opacity-100
+                          group-hover:visible"
                           onClick={() => {
                             setShowProduct((prev) => !prev);
                             setProductForShow(product);
@@ -272,15 +282,23 @@ export default function HomePageProducts() {
                           type="button"
                           title={t("cartProducts.addToCart")}
                           disabled={addToCartLoading}
-                          className="bg-white dark:bg-body border border-TB/15 
-                        dark:border-box-border-D text-[22px] rounded-lg inline-block p-2.5
+                          className="group/button bg-white dark:bg-body border border-TB/15 w-11 h-11
+                        dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
                         text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
                         dark:hover:bg-primary dark:hover:text-white invisible opacity-0
-                        dark:hover:border-primary hover:border-primary
-                          group-hover:opacity-100 group-hover:visible"
+                        dark:hover:border-primary hover:border-primary group-hover:opacity-100
+                          group-hover:visible"
                           onClick={() => handleAddToCart(product)}
                         >
-                          <AiOutlineShopping />
+                          {addToCartLoading ? (
+                            <div
+                              className="w-4 h-4 border-x-2 border-b-2 border-secondary
+                            dark:border-secondary-D rounded-full animate-spin 
+                            group-hover/button:border-white"
+                            ></div>
+                          ) : (
+                            <AiOutlineShopping />
+                          )}
                         </button>
                       </li>
                     </ul>
@@ -310,7 +328,7 @@ export default function HomePageProducts() {
                     <h3>
                       <a
                         className="text-TB dark:text-white text-lg line-clamp-1 tracking-widest
-                    hover:text-primary"
+                      hover:text-primary"
                         href={`/products/${product.id}`}
                       >
                         {product.title}

@@ -8,6 +8,7 @@ import Product from "../components/SingleProduct/Product/Product";
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import InfoAndDetail from "../components/SingleProduct/InfoAndDetail/InfoAndDetail";
+import { useSelector } from "react-redux";
 
 export default function SingleProduct() {
   const { id } = useParams();

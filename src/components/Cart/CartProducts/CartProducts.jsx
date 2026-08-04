@@ -46,7 +46,7 @@ export default function CartProducts() {
 
     setLoading(true);
 
-    const data = await getCartItems(user.id);
+    const { data } = await getCartItems(user.id);
     dispatch(setCartItems(data));
 
     setLoading(false);

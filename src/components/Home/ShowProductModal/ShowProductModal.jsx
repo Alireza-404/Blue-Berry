@@ -14,11 +14,11 @@ import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { addProductToCart } from "../../../services/ProductsService";
 import { showToast } from "../../../redux/Slices/ToastSlice";
 import {
   getCartItems,
   updateCartItemQuantity,
+  addProductToCart,
 } from "../../../services/CartService";
 import {
   setCartItems,
@@ -113,7 +113,7 @@ export default function ShowProductModal({
       );
     }
 
-    const data = await getCartItems(user.id);
+    const { data } = await getCartItems(user.id);
     dispatch(setCartItems(data));
   };
 
@@ -259,13 +259,21 @@ export default function ShowProductModal({
                     <PrimaryButton
                       type={"button"}
                       className={
-                        "px-4 h-11 w-fit dark:text-secondary-D flex items-center gap-x-2"
+                        "group px-4 h-11 w-fit dark:text-secondary-D flex items-center gap-x-2"
                       }
                       click={handleAddToCart}
                       disabled={addToCartLoading}
                     >
                       <LuShoppingBag className="text-lg" />
+
                       {t("cartProducts.addToCart")}
+
+                      {addToCartLoading && (
+                        <div
+                          className="w-4 h-4 border-x-2 border-b-2 border-secondary
+                        dark:border-secondary-D rounded-full animate-spin group-hover:border-white"
+                        ></div>
+                      )}
                     </PrimaryButton>
 
                     {cartItem && (

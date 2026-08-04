@@ -28,53 +28,6 @@ export const getProducts = async () => {
   }
 };
 
-export const addProductToCart = async (userId, productId) => {
-  try {
-    const { data: item, error: fetchError } = await supabase
-      .from("cart")
-      .select("*")
-      .eq("user_id", userId)
-      .eq("product_id", productId)
-      .maybeSingle();
-
-    if (fetchError) {
-      console.log(fetchError.message);
-      return { type: "fetch_error" };
-    }
-
-    if (item) {
-      const { error } = await supabase
-        .from("cart")
-        .update({ quantity: item.quantity + 1 })
-        .eq("id", item.id);
-
-      if (error) {
-        return { type: "updated_error" };
-      }
-
-      return { type: "updated" };
-    }
-
-    const { error } = await supabase.from("cart").insert({
-      user_id: userId,
-      product_id: productId,
-      quantity: 1,
-    });
-
-    if (error) {
-      return { type: "insert_error" };
-    }
-
-    return { type: "added" };
-  } catch (error) {
-    console.log(error.message);
-
-    return {
-      type: "unknown_error",
-    };
-  }
-};
-
 export const toggleWishlistItem = async (userId, productId) => {
   try {
     const { data: item, error: fetchError } = await supabase
@@ -127,29 +80,57 @@ export const toggleWishlistItem = async (userId, productId) => {
 
 export const getWishlistItems = async (userId) => {
   try {
-    const { data, error } = await supabase
+    const { data: wishlist, error: wishlistError } = await supabase
       .from("wishlists")
       .select("*")
       .eq("user_id", userId);
 
-    if (error) {
+    if (wishlistError) {
       return {
-        data: null,
+        data: [],
         success: false,
-        error: error.message,
+        error: wishlistError.message,
       };
     }
 
+    if (wishlist.length === 0) {
+      return {
+        data: [],
+        success: true,
+        error: null,
+      };
+    }
+
+    const productIds = wishlist.map((item) => item.product_id);
+
+    const { data: products, error: productsError } = await supabase
+      .from("products")
+      .select("*")
+      .in("id", productIds);
+
+    if (productsError) {
+      return {
+        data: [],
+        success: false,
+        error: productsError.message,
+      };
+    }
+
+    const wishlistWithProducts = wishlist.map((item) => ({
+      ...item,
+      product: products.find((product) => product.id === item.product_id),
+    }));
+
     return {
+      data: wishlistWithProducts,
       success: true,
       error: null,
-      data,
     };
   } catch (error) {
     console.log(error.message);
 
     return {
-      data: null,
+      data: [],
       success: false,
       error: error.message,
     };

@@ -9,11 +9,11 @@ export const getCartItems = async (userId) => {
 
     if (cartError) {
       console.log(cartError.message);
-      return { data: [], sucess: false };
+      return { data: [], success: false };
     }
 
     if (cartItems.length === 0) {
-      return { data: [], sucess: true };
+      return { data: [], success: true };
     }
 
     const productsId = cartItems.map((item) => item.product_id);
@@ -25,7 +25,7 @@ export const getCartItems = async (userId) => {
 
     if (productsError) {
       console.log(productsError.message);
-      return { data: [], sucess: false };
+      return { data: [], success: false };
     }
 
     const cartWithProducts = cartItems.map((item) => {
@@ -38,7 +38,54 @@ export const getCartItems = async (userId) => {
     return { data: cartWithProducts, success: true };
   } catch (error) {
     console.log(error);
-    return { data: [], sucess: false };
+    return { data: [], success: false };
+  }
+};
+
+export const addProductToCart = async (userId, productId) => {
+  try {
+    const { data: item, error: fetchError } = await supabase
+      .from("cart")
+      .select("*")
+      .eq("user_id", userId)
+      .eq("product_id", productId)
+      .maybeSingle();
+
+    if (fetchError) {
+      console.log(fetchError.message);
+      return { type: "fetch_error" };
+    }
+
+    if (item) {
+      const { error } = await supabase
+        .from("cart")
+        .update({ quantity: item.quantity + 1 })
+        .eq("id", item.id);
+
+      if (error) {
+        return { type: "updated_error" };
+      }
+
+      return { type: "updated" };
+    }
+
+    const { error } = await supabase.from("cart").insert({
+      user_id: userId,
+      product_id: productId,
+      quantity: 1,
+    });
+
+    if (error) {
+      return { type: "insert_error" };
+    }
+
+    return { type: "added" };
+  } catch (error) {
+    console.log(error.message);
+
+    return {
+      type: "unknown_error",
+    };
   }
 };
 

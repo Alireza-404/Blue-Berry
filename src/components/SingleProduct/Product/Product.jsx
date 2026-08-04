@@ -12,13 +12,14 @@ import {
 } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  addProductToCart,
+  getWishlistItems,
   toggleWishlistItem,
 } from "../../../services/ProductsService";
 import { showToast } from "../../../redux/Slices/ToastSlice";
 import {
   getCartItems,
   updateCartItemQuantity,
+  addProductToCart,
 } from "../../../services/CartService";
 import {
   setCartItems,
@@ -27,8 +28,8 @@ import {
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
 import {
-  addWishlistItem,
   removeWishlist,
+  setWishlistItem,
 } from "../../../redux/Slices/WishlistSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -43,10 +44,11 @@ export default function Product({ product }) {
 
   const [idsForUpdateQuantity, setIdsForUpdateQuantity] = useState([]);
   const [showProduct, setShowProduct] = useState(false);
+  const [addToCartLoading, setAddToCartLoading] = useState(false);
   const [heartLoading, setHeartLoading] = useState(false);
 
   const cartItem = cartItems.find((item) => item.product_id === product.id);
-  const wishlistItem = wishlist.find((item) => item.product_id === product.id);
+  const isWishlisted = wishlist.some((item) => item.product_id === product.id);
 
   const handleAddToCart = async () => {
     if (!user) {
@@ -54,21 +56,26 @@ export default function Product({ product }) {
       return;
     }
 
+    setAddToCartLoading(true);
     const result = await addProductToCart(user.id, product.id);
 
     if (result.type === "fetch_error") {
+      setAddToCartLoading(false);
       return;
     }
 
     if (result.type === "updated_error") {
+      setAddToCartLoading(false);
       return;
     }
 
     if (result.type === "insert_error") {
+      setAddToCartLoading(false);
       return;
     }
 
     if (result.type === "unknown_error") {
+      setAddToCartLoading(false);
       return;
     }
 
@@ -90,8 +97,9 @@ export default function Product({ product }) {
       );
     }
 
-    const data = await getCartItems(user.id);
+    const { data } = await getCartItems(user.id);
     dispatch(setCartItems(data));
+    setAddToCartLoading(false);
   };
 
   const handleIncreaseQuantity = async () => {
@@ -156,17 +164,19 @@ export default function Product({ product }) {
 
     setHeartLoading(true);
     const result = await toggleWishlistItem(user.id, product.id);
-    setHeartLoading(false);
 
     if (result.type === "fetch_error") {
+      setHeartLoading(false);
       return;
     }
 
     if (result.type === "insert_error") {
+      setHeartLoading(false);
       return;
     }
 
     if (result.type === "unknown_error") {
+      setHeartLoading(false);
       return;
     }
 
@@ -178,7 +188,11 @@ export default function Product({ product }) {
         })
       );
 
-      dispatch(addWishlistItem(result.item));
+      const { data } = await getWishlistItems(user.id);
+      dispatch(setWishlistItem(data));
+      setTimeout(() => {
+        setHeartLoading(false);
+      }, 100);
     }
 
     if (result.type === "deleted") {
@@ -190,6 +204,9 @@ export default function Product({ product }) {
       );
 
       dispatch(removeWishlist(result.product_id));
+      setTimeout(() => {
+        setHeartLoading(false);
+      }, 100);
     }
   };
 
@@ -282,10 +299,17 @@ export default function Product({ product }) {
         <div className="flex items-center gap-2 flex-wrap mt-4">
           <SecondaryButton
             type={"button"}
-            className={"px-4 h-11 w-fit"}
+            className={"px-4 h-11 flex items-center gap-x-2 w-fit"}
             click={handleAddToCart}
+            disabled={addToCartLoading}
           >
             {t("cartProducts.addToCart")}
+            {addToCartLoading && (
+              <div
+                className="w-4 h-4 border-x-2 border-b-2 border-gray-200
+                rounded-full animate-spin"
+              ></div>
+            )}
           </SecondaryButton>
 
           {cartItem && (
@@ -332,20 +356,29 @@ export default function Product({ product }) {
 
           <PrimaryButton
             type={"button"}
-            className={`px-4 h-11 ${
-              wishlistItem
+            className={`group w-12 h-11 flex items-center justify-center ${
+              isWishlisted
                 ? "text-red-500 dark:text-red-600"
                 : "dark:text-secondary-D"
             }`}
             disabled={heartLoading}
             click={handleToggleWishlist}
           >
-            <AiOutlineHeart className="text-xl" />
+            {heartLoading ? (
+              <div
+                className="w-4 h-4 border-x-2 border-b-2 border-secondary
+                dark:border-secondary-D rounded-full animate-spin group-hover:border-white"
+              ></div>
+            ) : (
+              <AiOutlineHeart className="text-xl" />
+            )}
           </PrimaryButton>
 
           <PrimaryButton
             type={"button"}
-            className={"px-4 h-11 dark:text-secondary-D"}
+            className={
+              "w-12 h-11 flex items-center justify-center dark:text-secondary-D"
+            }
             click={() => setShowProduct(true)}
           >
             <AiOutlineEye className="text-xl" />

@@ -12,7 +12,6 @@ import Navbar from "../components/Layout/Navbar/Navbar";
 import OrganicComponent from "../components/Home/OrganicComponent/OrganicComponent";
 import Services from "../components/Home/Services/Services";
 import SpecialCategories from "../components/Home/SpecialCategories/SpecialCategories";
-import Toast from "../components/Ui/Toast/Toast";
 import TopVendors from "../components/Home/TopVendors/TopVendors";
 import TopVendorsText from "../components/Home/TopVendorsText/TopVendorsText";
 
