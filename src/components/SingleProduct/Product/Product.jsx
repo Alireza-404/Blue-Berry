@@ -19,7 +19,9 @@ export default function Product({ product }) {
   const { t, i18n } = useTranslation();
 
   const cartItems = useSelector((state) => state.cart.cartItems);
-  const wishlist = useSelector((state) => state.wishlist.items);
+  const { items: wishlist, loading: wishlistLoading } = useSelector(
+    (state) => state.wishlist,
+  );
   const {
     handleAddToCart,
     handleIncreaseQuantity,
@@ -188,7 +190,7 @@ export default function Product({ product }) {
             disabled={heartLoading}
             click={() => handleToggleWishlist(product.id)}
           >
-            {heartLoading ? (
+            {heartLoading || wishlistLoading ? (
               <div
                 className="w-4 h-4 border-x-2 border-b-2 border-secondary
                 dark:border-secondary-D rounded-full animate-spin group-hover:border-white"
