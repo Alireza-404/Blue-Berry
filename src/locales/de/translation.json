@@ -253,7 +253,7 @@
         "cityRequired": "Bitte wählen Sie eine Stadt aus",
         "postCodeRequired": "Postleitzahl ist erforderlich",
         "loginErrorMessage": "Ungültige E-Mail-Adresse oder falsches Passwort. Bitte versuchen Sie es erneut.",
-        "registerErrorMessage": "Die Registrierung ist fehlgeschlagen. Bitte versuchen Sie es erneut.",
+        "registerErrorMessage": "Die Registrierung ist fehlgeschlagen. Die E-Mail wird möglicherweise bereits verwendet oder Ihre Angaben sind ungültig.",
         "profileErrorMessage": "Ihre Profildaten konnten nicht gespeichert werden. Bitte versuchen Sie es erneut.",
         "loggingIn": "Anmeldung läuft...",
         "registering": "Konto wird erstellt...",

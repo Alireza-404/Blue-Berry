@@ -253,7 +253,7 @@
         "cityRequired": "Please select a city",
         "postCodeRequired": "Post code is required",
         "loginErrorMessage": "Invalid email or password. Please try again.",
-        "registerErrorMessage": "Registration failed. Please try again.",
+        "registerErrorMessage": "Registration failed. The email may already be in use or your information is invalid.",
         "profileErrorMessage": "Failed to save your profile information. Please try again.",
         "loggingIn": "Logging in...",
         "registering": "Creating account...",

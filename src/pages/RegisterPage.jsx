@@ -11,11 +11,7 @@ import { IoChevronDown } from "react-icons/io5";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { supabase } from "../lib/supabase";
-import { useDispatch } from "react-redux";
-import { setUser } from "../redux/Slices/AuthSlice";
-import { useNavigate } from "react-router-dom";
-import { showToast } from "../redux/Slices/ToastSlice";
+import useAuth from "../hooks/useAuth";
 
 export default function RegisterPage() {
   const citiesArray = [
@@ -41,16 +37,18 @@ export default function RegisterPage() {
     "Phoenix",
   ];
 
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const {
+    handleRegister,
+    registerLoading: loading,
+    registerServerError: serverError,
+  } = useAuth();
+
   const dropdownRef = useRef(null);
   const containerRef = useRef(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const [dropdown, setDropdown] = useState(false);
   const [index, setIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
-  const [serverError, setServerError] = useState(false);
   const [showPassword, setShowPassword] = useState({
     password: false,
     confirmPassword: false,
@@ -143,54 +141,7 @@ export default function RegisterPage() {
     validateOnChange: false,
     validateOnBlur: false,
     validationSchema,
-    onSubmit: async (values) => {
-      setLoading(true);
-      setServerError("");
-
-      try {
-        const { data, error } = await supabase.auth.signUp({
-          email: values.email,
-          password: values.password,
-        });
-
-        if (error) {
-          setServerError(t("validation.registerErrorMessage"));
-          setLoading(false);
-          return;
-        }
-
-        const user = data.user;
-        const { error: profileError } = await supabase.from("profiles").insert([
-          {
-            id: user.id,
-            first_name: values.firstname,
-            last_name: values.lastname,
-            phone_number: values.phoneNumber,
-            address: values.address,
-            city: values.city,
-            post_code: values.postCode,
-          },
-        ]);
-
-        if (profileError) {
-          setLoading(false);
-          setServerError(t("validation.profileErrorMessage"));
-          return;
-        }
-
-        dispatch(setUser(user));
-        dispatch(
-          showToast({
-            type: "success",
-            message: t("validation.success.register"),
-          }),
-        );
-        navigate("/", { replace: true });
-      } catch {
-        setLoading(false);
-        setServerError(t("validation.serverError"));
-      }
-    },
+    onSubmit: handleRegister,
   });
 
   const firstError = Object.values(formik.errors)[0];
@@ -391,7 +342,7 @@ export default function RegisterPage() {
                       autoComplete="new-password"
                       spellCheck={false}
                       placeholder={t(
-                        "registerPage.confirmPassword.placeholder",
+                        "registerPage.confirmPassword.placeholder"
                       )}
                       className="py-3 px-3.5 border border-TB/15 dark:border-box-border-D
                       w-full focus:border-TB/40 outline-none rounded-lg dark:bg-box-D
@@ -487,7 +438,11 @@ export default function RegisterPage() {
                               <li
                                 key={i}
                                 className={`text-TB dark:text-white p-4 select-none flex items-center justify-between
-                            ${i === index ? "bg-secondary/20 dark:bg-secondary-D/15" : "bg-white dark:bg-body"}`}
+                            ${
+                              i === index
+                                ? "bg-secondary/20 dark:bg-secondary-D/15"
+                                : "bg-white dark:bg-body"
+                            }`}
                                 onClick={() => {
                                   setIndex(i);
                                 }}

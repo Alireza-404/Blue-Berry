@@ -20,7 +20,7 @@ export default function Product({ product }) {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const { items: wishlist, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist,
+    (state) => state.wishlist
   );
   const {
     handleAddToCart,
@@ -88,7 +88,7 @@ export default function Product({ product }) {
               <span className="text-TB dark:text-white font-bold text-2xl">
                 $
                 {Math.floor(
-                  product.price - (product.price * product.discount) / 100,
+                  product.price - (product.price * product.discount) / 100
                 ).toFixed(2)}
               </span>
             </div>

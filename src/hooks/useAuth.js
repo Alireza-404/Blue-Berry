@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { login } from "../services/AuthService";
+import { login, register } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,9 +13,13 @@ export default function useAuth() {
 
   const [loginServerError, setLoginServerError] = useState("");
   const [loginLoading, setLoginLoading] = useState(false);
+  const [registerLoading, setRegisterLoading] = useState(false);
+  const [registerServerError, setRegisterServerError] = useState("");
 
   const handleLogin = async (values) => {
     setLoginLoading(true);
+    setLoginServerError("");
+
     const { data, success, error } = await login(values.email, values.password);
 
     if (!success && error === "login_error") {
@@ -35,11 +39,64 @@ export default function useAuth() {
       showToast({
         type: "success",
         message: t("validation.success.login"),
-      }),
+      })
     );
     setLoginLoading(false);
+    setLoginServerError("");
     navigate("/", { replace: true });
   };
 
-  return { handleLogin, loginServerError, loginLoading };
+  const handleRegister = async (values) => {
+    setRegisterLoading(true);
+    setRegisterServerError("");
+
+    const { data, success, error } = await register(
+      values.email,
+      values.password,
+      values.firstname,
+      values.lastname,
+      values.phoneNumber,
+      values.address,
+      values.city,
+      values.postCode
+    );
+
+    if (!success && error === "sign-up-error") {
+      setRegisterLoading(false);
+      setRegisterServerError(t("validation.registerErrorMessage"));
+      return;
+    }
+
+    if (!success && error === "profile-error") {
+      setRegisterLoading(false);
+      setRegisterServerError(t("validation.profileErrorMessage"));
+      return;
+    }
+
+    if (!success && error === "catch-error") {
+      setRegisterLoading(false);
+      setRegisterServerError(t("validation.serverError"));
+      return;
+    }
+
+    dispatch(setUser(data));
+    dispatch(
+      showToast({
+        type: "success",
+        message: t("validation.success.register"),
+      })
+    );
+    setRegisterLoading(false);
+    setRegisterServerError("");
+    navigate("/", { replace: true });
+  };
+
+  return {
+    handleLogin,
+    loginServerError,
+    loginLoading,
+    handleRegister,
+    registerServerError,
+    registerLoading,
+  };
 }

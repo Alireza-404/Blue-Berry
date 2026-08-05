@@ -9,15 +9,7 @@ import {
 } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { showToast } from "../../../redux/Slices/ToastSlice";
-import { setCartItems } from "../../../redux/Slices/CartItemsSlice";
-import { getCartItems, addProductToCart } from "../../../services/CartService";
 import ShowProductModal from "../ShowProductModal/ShowProductModal";
-import {
-  addWishlistItem,
-  removeWishlist,
-} from "../../../redux/Slices/WishlistSlice";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useCart from "../../../hooks/useCart";
@@ -31,7 +23,7 @@ export default function HomePageProducts() {
   const { handleGetProducts, products, loading, error } = useProducts();
 
   const { items: wishlist, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist,
+    (state) => state.wishlist
   );
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
@@ -218,7 +210,7 @@ export default function HomePageProducts() {
                             $
                             {Math.floor(
                               product.price -
-                                (product.price * product.discount) / 100,
+                                (product.price * product.discount) / 100
                             ).toFixed(2)}
                           </span>
 
