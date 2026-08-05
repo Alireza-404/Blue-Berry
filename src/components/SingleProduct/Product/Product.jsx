@@ -86,7 +86,7 @@ export default function Product({ product }) {
               <span className="text-TB dark:text-white font-bold text-2xl">
                 $
                 {Math.floor(
-                  product.price - (product.price * product.discount) / 100
+                  product.price - (product.price * product.discount) / 100,
                 ).toFixed(2)}
               </span>
             </div>

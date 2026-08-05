@@ -15,10 +15,6 @@ import { setCartItems } from "../../../redux/Slices/CartItemsSlice";
 import { getCartItems, addProductToCart } from "../../../services/CartService";
 import ShowProductModal from "../ShowProductModal/ShowProductModal";
 import {
-  getProducts,
-  toggleWishlistItem,
-} from "../../../services/ProductsService";
-import {
   addWishlistItem,
   removeWishlist,
 } from "../../../redux/Slices/WishlistSlice";
@@ -31,10 +27,12 @@ import useProducts from "../../../hooks/useProducts";
 export default function HomePageProducts() {
   const { t } = useTranslation();
   const { handleAddToCart, addToCartLoading } = useCart();
-  const { handleToggleWishlist, heartLoading, setHeartLoading } = useWishlist();
+  const { handleToggleWishlist, heartLoading } = useWishlist();
   const { handleGetProducts, products, loading, error } = useProducts();
 
-  const wishlist = useSelector((state) => state.wishlist.items);
+  const { items: wishlist, loading: wishlistLoading } = useSelector(
+    (state) => state.wishlist,
+  );
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
@@ -64,13 +62,6 @@ export default function HomePageProducts() {
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
   }, [wishlist]);
-
-  useEffect(() => {
-    setHeartLoading(true);
-    if (wishlist.length === 0 && user) return;
-
-    setHeartLoading(false);
-  }, [wishlist, user]);
 
   return (
     <div className="grid grid-cols-4 gap-4">
@@ -132,7 +123,7 @@ export default function HomePageProducts() {
                           }`}
                           onClick={() => handleToggleWishlist(product.id)}
                         >
-                          {heartLoading ? (
+                          {heartLoading || wishlistLoading ? (
                             <div
                               className="w-4 h-4 border-x-2 border-b-2 border-secondary
                             dark:border-secondary-D rounded-full animate-spin 

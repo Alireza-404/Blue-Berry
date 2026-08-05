@@ -13,7 +13,7 @@ import {
   setWishlistItem,
   setWishlistLoading,
 } from "../redux/Slices/WishlistSlice";
-import { getWishlistItems } from "../services/ProductsService";
+import { getWishlistItems } from "../services/WishlistService";
 
 export default function useUserData() {
   const user = useSelector((state) => state.auth.user);

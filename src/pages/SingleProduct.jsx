@@ -9,9 +9,11 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import InfoAndDetail from "../components/SingleProduct/InfoAndDetail/InfoAndDetail";
 import { useSelector } from "react-redux";
+import useWishlist from "../hooks/useWishlist";
 
 export default function SingleProduct() {
   const { id } = useParams();
+  const { heartLoading } = useWishlist();
 
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -53,7 +55,7 @@ export default function SingleProduct() {
     getProduct();
   }, [id]);
 
-  if (loading) return <FullScreenLoader />;
+  if (loading || heartLoading) return <FullScreenLoader />;
 
   return (
     <>

@@ -5,7 +5,7 @@ import { removeWishlist, setWishlistItem } from "../redux/Slices/WishlistSlice";
 import {
   getWishlistItems,
   toggleWishlistItem,
-} from "../services/ProductsService";
+} from "../services/WishlistService";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
