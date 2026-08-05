@@ -15,15 +15,17 @@ import { useDispatch } from "react-redux";
 import { setUser } from "../redux/Slices/AuthSlice";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { showToast } from "../redux/Slices/ToastSlice";
+import useAuth from "../hooks/useAuth";
 
 export default function LoginPage() {
   const { t, i18n } = useTranslation();
-  const containerRef = useRef(null);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const {
+    handleLogin,
+    loginLoading: loading,
+    loginServerError: serverError,
+  } = useAuth();
 
-  const [serverError, setServerError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const containerRef = useRef(null);
   const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = Yup.object({
@@ -74,35 +76,7 @@ export default function LoginPage() {
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: async (values) => {
-      setLoading(true);
-      setServerError("");
-
-      try {
-        const { data, error } = await supabase.auth.signInWithPassword({
-          email: values.email,
-          password: values.password,
-        });
-
-        if (error) {
-          setServerError(t("validation.loginErrorMessage"));
-          setLoading(false);
-          return;
-        }
-
-        dispatch(setUser(data.user));
-        dispatch(
-          showToast({
-            type: "success",
-            message: t("validation.success.login"),
-          }),
-        );
-        navigate("/", { replace: true });
-      } catch {
-        setLoading(false);
-        setServerError(t("validation.serverError"));
-      }
-    },
+    onSubmit: handleLogin,
   });
 
   const firstError = Object.values(formik.errors)[0];
