@@ -45,7 +45,7 @@ export default function useWishlist() {
           showToast({
             type: "error",
             message: t("wishlist.fetchWishlistError"),
-          })
+          }),
         );
         setHeartLoading(false);
         break;
@@ -54,7 +54,7 @@ export default function useWishlist() {
           showToast({
             type: "error",
             message: t("wishlist.addToWishlistError"),
-          })
+          }),
         );
         setHeartLoading(false);
         break;
@@ -63,7 +63,7 @@ export default function useWishlist() {
           showToast({
             type: "error",
             message: t("wishlist.removeFromWishlistError"),
-          })
+          }),
         );
         setHeartLoading(false);
         break;
@@ -72,11 +72,11 @@ export default function useWishlist() {
           showToast({
             type: "error",
             message: t("wishlist.unknownWishlistError"),
-          })
+          }),
         );
         setHeartLoading(false);
     }
   };
 
-  return { handleToggleWishlist, heartLoading };
+  return { handleToggleWishlist, heartLoading, setHeartLoading };
 }

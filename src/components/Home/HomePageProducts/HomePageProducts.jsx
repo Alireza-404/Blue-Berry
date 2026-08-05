@@ -31,10 +31,11 @@ import useProducts from "../../../hooks/useProducts";
 export default function HomePageProducts() {
   const { t } = useTranslation();
   const { handleAddToCart, addToCartLoading } = useCart();
-  const { handleToggleWishlist, heartLoading } = useWishlist();
+  const { handleToggleWishlist, heartLoading, setHeartLoading } = useWishlist();
   const { handleGetProducts, products, loading, error } = useProducts();
 
   const wishlist = useSelector((state) => state.wishlist.items);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   const [showProduct, setShowProduct] = useState(false);
@@ -63,6 +64,13 @@ export default function HomePageProducts() {
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
   }, [wishlist]);
+
+  useEffect(() => {
+    setHeartLoading(true);
+    if (wishlist.length === 0 && user) return;
+
+    setHeartLoading(false);
+  }, [wishlist, user]);
 
   return (
     <div className="grid grid-cols-4 gap-4">

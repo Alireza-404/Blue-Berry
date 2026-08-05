@@ -42,7 +42,7 @@ export default function useCart() {
           showToast({
             type: "success",
             message: t("cartProducts.successAddedToCart"),
-          })
+          }),
         );
         break;
       case "updated":
@@ -50,7 +50,7 @@ export default function useCart() {
           showToast({
             type: "success",
             message: t("cartProducts.cartItemUpdate"),
-          })
+          }),
         );
         break;
       case "fetch_error":
@@ -58,7 +58,7 @@ export default function useCart() {
           showToast({
             type: "error",
             message: t("cartProducts.fetchCartError"),
-          })
+          }),
         );
         break;
       case "updated_error":
@@ -66,7 +66,7 @@ export default function useCart() {
           showToast({
             type: "error",
             message: t("cartProducts.updateCartError"),
-          })
+          }),
         );
         break;
       case "insert_error":
@@ -74,7 +74,7 @@ export default function useCart() {
           showToast({
             type: "error",
             message: t("cartProducts.addToCartError"),
-          })
+          }),
         );
         break;
       default:
@@ -82,7 +82,7 @@ export default function useCart() {
           showToast({
             type: "error",
             message: t("cartProducts.unknownError"),
-          })
+          }),
         );
     }
     const { data } = await getCartItems(user.id);
@@ -102,7 +102,7 @@ export default function useCart() {
   };
 
   const fetchCartItems = async () => {
-    if (!user.id) {
+    if (!user) {
       setLoading(false);
       return;
     }
@@ -128,7 +128,7 @@ export default function useCart() {
         showToast({
           type: "error",
           message: t("cartProducts.failedToIncreaseQuantity"),
-        })
+        }),
       );
 
       return;
@@ -138,7 +138,7 @@ export default function useCart() {
       updateQuantity({
         cartId: id,
         quantity: newQuantity,
-      })
+      }),
     );
     removeUpdatingId(id);
   };
@@ -162,7 +162,7 @@ export default function useCart() {
         showToast({
           type: "error",
           message: t("cartProducts.failedToDecreaseQuantity"),
-        })
+        }),
       );
 
       return;
@@ -172,7 +172,7 @@ export default function useCart() {
       updateQuantity({
         cartId: id,
         quantity: newQuantity,
-      })
+      }),
     );
     removeUpdatingId(id);
   };
