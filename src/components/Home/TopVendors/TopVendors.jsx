@@ -94,7 +94,7 @@ export default function TopVendors() {
             ease: "power3.out",
             duration: 0.3,
           },
-          "<"
+          "<",
         );
 
       mm.add("(min-width: 1024px)", () => {
@@ -148,16 +148,22 @@ export default function TopVendors() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             transition={{ duration: 0.2 }}
-            className="duration-0 sm:flex sm:justify-center mx-auto"
+            className="duration-0 xs:flex xs:justify-center h-full"
           >
             <div
               id="left-vendor-effect"
-              className="w-3 h-96 md:h-[550px] rounded-l-3xl bg-primary sm:block hidden
-              lg:h-96 xl:h-[490px] duration-0"
+              className="w-3 h-96 md:h-[505px] rounded-l-3xl bg-primary sm:block hidden
+              lg:h-[450px] xl:h-full duration-0"
             ></div>
 
-            <div id="vendor-images-elem" className="relative w-fit duration-0">
-              <div className="h-96 md:h-[550px] lg:h-96 xl:h-[490px]">
+            <div
+              id="vendor-images-elem"
+              className="relative duration-0 w-fit h-fit xl:h-full"
+            >
+              <div
+                className="w-full xs:w-96 h-96 md:w-[480px] md:h-[505px] lg:w-[440px] lg:h-[450px] 
+                xl:w-[505px] xl:h-full"
+              >
                 <img
                   src={topVendorsImagesArray[index].mainImg}
                   alt={`main-image-${index + 1}`}
@@ -174,8 +180,8 @@ export default function TopVendors() {
 
             <div
               id="right-vendor-effect"
-              className="w-3 h-96 md:h-[550px] rounded-r-3xl bg-primary sm:block hidden
-              lg:h-96 xl:h-[490px] duration-0"
+              className="w-3 h-96 md:h-[505px] rounded-r-3xl bg-primary sm:block hidden
+              lg:h-[450px] xl:h-full duration-0"
             ></div>
           </motion.div>
         </AnimatePresence>
