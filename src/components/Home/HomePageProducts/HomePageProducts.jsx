@@ -26,24 +26,19 @@ import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useCart from "../../../hooks/useCart";
 import useWishlist from "../../../hooks/useWishlist";
+import useProducts from "../../../hooks/useProducts";
 
 export default function HomePageProducts() {
   const { t } = useTranslation();
   const { handleAddToCart, addToCartLoading } = useCart();
   const { handleToggleWishlist, heartLoading } = useWishlist();
+  const { handleGetProducts, products, loading, error } = useProducts();
 
   const wishlist = useSelector((state) => state.wishlist.items);
   const dispatch = useDispatch();
 
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
-
-  useEffect(() => {
-    handleGetProducts();
-  }, []);
 
   useEffect(() => {
     const handleLoad = () => {
@@ -68,28 +63,6 @@ export default function HomePageProducts() {
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
   }, [wishlist]);
-
-  const handleGetProducts = async () => {
-    setLoading(true);
-    setError(false);
-
-    const result = await getProducts();
-
-    if (!result.success) {
-      console.log(result.error);
-      setError(true);
-      dispatch(
-        showToast({
-          type: "error",
-          message: t("homePageProducts.failedToLoadProducts"),
-        })
-      );
-    } else {
-      setError(false);
-      setProducts(result.data);
-    }
-    setLoading(false);
-  };
 
   return (
     <div className="grid grid-cols-4 gap-4">
@@ -246,7 +219,7 @@ export default function HomePageProducts() {
                             $
                             {Math.floor(
                               product.price -
-                                (product.price * product.discount) / 100
+                                (product.price * product.discount) / 100,
                             ).toFixed(2)}
                           </span>
 
