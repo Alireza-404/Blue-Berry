@@ -56,3 +56,11 @@ export const register = async (
     return { data: null, success: false, error: "catch-error" };
   }
 };
+
+export const logout = async () => {
+  const { error } = await supabase.auth.signOut();
+
+  if (error) return { success: false, error: true };
+
+  return { success: true, error: false };
+};

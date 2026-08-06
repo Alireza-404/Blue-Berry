@@ -1,10 +1,10 @@
 import { useDispatch } from "react-redux";
-import { login, register } from "../services/AuthService";
+import { login, logout, register } from "../services/AuthService";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { showToast } from "../redux/Slices/ToastSlice";
-import { setUser } from "../redux/Slices/AuthSlice";
+import { clearUser, setLoading, setUser } from "../redux/Slices/AuthSlice";
 
 export default function useAuth() {
   const { t } = useTranslation();
@@ -91,11 +91,28 @@ export default function useAuth() {
     navigate("/", { replace: true });
   };
 
+  const handleLogout = async () => {
+    dispatch(setLoading(true));
+    const { success, error } = await logout();
+
+    if (!success && error) {
+      dispatch(setLoading(false));
+      return;
+    }
+
+    dispatch(clearUser());
+    dispatch(
+      showToast({ type: "success", message: t("validation.success.logout") })
+    );
+    navigate("/", { replace: true });
+  };
+
   return {
     handleLogin,
+    handleRegister,
+    handleLogout,
     loginServerError,
     loginLoading,
-    handleRegister,
     registerServerError,
     registerLoading,
   };

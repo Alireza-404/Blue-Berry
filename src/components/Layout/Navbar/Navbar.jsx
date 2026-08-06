@@ -16,12 +16,11 @@ import {
 import { useTranslation } from "react-i18next";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { supabase } from "../../../lib/supabase";
-import { clearUser, setLoading } from "../../../redux/Slices/AuthSlice";
-import { showToast } from "../../../redux/Slices/ToastSlice";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 import useUserData from "../../../hooks/useUserData";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
@@ -37,9 +36,7 @@ export default function Navbar() {
     error: wishlistError,
   } = useSelector((state) => state.wishlist);
   const { getCart, getWishlist } = useUserData();
-
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const { handleLogout } = useAuth();
 
   const [menu, setMenu] = useState(false);
 
@@ -57,22 +54,6 @@ export default function Navbar() {
 
   const closeMenu = () => {
     setMenu(false);
-  };
-
-  const logout = async () => {
-    dispatch(setLoading(true));
-    const { error } = await supabase.auth.signOut();
-
-    if (error) {
-      dispatch(setLoading(false));
-      return;
-    }
-
-    dispatch(clearUser());
-    dispatch(
-      showToast({ type: "success", message: t("validation.success.logout") })
-    );
-    navigate("/", { replace: true });
   };
 
   return (
@@ -93,7 +74,7 @@ export default function Navbar() {
             >
               <span
                 className={`cursor-pointer h-full w-full flex justify-center items-center ${
-                  i18n.language === "en"
+                  i18n.language === "en" || i18n.language === "en-US"
                     ? "bg-primary text-white"
                     : "bg-transparent text-TB dark:text-white"
                 }`}
@@ -166,7 +147,7 @@ export default function Navbar() {
                       type="button"
                       className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
                       cursor-pointer flex items-end gap-x-1.5"
-                      onClick={logout}
+                      onClick={handleLogout}
                     >
                       <AiOutlineLogout />
 

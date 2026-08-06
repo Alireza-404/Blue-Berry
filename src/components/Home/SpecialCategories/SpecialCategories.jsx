@@ -76,7 +76,7 @@ export default function SpecialCategories() {
         gsap.from(box1.current, {
           scrollTrigger: {
             trigger: box1.current,
-            start: "top 30%",
+            start: "bottom bottom",
             toggleActions: "play none none reverse",
           },
           opacity: 0,
@@ -88,7 +88,7 @@ export default function SpecialCategories() {
         gsap.from(box2.current, {
           scrollTrigger: {
             trigger: box2.current,
-            start: "top 30%",
+            start: "bottom bottom",
             toggleActions: "play none none reverse",
           },
           opacity: 0,
