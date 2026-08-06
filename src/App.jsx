@@ -20,6 +20,7 @@ import { clearUser, setUser } from "./redux/Slices/AuthSlice";
 import { useTranslation } from "react-i18next";
 import "./App.css";
 import useUserData from "./hooks/useUserData";
+import WishlistPage from "./pages/WishlistPage";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -71,6 +72,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
+
         <Route
           path="/auth/login"
           element={
@@ -79,6 +81,7 @@ function App() {
             </GuestRoute>
           }
         />
+
         <Route
           path="/auth/register"
           element={
@@ -87,7 +90,9 @@ function App() {
             </GuestRoute>
           }
         />
+
         <Route path="/faq" element={<FAQPage />} />
+
         <Route
           path="/contact"
           element={
@@ -96,6 +101,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/cart"
           element={
@@ -104,11 +110,24 @@ function App() {
             </ProtectedRoute>
           }
         />
+
         <Route path="/about" element={<AboutPage />} />
+
         <Route path="/products/:id" element={<SingleProduct />} />
+
+        <Route
+          path="/wishlist"
+          element={
+            <ProtectedRoute>
+              <WishlistPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+// (Get-ChildItem .\src -Recurse -File -Include *.js,*.jsx,*.css,*.json | Get-Content | Measure-Object -Line).Lines

@@ -326,7 +326,10 @@
         "fetchWishlistError": "Ihre Wunschliste konnte nicht geladen werden.",
         "addToWishlistError": "Das Produkt konnte nicht zu Ihrer Wunschliste hinzugefügt werden.",
         "removeFromWishlistError": "Das Produkt konnte nicht aus Ihrer Wunschliste entfernt werden.",
-        "unknownWishlistError": "Ein unerwarteter Fehler ist aufgetreten."
+        "unknownWishlistError": "Ein unerwarteter Fehler ist aufgetreten.",
+        "emptyWishlist": "Ihre Wunschliste ist leer.",
+        "emptyWishlistDescription": "Sie haben Ihrer Wunschliste noch keine Produkte hinzugefügt.",
+        "wishlistLoadError": "Ihre Wunschliste konnte nicht geladen werden. Bitte versuchen Sie es erneut."
     },
     "homePageProducts": {
         "productsLoadError": "Die Produkte konnten nicht geladen werden. Bitte versuchen Sie es erneut.",

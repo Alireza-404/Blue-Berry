@@ -326,7 +326,10 @@
         "fetchWishlistError": "Failed to load your wishlist.",
         "addToWishlistError": "Failed to add the product to your wishlist.",
         "removeFromWishlistError": "Failed to remove the product from your wishlist.",
-        "unknownWishlistError": "An unexpected error occurred."
+        "unknownWishlistError": "An unexpected error occurred.",
+        "emptyWishlist": "Your wishlist is empty.",
+        "emptyWishlistDescription": "You haven't added any products to your wishlist yet.",
+        "wishlistLoadError": "We couldn't load your wishlist. Please try again."
     },
     "homePageProducts": {
         "productsLoadError": "We couldn't load the products. Please try again.",
