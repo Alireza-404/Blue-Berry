@@ -13,7 +13,8 @@
         "account": "Account",
         "wishlist": "Wishlist",
         "cart": "Cart",
-        "items": "Items"
+        "items": "Items",
+        "userLoadError": "We couldn't load your account information. Please try again."
     },
     "searchInputPlaceholder": "Search Products...",
     "heroSection": {

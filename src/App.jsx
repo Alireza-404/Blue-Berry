@@ -21,6 +21,7 @@ import { useTranslation } from "react-i18next";
 import "./App.css";
 import useUserData from "./hooks/useUserData";
 import WishlistPage from "./pages/WishlistPage";
+import useAuthSession from "./hooks/useAuthSession";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -32,20 +33,6 @@ function App() {
   useEffect(() => {
     ScrollTrigger.refresh();
   }, []);
-
-  useEffect(() => {
-    const getUser = async () => {
-      const { data } = await supabase.auth.getSession();
-
-      if (data.session) {
-        dispatch(setUser(data.session.user));
-      } else {
-        dispatch(clearUser());
-      }
-    };
-
-    getUser();
-  }, [dispatch]);
 
   useEffect(() => {
     const theme = localStorage.getItem("theme");
@@ -64,6 +51,7 @@ function App() {
     ScrollTrigger.refresh();
   }, [i18n.language]);
 
+  useAuthSession();
   useUserData();
 
   return (

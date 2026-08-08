@@ -25,7 +25,7 @@ export const register = async (
   phoneNumber,
   address,
   city,
-  postCode
+  postCode,
 ) => {
   try {
     const { data, error } = await supabase.auth.signUp({

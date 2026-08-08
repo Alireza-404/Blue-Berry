@@ -24,7 +24,11 @@ import useAuth from "../../../hooks/useAuth";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
-  const { user, initialized } = useSelector((state) => state.auth);
+  const {
+    user,
+    initialized,
+    loading: authLoading,
+  } = useSelector((state) => state.auth);
   const {
     cartItems,
     loading: cartLoading,
@@ -118,7 +122,7 @@ export default function Navbar() {
 
           <div className="flex items-center xl:items-end justify-end gap-x-6 xl:w-[460px]">
             <>
-              {initialized ? (
+              {authLoading ? (
                 <span
                   className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
                     flex items-center gap-x-1.5 h-full animate-pulse"

@@ -13,7 +13,8 @@
         "account": "Mein Konto",
         "wishlist": "Wunschliste",
         "cart": "Warenkorb",
-        "items": "Artikel"
+        "items": "Artikel",
+        "userLoadError": "Ihre Kontoinformationen konnten nicht geladen werden. Bitte versuchen Sie es erneut."
     },
     "searchInputPlaceholder": "Produkte suchen...",
     "heroSection": {

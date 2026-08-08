@@ -39,7 +39,7 @@ export default function useAuth() {
       showToast({
         type: "success",
         message: t("validation.success.login"),
-      })
+      }),
     );
     setLoginLoading(false);
     setLoginServerError("");
@@ -58,7 +58,7 @@ export default function useAuth() {
       values.phoneNumber,
       values.address,
       values.city,
-      values.postCode
+      values.postCode,
     );
 
     if (!success && error === "sign-up-error") {
@@ -79,12 +79,24 @@ export default function useAuth() {
       return;
     }
 
+    if (!success && error) {
+      const { success: logoutSuccess, error: logoutError } = await logout();
+
+      if (!logoutSuccess && logoutError) {
+        dispatch(setLoading(false));
+        return;
+      }
+
+      dispatch(clearUser());
+      return;
+    }
+
     dispatch(setUser(data));
     dispatch(
       showToast({
         type: "success",
         message: t("validation.success.register"),
-      })
+      }),
     );
     setRegisterLoading(false);
     setRegisterServerError("");
@@ -102,7 +114,7 @@ export default function useAuth() {
 
     dispatch(clearUser());
     dispatch(
-      showToast({ type: "success", message: t("validation.success.logout") })
+      showToast({ type: "success", message: t("validation.success.logout") }),
     );
     navigate("/", { replace: true });
   };
