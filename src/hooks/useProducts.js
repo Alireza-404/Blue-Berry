@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/ProductsService";
+import { addProduct, getProducts } from "../services/ProductsService";
 import { useDispatch } from "react-redux";
 import { showToast } from "../redux/Slices/ToastSlice";
 import { useTranslation } from "react-i18next";
@@ -34,9 +34,38 @@ export default function useProducts() {
     setLoading(false);
   };
 
+  const handleAddProduct = async (values) => {
+    const { success, error } = await addProduct(values);
+
+    if (!success && error === "insert_error") {
+      return dispatch(
+        showToast({
+          type: "error",
+          message: "Failed to add product.",
+        }),
+      );
+    }
+
+    if (!success && error === "catch_error") {
+      return dispatch(
+        showToast({
+          type: "error",
+          message: "Something went wrong.",
+        }),
+      );
+    }
+
+    dispatch(
+      showToast({
+        type: "primary",
+        message: "Product added successfully.",
+      }),
+    );
+  };
+
   useEffect(() => {
     handleGetProducts();
   }, []);
 
-  return { handleGetProducts, products, loading, error };
+  return { handleGetProducts, handleAddProduct, products, loading, error };
 }

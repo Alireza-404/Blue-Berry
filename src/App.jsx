@@ -22,6 +22,9 @@ import "./App.css";
 import useUserData from "./hooks/useUserData";
 import WishlistPage from "./pages/WishlistPage";
 import useAuthSession from "./hooks/useAuthSession";
+import AdminRoute from "./routes/AdminRoute";
+import Panel from "./pages/Panel/Panel";
+import AddProduct from "./pages/Panel/AddProduct";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -109,6 +112,24 @@ function App() {
             <ProtectedRoute>
               <WishlistPage />
             </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/panel"
+          element={
+            <AdminRoute>
+              <Panel />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/panel/products/new"
+          element={
+            <AdminRoute>
+              <AddProduct />
+            </AdminRoute>
           }
         />
       </Routes>

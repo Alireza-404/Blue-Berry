@@ -13,10 +13,12 @@ const authSlice = createSlice({
     setUser: (state, action) => {
       state.user = action.payload;
       state.loading = false;
+      state.initialized = true;
     },
     clearUser: (state) => {
       state.loading = false;
       state.user = null;
+      state.initialized = true;
     },
     setLoading: (state, action) => {
       state.loading = action.payload;
