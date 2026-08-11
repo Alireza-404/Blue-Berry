@@ -5,7 +5,7 @@ import useProducts from "../../../hooks/useProducts";
 import * as Yup from "yup";
 
 export default function AddProductForm() {
-  const { handleAddProduct } = useProducts();
+  const { handleAddProduct, addProductLoading } = useProducts();
 
   const validationSchema = Yup.object({
     title_en: Yup.string().trim().required("English title is required."),
@@ -16,9 +16,7 @@ export default function AddProductForm() {
     category_en: Yup.string().trim().required("English category is required."),
     category_de: Yup.string().trim().required("German category is required."),
     image: Yup.string().trim().required("Main product image is required."),
-    second_image: Yup.string()
-      .trim()
-      .required("Second product image is required."),
+    second_image: Yup.string().trim(),
     stars: Yup.number()
       .typeError("Stars must be a number.")
       .min(0, "Stars cannot be less than 0.")
@@ -47,9 +45,7 @@ export default function AddProductForm() {
     color_en: Yup.string().trim().required("English color is required."),
     color_de: Yup.string().trim().required("German color is required."),
     rating: Yup.number()
-      .typeError("Rating must be a number.")
-      .min(0, "Rating cannot be less than 0.")
-      .max(5, "Rating cannot be greater than 5.")
+      .required("Rating is required.")
       .required("Rating is required."),
     is_deal: Yup.boolean(),
     is_organic: Yup.boolean(),
@@ -59,7 +55,8 @@ export default function AddProductForm() {
     initialValues: {
       title_en: "",
       title_de: "",
-      description: "",
+      description:
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
       category_en: "Vegetables",
       category_de: "Gemüse",
       image: "",
@@ -83,8 +80,10 @@ export default function AddProductForm() {
     validationSchema,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: handleAddProduct,
+    onSubmit: (values) => handleAddProduct(values, formik.resetForm),
   });
+
+  const errorMessage = Object.values(formik.errors)[0];
 
   return (
     <form className="w-full" onSubmit={formik.handleSubmit}>
@@ -805,8 +804,22 @@ export default function AddProductForm() {
               border-blue-600/30 hover:border-blue-600/45 hover:bg-blue-500/15
               flex items-center justify-center gap-x-2.5 mt-8`}
       >
-        Add Product
+        {addProductLoading ? (
+          <>
+            Adding Product...
+            <span
+              className="animate-spin border-x border-t border-white/20
+                      rounded-full w-5 h-5 ml-2"
+            ></span>
+          </>
+        ) : (
+          <span>Add Product</span>
+        )}
       </PanelButton>
+
+      {errorMessage && (
+        <p className="text-red-500 font-bold text-lg mt-4">{errorMessage}</p>
+      )}
     </form>
   );
 }

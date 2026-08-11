@@ -18,7 +18,7 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 export default function WishlistItems() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { items, loading, error } = useSelector((state) => state.wishlist);
   const { handleAddToCart, addToCartLoading } = useCart();
   const { handleToggleWishlist, heartLoading } = useWishlist();
@@ -65,14 +65,12 @@ export default function WishlistItems() {
                     />
 
                     {item.product.second_image && (
-                      <a href="#">
-                        <img
-                          src={item.product.second_image}
-                          alt={`product-${item.product.id}`}
-                          className="select-none group-hover:scale-110 group-hover:opacity-100
+                      <img
+                        src={item.product.second_image}
+                        alt={`product-${item.product.id}`}
+                        className="select-none group-hover:scale-110 group-hover:opacity-100
                         group-hover:visible opacity-0 invisible absolute top-0 left-0"
-                        />
-                      </a>
+                      />
                     )}
 
                     <ul
@@ -155,7 +153,12 @@ export default function WishlistItems() {
                   <div className="p-4 flex flex-col gap-y-1">
                     <div className="flex items-center justify-between">
                       <h5 className="text-secondary dark:text-secondary-D">
-                        <a href="#">{item.product.category}</a>
+                        <a href="#">
+                          {" "}
+                          {i18n.language === "en" || i18n.language === "en-US"
+                            ? item.product.category_en
+                            : item.product.category_de}
+                        </a>
                       </h5>
 
                       <div className="flex items-center gap-x-0.5">
@@ -179,7 +182,9 @@ export default function WishlistItems() {
                         hover:text-primary"
                         href={`/products/${item.product.id}`}
                       >
-                        {item.product.title}
+                        {i18n.language === "en" || i18n.language === "en-US"
+                          ? item.product.title_en
+                          : item.product.title_de}
                       </a>
                     </h3>
 
@@ -191,7 +196,7 @@ export default function WishlistItems() {
                             {Math.floor(
                               item.product.price -
                                 (item.product.price * item.product.discount) /
-                                  100
+                                  100,
                             ).toFixed(2)}
                           </span>
 

@@ -11,6 +11,7 @@ export default function useProducts() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [addProductLoading, setAddProductLoading] = useState(false);
 
   const handleGetProducts = async () => {
     setLoading(true);
@@ -34,10 +35,12 @@ export default function useProducts() {
     setLoading(false);
   };
 
-  const handleAddProduct = async (values) => {
+  const handleAddProduct = async (values, resetForm) => {
+    setAddProductLoading(true);
     const { success, error } = await addProduct(values);
 
     if (!success && error === "insert_error") {
+      setAddProductLoading(false);
       return dispatch(
         showToast({
           type: "error",
@@ -47,6 +50,7 @@ export default function useProducts() {
     }
 
     if (!success && error === "catch_error") {
+      setAddProductLoading(false);
       return dispatch(
         showToast({
           type: "error",
@@ -55,17 +59,26 @@ export default function useProducts() {
       );
     }
 
+    resetForm();
     dispatch(
       showToast({
         type: "primary",
         message: "Product added successfully.",
       }),
     );
+    setAddProductLoading(false);
   };
 
   useEffect(() => {
     handleGetProducts();
   }, []);
 
-  return { handleGetProducts, handleAddProduct, products, loading, error };
+  return {
+    handleGetProducts,
+    handleAddProduct,
+    products,
+    loading,
+    error,
+    addProductLoading,
+  };
 }

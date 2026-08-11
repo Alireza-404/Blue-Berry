@@ -76,6 +76,7 @@ export const addProductToCart = async (userId, productId) => {
     });
 
     if (error) {
+      console.log(error);
       return { type: "insert_error" };
     }
 

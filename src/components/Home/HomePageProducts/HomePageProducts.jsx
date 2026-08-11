@@ -17,13 +17,13 @@ import useWishlist from "../../../hooks/useWishlist";
 import useProducts from "../../../hooks/useProducts";
 
 export default function HomePageProducts() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { handleAddToCart, addToCartLoading } = useCart();
   const { handleToggleWishlist, heartLoading } = useWishlist();
   const { handleGetProducts, products, loading, error } = useProducts();
 
   const { items: wishlist, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist
+    (state) => state.wishlist,
   );
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
@@ -85,14 +85,12 @@ export default function HomePageProducts() {
                     />
 
                     {product.second_image && (
-                      <a href="#">
-                        <img
-                          src={product.second_image}
-                          alt={`product-${product.id}`}
-                          className="select-none group-hover:scale-110 group-hover:opacity-100
+                      <img
+                        src={product.second_image}
+                        alt={`product-${product.id}`}
+                        className="select-none group-hover:scale-110 group-hover:opacity-100
                       group-hover:visible opacity-0 invisible absolute top-0 left-0"
-                        />
-                      </a>
+                      />
                     )}
 
                     <ul
@@ -175,7 +173,11 @@ export default function HomePageProducts() {
                   <div className="p-4 flex flex-col gap-y-1">
                     <div className="flex items-center justify-between">
                       <h5 className="text-secondary dark:text-secondary-D">
-                        <a href="#">{product.category}</a>
+                        <a href="#">
+                          {i18n.language === "en" || i18n.language === "en-US"
+                            ? product.category_en
+                            : product.category_de}
+                        </a>
                       </h5>
 
                       <div className="flex items-center gap-x-0.5">
@@ -199,7 +201,9 @@ export default function HomePageProducts() {
                       hover:text-primary"
                         href={`/products/${product.id}`}
                       >
-                        {product.title}
+                        {i18n.language === "en" || i18n.language === "en-US"
+                          ? product.title_en
+                          : product.title_de}
                       </a>
                     </h3>
 
@@ -210,7 +214,7 @@ export default function HomePageProducts() {
                             $
                             {Math.floor(
                               product.price -
-                                (product.price * product.discount) / 100
+                                (product.price * product.discount) / 100,
                             ).toFixed(2)}
                           </span>
 
