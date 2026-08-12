@@ -25,6 +25,8 @@ import useAuthSession from "./hooks/useAuthSession";
 import AdminRoute from "./routes/AdminRoute";
 import Panel from "./pages/Panel/Panel";
 import AddProduct from "./pages/Panel/AddProduct";
+import Products from "./pages/Panel/Products";
+import EditPage from "./pages/Panel/EditPage";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -129,6 +131,24 @@ function App() {
           element={
             <AdminRoute>
               <AddProduct />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/panel/products"
+          element={
+            <AdminRoute>
+              <Products />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/panel/products/:id/edit"
+          element={
+            <AdminRoute>
+              <EditPage />
             </AdminRoute>
           }
         />

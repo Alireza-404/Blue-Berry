@@ -12,7 +12,7 @@ export default function Summary() {
 
   const subTotal = cartItems.reduce((total, item) => {
     return (
-      total +
+      Math.floor(total) +
       (item.product.price -
         (item.product.price * item.product.discount) / 100) *
         item.quantity
@@ -140,7 +140,7 @@ export default function Summary() {
             ></span>
           ) : (
             <span className="text-secondary dark:text-secondary-D font-bold text-lg">
-              ${(subTotal + 40).toFixed(2)}
+              ${subTotal === 0 ? "0.00" : (subTotal + 40).toFixed(2)}
             </span>
           )}
         </div>

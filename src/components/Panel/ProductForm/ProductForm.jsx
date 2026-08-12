@@ -4,8 +4,13 @@ import PanelButton from "../PanelButton/PanelButton";
 import useProducts from "../../../hooks/useProducts";
 import * as Yup from "yup";
 
-export default function AddProductForm() {
-  const { handleAddProduct, addProductLoading } = useProducts();
+export default function ProductForm({ mode = "create", product = null }) {
+  const {
+    handleAddProduct,
+    handleUpdateProduct,
+    addProductLoading,
+    updateLoading,
+  } = useProducts();
 
   const validationSchema = Yup.object({
     title_en: Yup.string().trim().required("English title is required."),
@@ -22,7 +27,7 @@ export default function AddProductForm() {
       .min(0, "Stars cannot be less than 0.")
       .max(5, "Stars cannot be greater than 5.")
       .required("Stars are required."),
-    label: Yup.string().trim().required("Product label is required."),
+    label: Yup.string().trim(),
     price: Yup.number()
       .typeError("Price must be a number.")
       .moreThan(0, "Price must be greater than 0.")
@@ -30,8 +35,7 @@ export default function AddProductForm() {
     discount: Yup.number()
       .typeError("Discount must be a number.")
       .min(0, "Discount cannot be less than 0.")
-      .max(100, "Discount cannot be greater than 100%.")
-      .required("Discount is required."),
+      .max(100, "Discount cannot be greater than 100%."),
     stock: Yup.number()
       .typeError("Stock must be a number.")
       .integer("Stock must be a whole number.")
@@ -51,36 +55,70 @@ export default function AddProductForm() {
     is_organic: Yup.boolean(),
   });
 
+  const initialValues = product
+    ? {
+        title_en: product.title_en ?? "",
+        title_de: product.title_de ?? "",
+        description: product.description ?? "",
+        category_en: product.category_en ?? "Vegetables",
+        category_de: product.category_de ?? "Gemüse",
+        image: product.image ?? "",
+        second_image: product.second_image ?? "",
+        stars: product.stars ?? 1,
+        label: product.label ?? "",
+        price: product.price ?? "",
+        discount: product.discount ?? "",
+        stock: product.stock ?? "",
+        unit: product.unit ?? "",
+        sku: product.sku ?? "",
+        country: product.country ?? "Germany",
+        brand: product.brand ?? "Freshora",
+        shelf_life: product.shelf_life ?? "",
+        color_en: product.color_en ?? "",
+        color_de: product.color_de ?? "",
+        rating: product.rating ?? "",
+        is_deal: product.is_deal ?? false,
+        is_organic: product.is_organic ?? false,
+      }
+    : {
+        title_en: "",
+        title_de: "",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
+        category_en: "Vegetables",
+        category_de: "Gemüse",
+        image: "",
+        second_image: "",
+        stars: 1,
+        label: "",
+        price: "",
+        discount: "",
+        stock: "",
+        unit: "",
+        sku: "",
+        country: "Germany",
+        brand: "Freshora",
+        shelf_life: "",
+        color_en: "",
+        color_de: "",
+        rating: "",
+        is_deal: false,
+        is_organic: false,
+      };
+
   const formik = useFormik({
-    initialValues: {
-      title_en: "",
-      title_de: "",
-      description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-      category_en: "Vegetables",
-      category_de: "Gemüse",
-      image: "",
-      second_image: "",
-      stars: "1",
-      label: "",
-      price: "",
-      discount: "",
-      stock: "",
-      unit: "",
-      sku: "",
-      country: "Germany",
-      brand: "Freshora",
-      shelf_life: "",
-      color_en: "",
-      color_de: "",
-      rating: "",
-      is_deal: false,
-      is_organic: false,
-    },
+    initialValues,
     validationSchema,
+    enableReinitialize: true,
     validateOnChange: false,
     validateOnBlur: false,
-    onSubmit: (values) => handleAddProduct(values, formik.resetForm),
+    onSubmit: (values) => {
+      if (mode === "create") {
+        handleAddProduct(values, formik.resetForm);
+      } else {
+        handleUpdateProduct(product.id, values);
+      }
+    },
   });
 
   const errorMessage = Object.values(formik.errors)[0];
@@ -182,10 +220,10 @@ export default function AddProductForm() {
               </option>
 
               <option
-                value={"Peppers"}
+                value={"Spices"}
                 className="bg-neutral-950 text-white font-bold"
               >
-                Peppers
+                Spices
               </option>
 
               <option
@@ -267,10 +305,10 @@ export default function AddProductForm() {
               </option>
 
               <option
-                value="Paprika"
+                value="Gewürze"
                 className="bg-neutral-950 text-white font-bold"
               >
-                Paprika
+                Gewürze
               </option>
 
               <option
@@ -803,17 +841,18 @@ export default function AddProductForm() {
         className={`text-blue-600 bg-blue-500/10 px-6 py-3 text-lg rounded-xl border 
               border-blue-600/30 hover:border-blue-600/45 hover:bg-blue-500/15
               flex items-center justify-center gap-x-2.5 mt-8`}
+        disabled={mode === "create" ? addProductLoading : updateLoading}
       >
-        {addProductLoading ? (
+        {addProductLoading || updateLoading ? (
           <>
-            Adding Product...
+            {mode === "create" ? "Adding Product..." : "Updating..."}
             <span
               className="animate-spin border-x border-t border-white/20
                       rounded-full w-5 h-5 ml-2"
             ></span>
           </>
         ) : (
-          <span>Add Product</span>
+          <span>{mode === "create" ? "Add Product" : "Update"}</span>
         )}
       </PanelButton>
 

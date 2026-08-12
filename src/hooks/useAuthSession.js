@@ -4,8 +4,10 @@ import { clearUser, setUser } from "../redux/Slices/AuthSlice";
 import { useEffect } from "react";
 import { getUserRole } from "../services/UserRole";
 import { showToast } from "../redux/Slices/ToastSlice";
+import { useTranslation } from "react-i18next";
 
 export default function useAuthSession() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const getUser = async () => {

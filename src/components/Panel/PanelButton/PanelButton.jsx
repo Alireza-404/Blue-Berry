@@ -1,6 +1,17 @@
-export default function PanelButton({ type, className, children }) {
+export default function PanelButton({
+  type,
+  className,
+  disabled,
+  click,
+  children,
+}) {
   return (
-    <button type={type} className={`${className || ""}`}>
+    <button
+      onClick={click}
+      type={type}
+      className={`${className || ""}`}
+      disabled={disabled}
+    >
       {children}
     </button>
   );

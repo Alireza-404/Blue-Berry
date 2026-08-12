@@ -64,3 +64,78 @@ export const addProduct = async (values) => {
     return { success: false, error: "catch_error" };
   }
 };
+
+export const deleteProduct = async (productId) => {
+  try {
+    const { error } = await supabase
+      .from("products")
+      .delete()
+      .eq("id", productId);
+
+    if (error) {
+      return { error: "delete_error", success: false };
+    }
+
+    return { error: null, success: true };
+  } catch {
+    return { error: "catch_error", success: false };
+  }
+};
+
+export const updateProduct = async (productId, values) => {
+  try {
+    const { data, error } = await supabase
+      .from("products")
+      .update(values)
+      .eq("id", productId)
+      .select()
+      .single();
+
+    if (error) {
+      return {
+        success: false,
+        error: "update_error",
+      };
+    }
+
+    return {
+      success: true,
+      data,
+    };
+  } catch (error) {
+    return {
+      success: false,
+      error: "catch_error",
+    };
+  }
+};
+
+export const getProductById = async (productId) => {
+  try {
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .eq("id", productId)
+      .single();
+
+    if (error) {
+      return {
+        data: null,
+        error: "fetch_error",
+        success: false,
+      };
+    }
+
+    return {
+      data,
+      error: null,
+      success: true,
+    };
+  } catch {
+    return {
+      data: null,
+      error: "catch_error",
+      success: false,
+    };
+  }
+};
