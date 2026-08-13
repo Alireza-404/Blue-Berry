@@ -107,7 +107,19 @@ export default function Product({ product }) {
               SKU#: {product.sku}
             </span>
 
-            <span className="text-primary text-lg font-normal">In Stock</span>
+            <span className="text-primary text-lg font-normal">
+              {product.stock === 0
+                ? i18n.language === "en" || i18n.language === "en-US"
+                  ? "Out of stock"
+                  : "Nicht auf Lager"
+                : product.stock >= 3
+                ? i18n.language === "en" || i18n.language === "en-US"
+                  ? "In stock"
+                  : "Auf Lager"
+                : i18n.language === "en" || i18n.language === "en-US"
+                ? `Only ${product.stock} left`
+                : `Nur noch ${product.stock} Stück übrig`}
+            </span>
           </div>
         </div>
 
@@ -130,7 +142,9 @@ export default function Product({ product }) {
           <SecondaryButton
             type={"button"}
             className={"px-4 h-11 flex items-center gap-x-2 w-fit"}
-            click={() => handleAddToCart(product.id)}
+            click={() => {
+              handleAddToCart(product.id, product.stock);
+            }}
             disabled={addToCartLoading}
           >
             {t("cartProducts.addToCart")}

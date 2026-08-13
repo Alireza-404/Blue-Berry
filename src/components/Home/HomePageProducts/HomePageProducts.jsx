@@ -23,7 +23,7 @@ export default function HomePageProducts() {
   const { handleGetProducts, products, loading, error } = useProducts();
 
   const { items: wishlist, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist,
+    (state) => state.wishlist
   );
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
@@ -53,7 +53,7 @@ export default function HomePageProducts() {
   }, [wishlist]);
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-4 gap-6">
       {loading ? (
         <ProductsSkeleton />
       ) : error ? (
@@ -154,7 +154,9 @@ export default function HomePageProducts() {
                         dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                         dark:hover:border-primary hover:border-primary group-hover:opacity-100
                           group-hover:visible"
-                          onClick={() => handleAddToCart(product.id)}
+                          onClick={() =>
+                            handleAddToCart(product.id, product.stock)
+                          }
                         >
                           {addToCartLoading ? (
                             <div
@@ -208,13 +210,13 @@ export default function HomePageProducts() {
                     </h3>
 
                     <div className="flex items-center justify-between">
-                      {product.discount ? (
+                      {product.discount && product.stock !== 0 ? (
                         <div className="flex gap-x-2 items-end">
                           <span className="text-TB dark:text-white font-bold text-lg">
                             $
                             {Math.floor(
                               product.price -
-                                (product.price * product.discount) / 100,
+                                (product.price * product.discount) / 100
                             ).toFixed(2)}
                           </span>
 
@@ -223,14 +225,27 @@ export default function HomePageProducts() {
                           </span>
                         </div>
                       ) : (
-                        <span className="text-TB dark:text-white font-bold text-lg">
-                          ${product.price.toFixed(2)}
-                        </span>
+                        <>
+                          <span className="text-TB dark:text-white font-bold text-lg">
+                            ${product.price.toFixed(2)}
+                          </span>
+
+                          {product.stock === 0 && (
+                            <span className="text-primary font-normal">
+                              {i18n.language === "en" ||
+                              i18n.language === "en-US"
+                                ? "Out of Stock"
+                                : "Nicht vorrätig"}
+                            </span>
+                          )}
+                        </>
                       )}
 
-                      <span className="text-secondary dark:text-secondary-D">
-                        {product.unit}
-                      </span>
+                      {product.stock !== 0 && (
+                        <span className="text-secondary dark:text-secondary-D">
+                          {product.unit}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

@@ -294,7 +294,8 @@
         "unknownError": "An unexpected error occurred.",
         "addToCart": "Add to Cart",
         "emptyCart": "Your cart is currently empty.",
-        "emptyCartDescription": "No items have been added yet. Products you add to your cart will appear here."
+        "emptyCartDescription": "No items have been added yet. Products you add to your cart will appear here.",
+        "productOutOfStock": "This product is currently out of stock."
     },
     "about": {
         "h1": "About the <1>BlueBerry</1>",

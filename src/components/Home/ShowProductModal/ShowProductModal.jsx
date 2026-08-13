@@ -152,7 +152,7 @@ export default function ShowProductModal({
                       className={
                         "group px-4 h-11 w-fit dark:text-secondary-D flex items-center gap-x-2"
                       }
-                      click={() => handleAddToCart(product.id)}
+                      click={() => handleAddToCart(product.id, product.stock)}
                       disabled={addToCartLoading}
                     >
                       <LuShoppingBag className="text-lg" />

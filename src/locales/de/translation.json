@@ -294,7 +294,8 @@
         "unknownError": "Ein unerwarteter Fehler ist aufgetreten.",
         "addToCart": "In den Warenkorb",
         "emptyCart": "Ihr Warenkorb ist derzeit leer.",
-        "emptyCartDescription": "Es wurden noch keine Artikel hinzugefügt. Produkte, die Sie Ihrem Warenkorb hinzufügen, werden hier angezeigt."
+        "emptyCartDescription": "Es wurden noch keine Artikel hinzugefügt. Produkte, die Sie Ihrem Warenkorb hinzufügen, werden hier angezeigt.",
+        "productOutOfStock": "Dieses Produkt ist derzeit nicht vorrätig."
     },
     "about": {
         "h1": "Über <1>BlueBerry</1>",
