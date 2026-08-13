@@ -4,6 +4,7 @@ import useProducts from "../../hooks/useProducts";
 import PanelLayout from "../../components/Layout/PanelLayout/PanelLayout";
 import PanelFooter from "../../components/Panel/Footer/Footer";
 import ProductForm from "../../components/Panel/ProductForm/ProductForm";
+import ProductsError from "../../components/Ui/ProductsError/ProductsError";
 
 export default function EditPage() {
   const { id } = useParams();
@@ -57,7 +58,22 @@ export default function EditPage() {
               className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
                       lg:pt-28 lg:pb-8 flex items-center"
             >
-              <ProductForm mode="update" product={singleProductForEdit} />
+              {getProductByIdError ? (
+                <ProductsError
+                  className={"h-72 justify-center"}
+                  text={"Failed to load product."}
+                  getProducts={handleGetProductById(id)}
+                />
+              ) : getProductByIdLoading ? (
+                <div className="flex justify-center items-center w-full h-72">
+                  <span
+                    className="animate-spin border-x-2 border-t-2 border-white/20
+                    rounded-full w-10 h-10 ml-2"
+                  ></span>
+                </div>
+              ) : (
+                <ProductForm mode="update" product={singleProductForEdit} />
+              )}
             </div>
           </section>
         </main>

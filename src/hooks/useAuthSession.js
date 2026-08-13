@@ -20,7 +20,7 @@ export default function useAuthSession() {
 
       if (!success && error) {
         dispatch(
-          showToast({ type: "error", messgae: t("user.userLoadError") }),
+          showToast({ type: "error", message: t("user.userLoadError") })
         );
         return;
       }

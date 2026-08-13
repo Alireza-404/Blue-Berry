@@ -20,7 +20,7 @@ export default function ShowProductModal({
   setShowProduct,
   product,
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const {
     handleAddToCart,
     handleIncreaseQuantity,
@@ -100,8 +100,9 @@ export default function ShowProductModal({
 
                 <div className="flex flex-col gap-y-4">
                   <h5 className="text-TB dark:text-white text-xl">
-                    {product.title} This Is A Elan Mosk Very Good Is For She Man
-                    HE
+                    {i18n.language === "en" || i18n.language === "en-US"
+                      ? product.title_en
+                      : product.title_de}
                   </h5>
 
                   <div className="flex items-center gap-x-0.5">

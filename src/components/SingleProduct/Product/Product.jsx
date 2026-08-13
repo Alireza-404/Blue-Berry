@@ -39,8 +39,10 @@ export default function Product({ product }) {
   return (
     <>
       <div className="flex flex-col gap-y-6 w-full">
-        <h3 className="text-TB dark:text-white font-bold tracking-wide text-2xl">
-          {i18n.language === "en" ? product.title : product.title}
+        <h3 className="text-TB dark:text-white font-bold tracking-wide text-2xl xl:text-3xl line-clamp-1">
+          {i18n.language === "en" || i18n.language === "en-US"
+            ? product.title_en
+            : product.title_de}
         </h3>
 
         <div className="flex items-center gap-x-4">
@@ -60,7 +62,9 @@ export default function Product({ product }) {
 
           <span className="block w-px h-5 bg-secondary dark:text-secondary-D"></span>
 
-          <span className="text-primary font-normal">404 Ratings</span>
+          <span className="text-primary font-normal">
+            {product.rating} Ratings
+          </span>
         </div>
 
         <p className="text-secondary dark:text-secondary-D font-normal">
@@ -100,7 +104,7 @@ export default function Product({ product }) {
 
           <div className="flex flex-col gap-y-1">
             <span className="text-secondary dark:text-secondary-D text-lg">
-              SKU#: AA10
+              SKU#: {product.sku}
             </span>
 
             <span className="text-primary text-lg font-normal">In Stock</span>

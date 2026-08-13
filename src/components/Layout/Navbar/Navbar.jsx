@@ -319,7 +319,7 @@ export default function Navbar() {
                 >
                   <span
                     className={`cursor-pointer h-full w-full flex justify-center items-center ${
-                      i18n.language === "en"
+                      i18n.language === "en" || i18n.language === "en-US"
                         ? "bg-primary text-white"
                         : "bg-transparent text-TB dark:text-white"
                     }`}

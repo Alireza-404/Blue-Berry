@@ -88,7 +88,7 @@ export default function Articles() {
               ease: "power3.out",
               duration: 0.5,
             },
-            "<",
+            "<"
           )
           .from(self.selector(".article-box-2"), {
             x: -150,
@@ -192,7 +192,8 @@ export default function Articles() {
 
                 <h4
                   className={`text-TB ${
-                    i18n.language === "en" && article.id === 4
+                    (i18n.language === "en" || i18n.language === "en-US") &&
+                    article.id === 4
                       ? "pr-10"
                       : "pr-0"
                   }`}

@@ -56,7 +56,7 @@ export default function HeroSection() {
     <div
       id="hero-section"
       className={`relative ${
-        i18n.language === "en"
+        i18n.language === "en" || i18n.language === "en-US"
           ? "h-[calc(100vh-130px)]"
           : "h-[calc(100vh-80px)]"
       }

@@ -314,12 +314,22 @@
         "text4": "Verpackung : Hygienisch verpackt",
         "detail": "Details",
         "information": "Informationen",
+        "informationDescription": "Hier finden Sie wichtige Details und Informationen zu diesem Produkt.",
         "productDetail1": "Premiumqualität garantiert.",
         "productDetail2": "Vor dem Versand sorgfältig geprüft.",
         "productDetail3": "Sichere Verpackung für eine zuverlässige Lieferung.",
         "productDetail4": "Für den privaten und professionellen Gebrauch geeignet.",
         "productDetail5": "Nach hohen Qualitätsstandards hergestellt.",
-        "productDetail6": "Pflegeleicht und langlebig."
+        "productDetail6": "Pflegeleicht und langlebig.",
+        "informationItems": {
+            "unit": "Einheit",
+            "sku": "SKU",
+            "origin": "Herkunft",
+            "organic": "Bio",
+            "color": "Farbe",
+            "shelflife": "Haltbarkeit",
+            "brand": "Marke"
+        }
     },
     "wishlist": {
         "addedToWishlist": "Das Produkt wurde zu Ihrer Wunschliste hinzugefügt.",

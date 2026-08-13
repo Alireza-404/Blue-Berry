@@ -18,15 +18,6 @@ export default function SingleProduct() {
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  // Unit
-  // SKU
-  // Origin
-  // Organic
-  // Color
-  // Shelf Life
-  // Brand
-  // Stock
-
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
@@ -77,7 +68,7 @@ export default function SingleProduct() {
                   <Product product={product} />
                 </div>
 
-                <InfoAndDetail />
+                <InfoAndDetail product={product} />
               </>
             )}
           </div>

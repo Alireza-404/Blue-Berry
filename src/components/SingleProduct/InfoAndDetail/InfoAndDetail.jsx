@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function InfoAndDetail({ product }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [activeTab, setActiveTab] = useState("detail");
 
   return (
@@ -53,7 +53,7 @@ export default function InfoAndDetail({ product }) {
             exit={{ opacity: 0, y: -40 }}
             transition={{ duration: 0.3 }}
             className="duration-0 border border-TB/15 dark:border-box-border-D rounded-2xl
-            p-4 flex flex-col gap-y-4"
+            p-4 flex flex-col gap-y-4 marker:text-TB marker:dark:text-white"
           >
             <p className="text-secondary dark:text-secondary-D font-normal">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia nisi
@@ -97,8 +97,108 @@ export default function InfoAndDetail({ product }) {
             exit={{ opacity: 0, y: -40 }}
             transition={{ duration: 0.3 }}
             className="duration-0 border border-TB/15 dark:border-box-border-D rounded-2xl
-            p-4"
-          ></motion.div>
+            p-4 flex flex-col gap-y-4"
+          >
+            <div>
+              <h3 className="text-TB dark:text-white font-bold text-xl">
+                {t("singleProduct.information")}
+              </h3>
+
+              <h3 className="text-secondary dark:text-secondary-D text-sm mt-2">
+                {t("singleProduct.informationDescription")}
+              </h3>
+
+              <ul className="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary"
+                >
+                  {t("singleProduct.informationItems.unit")}
+                  <span className="text-secondary dark:text-secondary-D text-[17px]">
+                    {product.unit}
+                  </span>
+                </li>
+
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary"
+                >
+                  {t("singleProduct.informationItems.sku")}
+                  <span className="text-secondary dark:text-secondary-D text-[17px]">
+                    {product.sku}
+                  </span>
+                </li>
+
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary"
+                >
+                  {t("singleProduct.informationItems.origin")}
+                  <span className="text-secondary dark:text-secondary-D text-[17px]">
+                    {product.country}
+                  </span>
+                </li>
+
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary"
+                >
+                  {t("singleProduct.informationItems.organic")}
+                  <span
+                    className={`text-[17px] flex items-center gap-x-2.5 ${
+                      product.organic ? "text-green-500" : "text-red-500"
+                    }`}
+                  >
+                    <span
+                      className={`w-1.5 h-1.5 inline-block rounded-full animate-ping ${
+                        product.organic ? "bg-green-500" : "bg-red-500"
+                      }`}
+                    ></span>
+                    {product.organic ? "Yes" : "No"}
+                  </span>
+                </li>
+
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary"
+                >
+                  {t("singleProduct.informationItems.color")}
+                  <span className="text-secondary dark:text-secondary-D text-[17px]">
+                    {i18n.language === "en" || i18n.language === "en-US"
+                      ? product.color_en
+                      : product.color_de}
+                  </span>
+                </li>
+
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary"
+                >
+                  {t("singleProduct.informationItems.shelflife")}
+                  <span className="text-secondary dark:text-secondary-D text-[17px]">
+                    {product.shelf_life}
+                  </span>
+                </li>
+
+                <li
+                  className="bg-gray-200/85 dark:bg-box-D text-TB dark:text-white p-4 flex flex-col gap-y-2
+                  rounded-xl border border-TB/15 dark:border-box-border-D hover:border-primary
+                  dark:hover:border-primary md:col-span-2 lg:col-span-1"
+                >
+                  {t("singleProduct.informationItems.brand")}
+                  <span className="text-secondary dark:text-secondary-D text-[17px]">
+                    {product.brand}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </div>
