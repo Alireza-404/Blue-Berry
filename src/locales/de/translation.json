@@ -348,5 +348,10 @@
         "failedToLoadProducts": "Produkte konnten nicht geladen werden."
     },
     "retry": "Erneut versuchen",
-    "loading": "Wird geladen..."
+    "loading": "Wird geladen...",
+    "notFound": {
+        "title": "Seite nicht gefunden",
+        "description": "Die gesuchte Seite existiert leider nicht oder wurde möglicherweise verschoben.",
+        "backHome": "Zur Startseite"
+    }
 }

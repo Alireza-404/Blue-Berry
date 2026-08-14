@@ -27,6 +27,8 @@ import Panel from "./pages/Panel/Panel";
 import AddProduct from "./pages/Panel/AddProduct";
 import Products from "./pages/Panel/Products";
 import EditPage from "./pages/Panel/EditPage";
+import ShopPage from "./pages/ShopPage";
+import NotFoundPage from "./pages/404";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -152,6 +154,10 @@ function App() {
             </AdminRoute>
           }
         />
+
+        <Route path="/shop" element={<ShopPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
   );

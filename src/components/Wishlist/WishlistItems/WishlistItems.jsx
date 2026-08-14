@@ -39,7 +39,7 @@ export default function WishlistItems() {
         <ProductsError
           text={t("wishlist.wishlistLoadError")}
           getProducts={getWishlist}
-          className={"h-72 justify-center"}
+          className={"h-80 justify-center"}
         />
       ) : items.length > 0 ? (
         <>
@@ -133,14 +133,16 @@ export default function WishlistItems() {
                           text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
                           dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                           dark:hover:border-primary hover:border-primary group-hover:opacity-100
-                            group-hover:visible"
-                          onClick={() => handleAddToCart(item.product.id)}
+                          group-hover:visible"
+                          onClick={() =>
+                            handleAddToCart(item.product.id, item.product.stock)
+                          }
                         >
                           {addToCartLoading ? (
                             <div
                               className="w-4 h-4 border-x-2 border-b-2 border-secondary
-                              dark:border-secondary-D rounded-full animate-spin 
-                              group-hover/button:border-white"
+                            dark:border-secondary-D rounded-full animate-spin 
+                            group-hover/button:border-white"
                             ></div>
                           ) : (
                             <AiOutlineShopping />
@@ -189,14 +191,14 @@ export default function WishlistItems() {
                     </h3>
 
                     <div className="flex items-center justify-between">
-                      {item.product.discount ? (
+                      {item.product.discount && item.product.stock !== 0 ? (
                         <div className="flex gap-x-2 items-end">
                           <span className="text-TB dark:text-white font-bold text-lg">
                             $
                             {Math.floor(
                               item.product.price -
                                 (item.product.price * item.product.discount) /
-                                  100,
+                                  100
                             ).toFixed(2)}
                           </span>
 
@@ -205,14 +207,27 @@ export default function WishlistItems() {
                           </span>
                         </div>
                       ) : (
-                        <span className="text-TB dark:text-white font-bold text-lg">
-                          ${item.product.price.toFixed(2)}
-                        </span>
+                        <>
+                          <span className="text-TB dark:text-white font-bold text-lg">
+                            ${item.product.price.toFixed(2)}
+                          </span>
+
+                          {item.product.stock === 0 && (
+                            <span className="text-primary font-normal">
+                              {i18n.language === "en" ||
+                              i18n.language === "en-US"
+                                ? "Out of Stock"
+                                : "Nicht vorrätig"}
+                            </span>
+                          )}
+                        </>
                       )}
 
-                      <span className="text-secondary dark:text-secondary-D">
-                        {item.product.unit}
-                      </span>
+                      {item.product.stock !== 0 && (
+                        <span className="text-secondary dark:text-secondary-D">
+                          {item.product.unit}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>

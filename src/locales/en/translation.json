@@ -348,5 +348,10 @@
         "failedToLoadProducts": "Failed to load products."
     },
     "retry": "Try Again",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "notFound": {
+        "title": "Page not found",
+        "description": "Sorry, the page you're looking for doesn't exist or may have been moved.",
+        "backHome": "Back to home"
+    }
 }
