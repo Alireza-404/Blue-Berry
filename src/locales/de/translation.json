@@ -293,6 +293,8 @@
         "addToCartError": "Das Produkt konnte nicht zum Warenkorb hinzugefügt werden.",
         "unknownError": "Ein unerwarteter Fehler ist aufgetreten.",
         "addToCart": "In den Warenkorb",
+        "wishlist": "Wunschliste",
+        "quickView": "Schnellansicht",
         "emptyCart": "Ihr Warenkorb ist derzeit leer.",
         "emptyCartDescription": "Es wurden noch keine Artikel hinzugefügt. Produkte, die Sie Ihrem Warenkorb hinzufügen, werden hier angezeigt.",
         "productOutOfStock": "Dieses Produkt ist derzeit nicht vorrätig."
@@ -353,5 +355,23 @@
         "title": "Seite nicht gefunden",
         "description": "Die gesuchte Seite existiert leider nicht oder wurde möglicherweise verschoben.",
         "backHome": "Zur Startseite"
+    },
+    "shopPage": {
+        "firstCategoryText1": "Frisches",
+        "secondCategoryText1": "Gemüse",
+        "firstCategoryText2": "Frisches &",
+        "secondCategoryText2": "gesundes Obst",
+        "categories": {
+            "all": "Alle",
+            "vegetables": "Gemüse",
+            "coldDrink": "Kaltgetränke",
+            "snack": "Snacks",
+            "juice": "Saft",
+            "chips": "Chips",
+            "sauces": "Soßen",
+            "spices": "Gewürze",
+            "leaves": "Blätter",
+            "fruits": "Obst"
+        }
     }
 }

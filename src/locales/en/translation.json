@@ -293,6 +293,8 @@
         "addToCartError": "Failed to add the product to your cart.",
         "unknownError": "An unexpected error occurred.",
         "addToCart": "Add to Cart",
+        "wishlist": "Wishlist",
+        "quickView": "Quick View",
         "emptyCart": "Your cart is currently empty.",
         "emptyCartDescription": "No items have been added yet. Products you add to your cart will appear here.",
         "productOutOfStock": "This product is currently out of stock."
@@ -353,5 +355,23 @@
         "title": "Page not found",
         "description": "Sorry, the page you're looking for doesn't exist or may have been moved.",
         "backHome": "Back to home"
+    },
+    "shopPage": {
+        "firstCategoryText1": "Fresh",
+        "secondCategoryText1": "Vegetable",
+        "firstCategoryText2": "Fresh &",
+        "secondCategoryText2": "Healthy Fruit",
+        "categories": {
+            "all": "All",
+            "vegetables": "Vegetables",
+            "coldDrink": "Cold Drink",
+            "snack": "Snack",
+            "juice": "Juice",
+            "chips": "Chips",
+            "sauces": "Sauces",
+            "spices": "Spices",
+            "leaves": "Leaves",
+            "fruits": "Fruits"
+        }
     }
 }
