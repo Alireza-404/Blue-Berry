@@ -16,6 +16,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function WishlistItems() {
   const { t, i18n } = useTranslation();
@@ -32,7 +33,7 @@ export default function WishlistItems() {
   }, [items]);
 
   return (
-    <div className="grid grid-cols-4 gap-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {loading ? (
         <ProductsSkeleton />
       ) : error ? (
@@ -57,7 +58,7 @@ export default function WishlistItems() {
                     <img
                       src={item.product.image}
                       alt={`product-${item.product.id}`}
-                      className={`select-none h-[298px] w-[298px] ${
+                      className={`select-none ${
                         item.product.second_image
                           ? "group-hover:opacity-0 group-hover:invisible opacity-100 visible"
                           : "group-hover:scale-110"
@@ -69,7 +70,7 @@ export default function WishlistItems() {
                         src={item.product.second_image}
                         alt={`product-${item.product.id}`}
                         className="select-none group-hover:scale-110 group-hover:opacity-100
-                        group-hover:visible opacity-0 invisible absolute top-0 left-0"
+                        group-hover:visible opacity-0 invisible absolute top-0 left-0 h-full"
                       />
                     )}
 
@@ -81,6 +82,7 @@ export default function WishlistItems() {
                         <button
                           type="button"
                           disabled={heartLoading}
+                          title={t("cartProducts.wishlist")}
                           className={`group/button bg-white dark:bg-body border border-TB/15 
                           dark:border-box-border-D text-[22px] rounded-lg w-11 h-11
                           hover:text-white hover:bg-primary flex items-center justify-center
@@ -108,6 +110,7 @@ export default function WishlistItems() {
                       <li>
                         <button
                           type="button"
+                          title={t("cartProducts.quickView")}
                           className="bg-white dark:bg-body border border-TB/15 w-11 h-11
                           dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
                           text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
@@ -133,7 +136,7 @@ export default function WishlistItems() {
                           text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
                           dark:hover:bg-primary dark:hover:text-white invisible opacity-0
                           dark:hover:border-primary hover:border-primary group-hover:opacity-100
-                          group-hover:visible"
+                            group-hover:visible"
                           onClick={() =>
                             handleAddToCart(item.product.id, item.product.stock)
                           }
@@ -141,8 +144,8 @@ export default function WishlistItems() {
                           {addToCartLoading ? (
                             <div
                               className="w-4 h-4 border-x-2 border-b-2 border-secondary
-                            dark:border-secondary-D rounded-full animate-spin 
-                            group-hover/button:border-white"
+                              dark:border-secondary-D rounded-full animate-spin 
+                              group-hover/button:border-white"
                             ></div>
                           ) : (
                             <AiOutlineShopping />
@@ -152,15 +155,16 @@ export default function WishlistItems() {
                     </ul>
                   </div>
 
-                  <div className="p-4 flex flex-col gap-y-1">
+                  <div className="p-4 flex flex-col gap-y-2 lg:gap-y-1.5">
                     <div className="flex items-center justify-between">
                       <h5 className="text-secondary dark:text-secondary-D">
-                        <a href="#">
-                          {" "}
+                        <Link
+                          to={`/shop?category=${item.product.category_en.toLowerCase()}`}
+                        >
                           {i18n.language === "en" || i18n.language === "en-US"
                             ? item.product.category_en
                             : item.product.category_de}
-                        </a>
+                        </Link>
                       </h5>
 
                       <div className="flex items-center gap-x-0.5">
@@ -180,7 +184,7 @@ export default function WishlistItems() {
 
                     <h3>
                       <a
-                        className="text-TB dark:text-white text-lg line-clamp-1 tracking-widest
+                        className="text-TB dark:text-white lg:text-lg line-clamp-1 tracking-widest
                         hover:text-primary"
                         href={`/products/${item.product.id}`}
                       >
@@ -193,7 +197,7 @@ export default function WishlistItems() {
                     <div className="flex items-center justify-between">
                       {item.product.discount && item.product.stock !== 0 ? (
                         <div className="flex gap-x-2 items-end">
-                          <span className="text-TB dark:text-white font-bold text-lg">
+                          <span className="text-TB dark:text-white font-bold lg:text-lg">
                             $
                             {Math.floor(
                               item.product.price -
@@ -202,18 +206,21 @@ export default function WishlistItems() {
                             ).toFixed(2)}
                           </span>
 
-                          <span className="text-secondary dark:text-secondary-D line-through">
+                          <span
+                            className="text-secondary dark:text-secondary-D line-through
+                            text-sm lg:text-base"
+                          >
                             ${item.product.price.toFixed(2)}
                           </span>
                         </div>
                       ) : (
                         <>
-                          <span className="text-TB dark:text-white font-bold text-lg">
+                          <span className="text-TB dark:text-white font-bold lg:text-lg">
                             ${item.product.price.toFixed(2)}
                           </span>
 
                           {item.product.stock === 0 && (
-                            <span className="text-primary font-normal">
+                            <span className="text-primary font-normal text-sm lg:text-base">
                               {i18n.language === "en" ||
                               i18n.language === "en-US"
                                 ? "Out of Stock"
@@ -224,7 +231,10 @@ export default function WishlistItems() {
                       )}
 
                       {item.product.stock !== 0 && (
-                        <span className="text-secondary dark:text-secondary-D">
+                        <span
+                          className="text-secondary dark:text-secondary-D
+                        text-sm lg:text-base"
+                        >
                           {item.product.unit}
                         </span>
                       )}
