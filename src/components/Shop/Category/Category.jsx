@@ -97,29 +97,6 @@ export default function ShopCategory() {
           </button>
         ))}
       </div>
-
-      {/* <div className="flex items-center justify-center gap-2 mt-8">
-        {Array.from({ length: totalPages }, (_, index) => {
-          const page = index + 1;
-
-          return (
-            <button
-              key={page}
-              type="button"
-              onClick={() => setCurrentPage(page)}
-              className={`h-10 w-10 rounded-lg border transition ${
-                currentPage === page
-                  ? "border-primary bg-primary text-white"
-                  : `border-TB/15 dark:border-box-border-D text-secondary
-                    dark:text-secondary-D hover:border-primary hover:text-primary
-                    dark:hover:border-primary dark:hover:text-primary`
-              }`}
-            >
-              {page}
-            </button>
-          );
-        })}
-      </div> */}
     </div>
   );
 }

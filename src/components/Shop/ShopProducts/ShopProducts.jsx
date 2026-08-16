@@ -54,7 +54,7 @@ export default function ShopProducts() {
   }, [wishlist]);
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {loading ? (
           <ProductsSkeleton />
@@ -285,6 +285,36 @@ export default function ShopProducts() {
             />
           </>
         )}
+      </div>
+
+      <div className="flex items-center justify-between">
+        <span className="text-secondary dark:text-secondary-D font-normal">
+          Showing {startIndex + 1}-{startIndex + PRODUCTS_PER_PAGE} of{" "}
+          {filteredProducts.length} items
+        </span>
+
+        <div className="flex items-center gap-2 mt-8">
+          {Array.from({ length: totalPages }, (_, index) => {
+            const page = index + 1;
+
+            return (
+              <button
+                key={page}
+                type="button"
+                onClick={() => setCurrentPage(page)}
+                className={`h-8 w-8 rounded-lg border transition ${
+                  currentPage === page
+                    ? "border-primary bg-primary text-white"
+                    : `border-TB/15 dark:border-box-border-D text-secondary
+                    dark:text-secondary-D hover:border-primary hover:text-primary
+                    dark:hover:border-primary dark:hover:text-primary`
+                }`}
+              >
+                {page}
+              </button>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
