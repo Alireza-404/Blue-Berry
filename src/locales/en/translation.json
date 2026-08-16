@@ -332,7 +332,12 @@
             "color": "Color",
             "shelflife": "Shelf Life",
             "brand": "Brand"
-        }
+        },
+        "relatedProducts": {
+            "text": "Related <1>Products</1>",
+            "secondaryText": "Browse the collection of top products."
+        },
+        "connectionError": "We couldn't load the content. Please check your connection and try again."
     },
     "wishlist": {
         "addedToWishlist": "The product has been added to your wishlist.",

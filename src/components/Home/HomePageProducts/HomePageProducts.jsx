@@ -65,7 +65,7 @@ export default function HomePageProducts() {
         />
       ) : (
         <>
-          {products.map((product) => {
+          {products.slice(0, 8).map((product) => {
             const isWishlisted = wishlistIds.has(product.id);
 
             return (

@@ -150,15 +150,15 @@ export default function InfoAndDetail({ product }) {
                   {t("singleProduct.informationItems.organic")}
                   <span
                     className={`text-[17px] flex items-center gap-x-2.5 ${
-                      product.organic ? "text-green-500" : "text-red-500"
+                      product.is_organic ? "text-green-500" : "text-red-500"
                     }`}
                   >
                     <span
                       className={`w-1.5 h-1.5 inline-block rounded-full animate-ping ${
-                        product.organic ? "bg-green-500" : "bg-red-500"
+                        product.is_organic ? "bg-green-500" : "bg-red-500"
                       }`}
                     ></span>
-                    {product.organic ? "Yes" : "No"}
+                    {product.is_organic ? "Yes" : "No"}
                   </span>
                 </li>
 

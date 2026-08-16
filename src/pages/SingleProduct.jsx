@@ -5,49 +5,30 @@ import Image from "../components/SingleProduct/Image/Image";
 import { useParams } from "react-router-dom";
 import FullScreenLoader from "../components/Ui/FullScreenLoader/FullScreenLoader";
 import Product from "../components/SingleProduct/Product/Product";
-import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import { useEffect } from "react";
 import InfoAndDetail from "../components/SingleProduct/InfoAndDetail/InfoAndDetail";
-import { useSelector } from "react-redux";
 import useWishlist from "../hooks/useWishlist";
+import useProducts from "../hooks/useProducts";
+import RelatedProducts from "../components/SingleProduct/RelatedProducts/RelatedProducts";
+import RelatedProductsText from "../components/SingleProduct/RelatedProductsText/RelatedProductsText";
+import { useTranslation } from "react-i18next";
 
 export default function SingleProduct() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const { heartLoading } = useWishlist();
-
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const {
+    handleGetProductById,
+    getProductByIdLoading,
+    singleProductForEdit: product,
+    getProductByIdError,
+  } = useProducts();
 
   useEffect(() => {
-    const getProduct = async () => {
-      setLoading(true);
+    handleGetProductById(id);
+  }, []);
 
-      try {
-        const { data, error } = await supabase
-          .from("products")
-          .select("*")
-          .eq("id", id)
-          .single();
-
-        if (error) {
-          console.log(error.message);
-          setLoading(false);
-          return;
-        }
-
-        setProduct(data);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    getProduct();
-  }, [id]);
-
-  if (loading || heartLoading) return <FullScreenLoader />;
-
+  if (getProductByIdLoading || heartLoading) return <FullScreenLoader />;
   return (
     <>
       <header>
@@ -55,24 +36,57 @@ export default function SingleProduct() {
       </header>
 
       <main>
-        <section id="single-product-section">
-          <div
-            className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
+        {getProductByIdError ? (
+          <section id="connectio-error-section">
+            <div
+              className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20
+                    lg:py-28 h-[calc(100vh-586px)] flex items-center justify-center"
+            >
+              <p
+                className="font-bold text-3xl text-red-500 dark:text-red-600 lg:w-[707px]
+                text-center"
+              >
+                {t("singleProduct.connectionError")}
+              </p>
+            </div>
+          </section>
+        ) : (
+          <>
+            <section id="single-product-section">
+              <div
+                className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
                     lg:py-28 "
-          >
-            {product && (
-              <>
-                <div className="flex flex-col gap-y-8 lg:flex-row lg:gap-x-8">
-                  <Image src={product.image} title={product.title} />
+              >
+                {product && (
+                  <>
+                    <div className="flex flex-col gap-y-8 lg:flex-row lg:gap-x-8">
+                      <Image src={product.image} title={product.title} />
 
-                  <Product product={product} />
-                </div>
+                      <Product product={product} />
+                    </div>
 
-                <InfoAndDetail product={product} />
-              </>
-            )}
-          </div>
-        </section>
+                    <InfoAndDetail product={product} />
+                  </>
+                )}
+              </div>
+            </section>
+
+            <section id="related-products-section">
+              <div
+                className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-8 
+                    lg:pb-28"
+              >
+                {product && (
+                  <div className="flex flex-col gap-y-6 lg:gap-y-12">
+                    <RelatedProductsText />
+
+                    <RelatedProducts productCategory={product.category_en} />
+                  </div>
+                )}
+              </div>
+            </section>
+          </>
+        )}
       </main>
 
       <footer className="bg-gray-200/85 dark:bg-box-D">

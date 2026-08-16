@@ -37,7 +37,7 @@ export default function CartProducts() {
     <div className="flex flex-col gap-y-4">
       <div
         className="border border-TB/15 dark:border-box-border-D rounded-xl w-full overflow-x-auto my-scroll
-        lg:h-[595px]"
+        lg:max-h-[595px]"
       >
         <table className="w-[768px] md:w-full">
           <thead className="border-b border-TB/15 dark:border-box-border-D">

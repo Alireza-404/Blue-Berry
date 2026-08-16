@@ -1,8 +1,10 @@
+import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
+import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useProducts from "../../../hooks/useProducts";
+import useWishlist from "../../../hooks/useWishlist";
+import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
+import useCart from "../../../hooks/useCart";
 
-import { Link, useSearchParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
-import { useSelector } from "react-redux";
 import {
   AiFillStar,
   AiOutlineEye,
@@ -10,74 +12,83 @@ import {
   AiOutlineShopping,
   AiOutlineStar,
 } from "react-icons/ai";
-
-import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
-import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
-import ProductsError from "../../Ui/ProductsError/ProductsError";
-import useWishlist from "../../../hooks/useWishlist";
+import { Link } from "react-router-dom";
+import { useMemo, useState } from "react";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import useCart from "../../../hooks/useCart";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const PRODUCTS_PER_PAGE = 12;
+import "swiper/css";
+import "swiper/css/autoplay";
+import { Autoplay, FreeMode } from "swiper/modules";
 
-export default function ShopProducts() {
+export default function RelatedProducts({ productCategory }) {
   const { t, i18n } = useTranslation();
-  const { handleGetProducts, products, loading, error } = useProducts();
+  const { products, loading, error } = useProducts();
   const { handleToggleWishlist, heartLoading } = useWishlist();
   const { handleAddToCart, addToCartLoading } = useCart();
   const { items: wishlist, loading: wishlistLoading } = useSelector(
     (state) => state.wishlist
   );
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
+
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
-
-  const activeCategory = searchParams.get("category") || "all";
-
-  const filteredProducts =
-    activeCategory === "all"
-      ? products
-      : products.filter(
-          (product) => product.category_en.toLowerCase() === activeCategory
-        );
-
-  const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
-  const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
-  const paginationProducts = filteredProducts.slice(
-    startIndex,
-    startIndex + PRODUCTS_PER_PAGE
-  );
 
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
   }, [wishlist]);
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [searchParams]);
+  const filteredProducts = products.filter(
+    (product) => product.category_en === productCategory
+  );
 
   return (
-    <div className="flex flex-col gap-y-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {loading ? (
-          <ProductsSkeleton />
-        ) : error ? (
-          <ProductsError
-            className={"h-72 justify-center"}
-            text={t("homePageProducts.productsLoadError")}
-            getProducts={handleGetProducts}
-          />
-        ) : (
-          <>
-            {paginationProducts.map((product) => {
-              const isWishlisted = wishlistIds.has(product.id);
+    <div
+      className={`${
+        loading
+          ? "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+          : null
+      }`}
+    >
+      {loading ? (
+        <ProductsSkeleton />
+      ) : error ? (
+        <ProductsError
+          className={"h-72 justify-center"}
+          text={t("homePageProducts.productsLoadError")}
+          getProducts={handleGetProducts}
+        />
+      ) : (
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView={1}
+          spaceBetween={24}
+          breakpoints={{
+            640: {
+              slidesPerView: 2,
+            },
+            768: {
+              spaceBetween: 16,
+              slidesPerView: 3,
+            },
+            1024: { slidesPerView: 4 },
+          }}
+          freeMode={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false,
+          }}
+          speed={500}
+          className="duration-0"
+        >
+          {filteredProducts.slice(0, 4).map((product) => {
+            const isWishlisted = wishlistIds.has(product.id);
 
-              return (
+            return (
+              <SwiperSlide key={product.id}>
                 <div
-                  key={product.id}
                   className="group rounded-3xl overflow-hidden border border-TB/15
-                      relative dark:border-box-border-D"
+                    relative dark:border-box-border-D"
                 >
                   <div className="divide-y divide-TB/15 dark:divide-box-border-D">
                     <div className="overflow-hidden relative flex justify-center items-center">
@@ -102,7 +113,7 @@ export default function ShopProducts() {
 
                       <ul
                         className="flex items-center gap-x-1.5 absolute bottom-5 left-1/2
-                          -translate-x-1/2"
+                        -translate-x-1/2"
                       >
                         <li>
                           <button
@@ -110,22 +121,22 @@ export default function ShopProducts() {
                             disabled={heartLoading}
                             title={t("cartProducts.wishlist")}
                             className={`group/button bg-white dark:bg-body border border-TB/15 
-                              dark:border-box-border-D text-[22px] rounded-lg w-11 h-11
-                              hover:text-white hover:bg-primary flex items-center justify-center
-                              dark:hover:bg-primary dark:hover:text-white invisible opacity-0
-                              dark:hover:border-primary hover:border-primary
-                                group-hover:opacity-100 group-hover:visible ${
-                                  isWishlisted
-                                    ? "text-red-500 dark:text-red-600"
-                                    : "text-secondary dark:text-secondary-D"
-                                }`}
+                            dark:border-box-border-D text-[22px] rounded-lg w-11 h-11
+                            hover:text-white hover:bg-primary flex items-center justify-center
+                            dark:hover:bg-primary dark:hover:text-white invisible opacity-0
+                            dark:hover:border-primary hover:border-primary
+                            group-hover:opacity-100 group-hover:visible ${
+                              isWishlisted
+                                ? "text-red-500 dark:text-red-600"
+                                : "text-secondary dark:text-secondary-D"
+                            }`}
                             onClick={() => handleToggleWishlist(product.id)}
                           >
                             {heartLoading || wishlistLoading ? (
                               <div
                                 className="w-4 h-4 border-x-2 border-b-2 border-secondary
-                                  dark:border-secondary-D rounded-full animate-spin 
-                                  group-hover/button:border-white"
+                            dark:border-secondary-D rounded-full animate-spin 
+                            group-hover/button:border-white"
                               ></div>
                             ) : (
                               <AiOutlineHeart />
@@ -138,11 +149,11 @@ export default function ShopProducts() {
                             type="button"
                             title={t("cartProducts.quickView")}
                             className="bg-white dark:bg-body border border-TB/15 w-11 h-11
-                              dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
-                              text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
-                              dark:hover:bg-primary dark:hover:text-white invisible opacity-0
-                              dark:hover:border-primary hover:border-primary group-hover:opacity-100
-                                group-hover:visible"
+                            dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
+                            text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
+                            dark:hover:bg-primary dark:hover:text-white invisible opacity-0
+                            dark:hover:border-primary hover:border-primary group-hover:opacity-100
+                            group-hover:visible"
                             onClick={() => {
                               setShowProduct((prev) => !prev);
                               setProductForShow(product);
@@ -158,11 +169,11 @@ export default function ShopProducts() {
                             title={t("cartProducts.addToCart")}
                             disabled={addToCartLoading}
                             className="group/button bg-white dark:bg-body border border-TB/15 w-11 h-11
-                              dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
-                              text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
-                              dark:hover:bg-primary dark:hover:text-white invisible opacity-0
-                              dark:hover:border-primary hover:border-primary group-hover:opacity-100
-                                group-hover:visible"
+                            dark:border-box-border-D text-[22px] rounded-lg flex items-center justify-center
+                            text-secondary dark:text-secondary-D hover:text-white hover:bg-primary
+                            dark:hover:bg-primary dark:hover:text-white invisible opacity-0
+                            dark:hover:border-primary hover:border-primary group-hover:opacity-100
+                            group-hover:visible"
                             onClick={() =>
                               handleAddToCart(product.id, product.stock)
                             }
@@ -170,8 +181,8 @@ export default function ShopProducts() {
                             {addToCartLoading ? (
                               <div
                                 className="w-4 h-4 border-x-2 border-b-2 border-secondary
-                                  dark:border-secondary-D rounded-full animate-spin 
-                                  group-hover/button:border-white"
+                                dark:border-secondary-D rounded-full animate-spin 
+                                group-hover/button:border-white"
                               ></div>
                             ) : (
                               <AiOutlineShopping />
@@ -211,7 +222,7 @@ export default function ShopProducts() {
                       <h3>
                         <a
                           className="text-TB dark:text-white lg:text-lg line-clamp-1 tracking-widest
-                            hover:text-primary"
+                      hover:text-primary"
                           href={`/products/${product.id}`}
                         >
                           {i18n.language === "en" || i18n.language === "en-US"
@@ -233,7 +244,7 @@ export default function ShopProducts() {
 
                             <span
                               className="text-secondary dark:text-secondary-D line-through
-                                text-sm lg:text-base"
+                          text-sm lg:text-base"
                             >
                               ${product.price.toFixed(2)}
                             </span>
@@ -258,7 +269,7 @@ export default function ShopProducts() {
                         {product.stock !== 0 && (
                           <span
                             className="text-secondary dark:text-secondary-D
-                            text-sm lg:text-base"
+                      text-sm lg:text-base"
                           >
                             {product.unit}
                           </span>
@@ -270,8 +281,8 @@ export default function ShopProducts() {
                   {product.label && (
                     <div
                       className="absolute top-4 left-4 flex flex-col gap-y-1 text-secondary
-                        select-none group-hover:invisible group-hover:opacity-0
-                        font-mono font-bold"
+                  select-none group-hover:invisible group-hover:opacity-0
+                  font-mono font-bold"
                     >
                       {product.label.split("").map((text, i) => (
                         <span key={i}>{text}</span>
@@ -279,47 +290,17 @@ export default function ShopProducts() {
                     </div>
                   )}
                 </div>
-              );
-            })}
-
-            <ShowProductModal
-              showProduct={showProduct}
-              setShowProduct={setShowProduct}
-              product={productForShow}
-            />
-          </>
-        )}
-      </div>
-
-      <div className="flex items-center justify-between">
-        <span className="text-secondary dark:text-secondary-D font-normal">
-          Showing {startIndex + 1}-{startIndex + PRODUCTS_PER_PAGE} of{" "}
-          {filteredProducts.length} items
-        </span>
-
-        <div className="flex items-center gap-2 mt-8">
-          {Array.from({ length: totalPages }, (_, index) => {
-            const page = index + 1;
-
-            return (
-              <button
-                key={page}
-                type="button"
-                onClick={() => setCurrentPage(page)}
-                className={`h-8 w-8 rounded-lg border transition ${
-                  currentPage === page
-                    ? "border-primary bg-primary text-white"
-                    : `border-TB/15 dark:border-box-border-D text-secondary
-                    dark:text-secondary-D hover:border-primary hover:text-primary
-                    dark:hover:border-primary dark:hover:text-primary`
-                }`}
-              >
-                {page}
-              </button>
+              </SwiperSlide>
             );
           })}
-        </div>
-      </div>
+
+          <ShowProductModal
+            showProduct={showProduct}
+            setShowProduct={setShowProduct}
+            product={productForShow}
+          />
+        </Swiper>
+      )}
     </div>
   );
 }

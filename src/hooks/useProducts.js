@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { showToast } from "../redux/Slices/ToastSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function useProducts() {
   const { t } = useTranslation();
@@ -39,7 +40,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: t("homePageProducts.failedToLoadProducts"),
-        }),
+        })
       );
     } else {
       setError(false);
@@ -58,7 +59,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Failed to add product.",
-        }),
+        })
       );
     }
 
@@ -68,7 +69,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Something went wrong.",
-        }),
+        })
       );
     }
 
@@ -77,7 +78,7 @@ export default function useProducts() {
       showToast({
         type: "primary",
         message: "Product added successfully.",
-      }),
+      })
     );
     setAddProductLoading(false);
   };
@@ -92,7 +93,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Failed to remove product.",
-        }),
+        })
       );
     }
 
@@ -102,19 +103,19 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Something went wrong.",
-        }),
+        })
       );
     }
 
     setProducts((prevProducts) =>
-      prevProducts.filter((product) => product.id !== productId),
+      prevProducts.filter((product) => product.id !== productId)
     );
 
     dispatch(
       showToast({
         type: "primary",
         message: "Product removed successfully.",
-      }),
+      })
     );
     setDeleteLoading(false);
   };
@@ -129,7 +130,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Failed to update product.",
-        }),
+        })
       );
     }
 
@@ -139,7 +140,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Something went wrong.",
-        }),
+        })
       );
     }
 
@@ -147,7 +148,7 @@ export default function useProducts() {
       showToast({
         type: "primary",
         message: "Product updated successfully.",
-      }),
+      })
     );
     setUpdateLoading(false);
     navigate("/panel/products", { replace: true });
@@ -166,7 +167,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Failed to load product.",
-        }),
+        })
       );
       return;
     }
@@ -178,7 +179,7 @@ export default function useProducts() {
         showToast({
           type: "error",
           message: "Something went wrong.",
-        }),
+        })
       );
       return;
     }
@@ -187,6 +188,8 @@ export default function useProducts() {
     setGetProductByIdError(false);
     setGetProductByIdLoading(false);
   };
+
+  ScrollTrigger.refresh();
 
   useEffect(() => {
     handleGetProducts();

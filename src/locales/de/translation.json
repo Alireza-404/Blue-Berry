@@ -332,7 +332,12 @@
             "color": "Farbe",
             "shelflife": "Haltbarkeit",
             "brand": "Marke"
-        }
+        },
+        "relatedProducts": {
+            "text": "Ähnliche <1>Produkte</1>",
+            "secondaryText": "Entdecken Sie unsere Auswahl an Top-Produkten."
+        },
+        "connectionError": "Die Inhalte konnten nicht geladen werden. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut."
     },
     "wishlist": {
         "addedToWishlist": "Das Produkt wurde zu Ihrer Wunschliste hinzugefügt.",
