@@ -293,7 +293,7 @@ export default function ShopProducts() {
 
       <div className="flex items-center justify-between">
         <span className="text-secondary dark:text-secondary-D font-normal">
-          Showing {startIndex + 1}-{startIndex + PRODUCTS_PER_PAGE} of{" "}
+          Showing {startIndex + 1}-{filteredProducts.length} of{" "}
           {filteredProducts.length} items
         </span>
 

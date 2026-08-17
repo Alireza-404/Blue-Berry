@@ -9,7 +9,6 @@ import {
   AiOutlineStar,
   AiOutlineShoppingCart,
   AiOutlineMenu,
-  AiOutlineSearch,
   AiOutlineClose,
   AiOutlineLogout,
 } from "react-icons/ai";
@@ -21,6 +20,8 @@ import { useSelector } from "react-redux";
 
 import useUserData from "../../../hooks/useUserData";
 import useAuth from "../../../hooks/useAuth";
+import useAuthSession from "../../../hooks/useAuthSession";
+import SearchInput from "../../Navbar/SearchInput/SearchInput";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
@@ -41,6 +42,7 @@ export default function Navbar() {
   } = useSelector((state) => state.wishlist);
   const { getCart, getWishlist } = useUserData();
   const { handleLogout } = useAuth();
+  const { sessionError } = useAuthSession();
 
   const [menu, setMenu] = useState(false);
 
@@ -99,25 +101,7 @@ export default function Navbar() {
               </span>
             </div>
 
-            <div className="relative w-full">
-              <input
-                type="text"
-                id="search-input"
-                name="search"
-                placeholder={t("searchInputPlaceholder")}
-                spellCheck={false}
-                className="w-full md:w-80 h-12 pl-2.5 pr-10 text-TB outline-none rounded-lg 
-                border border-TB/15 dark:border-box-border-D focus:border-TB/40
-                transition-colors duration-200 bg-white dark:bg-box-D dark:text-white
-                dark:focus:border-[#5a606f] placeholder:select-none"
-              />
-              <label
-                htmlFor="search-input"
-                className="text-secondary dark:text-secondary-D text-xl absolute top-1/2 right-4 -translate-y-1/2"
-              >
-                <AiOutlineSearch />
-              </label>
-            </div>
+            <SearchInput />
           </div>
 
           <div className="flex items-center xl:items-end justify-end gap-x-6 xl:w-[460px]">
@@ -144,6 +128,24 @@ export default function Navbar() {
                     ></span>
                   </div>
                 </span>
+              ) : sessionError ? (
+                <div
+                  to={"/auth/login"}
+                  className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
+                      flex items-end gap-x-1.5"
+                >
+                  <AiOutlineUser />
+
+                  <div className="hidden xl:flex flex-col">
+                    <span className="text-secondary dark:text-secondary-D text-sm leading-3">
+                      {t("user.account")}
+                    </span>
+
+                    <span className="text-red-500 dark:text-red-600 text-base">
+                      Error
+                    </span>
+                  </div>
+                </div>
               ) : (
                 <>
                   {user ? (
