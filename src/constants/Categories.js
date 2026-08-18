@@ -8,10 +8,6 @@ export const PRODUCT_CATEGORIES = [
     translationKey: "shopPage.categories.vegetables",
   },
   {
-    value: "cold-drink",
-    translationKey: "shopPage.categories.coldDrink",
-  },
-  {
     value: "snack",
     translationKey: "shopPage.categories.snack",
   },
@@ -30,10 +26,6 @@ export const PRODUCT_CATEGORIES = [
   {
     value: "spices",
     translationKey: "shopPage.categories.spices",
-  },
-  {
-    value: "leaves",
-    translationKey: "shopPage.categories.leaves",
   },
   {
     value: "fruits",

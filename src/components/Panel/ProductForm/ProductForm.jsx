@@ -41,7 +41,7 @@ export default function ProductForm({ mode = "create", product = null }) {
       .integer("Stock must be a whole number.")
       .min(0, "Stock cannot be negative.")
       .required("Stock is required."),
-    unit: Yup.string().trim().required("Product unit is required."),
+    unit: Yup.string().trim(),
     sku: Yup.string().trim().required("SKU is required."),
     country: Yup.string().trim().required("Country is required."),
     brand: Yup.string().trim().required("Brand is required."),

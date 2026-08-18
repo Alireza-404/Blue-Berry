@@ -49,17 +49,31 @@ export default function SearchInput() {
             className={`bg-gray-200 dark:bg-box-D p-4 border border-TB/15 dark:border-box-border-D
             rounded-lg absolute z-30 -bottom-3 translate-y-full w-full duration-0 overflow-y-auto my-scroll
             ${
-              loading || error || products.length === 0
+              loading || error || filteredProducts.length === 0
                 ? "flex items-center justify-center"
                 : "flex flex-col divide-y divide-TB/15 dark:divide-box-border-D"
             }`}
           >
             {loading ? (
-              <></>
+              <span
+                className="animate-spin border-x-2 border-t-2 border-white/20
+                          rounded-full w-10 h-10"
+              ></span>
             ) : error ? (
-              <></>
-            ) : products.length === 0 ? (
-              <></>
+              <p
+                className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-500 dark:from-red-600
+                to-red-400 dark:to-red-400 text-center"
+              >
+                {i18n.language === "de"
+                  ? "Produkte konnten nicht geladen werden."
+                  : "Products couldn’t be loaded."}
+              </p>
+            ) : filteredProducts.length === 0 ? (
+              <p className="text-2xl font-bold text-TB dark:text-white">
+                {i18n.language === "de"
+                  ? "Keine Produkte gefunden."
+                  : "No products found."}
+              </p>
             ) : (
               filteredProducts.map((product, i) => (
                 <div

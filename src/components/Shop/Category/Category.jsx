@@ -79,13 +79,16 @@ export default function ShopCategory() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
+      <div
+        className="grid grid-cols-2 xs:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:flex xl:flex-wrap
+        xl:justify-center gap-2"
+      >
         {PRODUCT_CATEGORIES.map((item, i) => (
           <button
             type="button"
             key={i}
             className={`border
-            bg-white dark:bg-body rounded-xl py-2 px-4 cursor-pointer ${
+            bg-white dark:bg-body rounded-xl py-2 px-4 cursor-pointer xl:w-60 ${
               activeCategory === item.value
                 ? "text-primary border-primary"
                 : `border-TB/15 dark:border-box-border-D hover:border-primary
