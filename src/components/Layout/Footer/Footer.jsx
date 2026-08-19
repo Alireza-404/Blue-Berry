@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import {
   AiFillFacebook,
   AiFillGithub,
-  AiFillLinkedin,
   AiFillTwitterCircle,
   AiOutlineInstagram,
   AiOutlineMail,
@@ -74,7 +73,7 @@ export default function Footer() {
           <ul className="overflow-hidden px-4 py-2 flex flex-col gap-y-3.5">
             <li>
               <Link
-                to={"#"}
+                to={"/shop?category=snack"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -84,7 +83,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/shop?category=juice"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -94,7 +93,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/shop?category=chips"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -104,7 +103,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/shop?category=spices"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -114,7 +113,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/shop?category=sauces"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -124,7 +123,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/shop?category=fruits"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -145,7 +144,7 @@ export default function Footer() {
           <ul className="overflow-hidden px-4 py-2 flex flex-col gap-y-3.5">
             <li>
               <Link
-                to={"#"}
+                to={"/about"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -155,7 +154,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/contact"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -216,7 +215,7 @@ export default function Footer() {
           <ul className="overflow-hidden px-4 py-2 flex flex-col gap-y-3.5">
             <li>
               <Link
-                to={"#"}
+                to={"/auth/login"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -226,7 +225,7 @@ export default function Footer() {
 
             <li>
               <Link
-                to={"#"}
+                to={"/cart"}
                 className="text-sm text-secondary dark:text-secondary-D
                       hover:text-primary dark:hover:text-primary"
               >
@@ -653,7 +652,7 @@ export default function Footer() {
                   <li className="flex items-center gap-x-2.5">
                     <Link
                       to={"#"}
-                      className="w-9 h-9 md:w-10 h-10 rounded-lg bg-TB dark:bg-white
+                      className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-TB dark:bg-white
                       flex items-center justify-center text-white dark:text-TB text-lg
                       cursor-pointer hover:bg-TB/80 dark:hover:bg-gray-300"
                     >
@@ -662,7 +661,7 @@ export default function Footer() {
 
                     <Link
                       to={"#"}
-                      className="w-9 h-9 md:w-10 h-10 rounded-lg bg-TB dark:bg-white
+                      className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-TB dark:bg-white
                       flex items-center justify-center text-white dark:text-TB text-lg
                       cursor-pointer hover:bg-TB/80 dark:hover:bg-gray-300"
                     >
@@ -671,7 +670,7 @@ export default function Footer() {
 
                     <Link
                       to={"https://github.com/Alireza-404"}
-                      className="w-9 h-9 md:w-10 h-10 rounded-lg bg-TB dark:bg-white
+                      className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-TB dark:bg-white
                       flex items-center justify-center text-white dark:text-TB text-lg
                       cursor-pointer hover:bg-TB/80 dark:hover:bg-gray-300"
                     >
@@ -680,7 +679,7 @@ export default function Footer() {
 
                     <Link
                       to={"#"}
-                      className="w-9 h-9 md:w-10 h-10 rounded-lg bg-TB dark:bg-white
+                      className="w-9 h-9 md:w-10 md:h-10 rounded-lg bg-TB dark:bg-white
                       flex items-center justify-center text-white dark:text-TB text-lg
                       cursor-pointer hover:bg-TB/80 dark:hover:bg-gray-300"
                     >

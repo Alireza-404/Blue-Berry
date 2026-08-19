@@ -7,7 +7,13 @@ import ManagerComponent from "../components/Home/ManagerComponent/ManagerCompone
 import OurTeam from "../components/About/OurTeam/OurTeam";
 import OurTeamText from "../components/About/OurTeamText/OurTeamText";
 
+import { useEffect } from "react";
+
 export default function AboutPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <header>

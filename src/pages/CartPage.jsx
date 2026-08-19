@@ -3,7 +3,13 @@ import Summary from "../components/Cart/Summary/Summary";
 import Footer from "../components/Layout/Footer/Footer";
 import Navbar from "../components/Layout/Navbar/Navbar";
 
+import { useEffect } from "react";
+
 export default function CartPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <header>

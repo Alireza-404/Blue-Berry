@@ -7,6 +7,7 @@ import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
 import { useTranslation } from "react-i18next";
 import { useLayoutEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -154,9 +155,14 @@ export default function SpecialCategories() {
 
             <PrimaryButton
               type={"button"}
-              className={"py-2 px-4 dark:text-box-border-D"}
+              className={"dark:text-box-border-D w-28 h-10"}
             >
-              {t("specialCategories.btnText")}
+              <Link
+                to={"/shop?category=snack"}
+                className="w-full h-full duration-0 flex items-center justify-center"
+              >
+                {t("specialCategories.btnText")}
+              </Link>
             </PrimaryButton>
           </div>
         </div>
@@ -202,9 +208,14 @@ export default function SpecialCategories() {
 
             <PrimaryButton
               type={"button"}
-              className={"py-2 px-4 dark:text-box-border-D"}
+              className={"dark:text-box-border-D w-28 h-10"}
             >
-              {t("specialCategories.btnText")}
+              <Link
+                to={"/shop?category=fruits"}
+                className="w-full h-full duration-0 flex items-center justify-center"
+              >
+                {t("specialCategories.btnText")}
+              </Link>
             </PrimaryButton>
           </div>
         </div>

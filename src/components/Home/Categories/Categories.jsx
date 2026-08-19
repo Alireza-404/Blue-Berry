@@ -15,21 +15,25 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "swiper/css";
 import "swiper/css/autoplay";
+import useProducts from "../../../hooks/useProducts";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Categories() {
+  const { products, error, loading } = useProducts();
+
   const categoriesArray = [
-    { id: 1, text: "vegetables", count: "24", src: Svg1 },
-    { id: 2, text: "fruits", count: "12", src: Svg2 },
-    { id: 3, text: "coldDrinks", count: "64", src: Svg3 },
-    { id: 4, text: "bakery", count: "52", src: Svg4 },
-    { id: 5, text: "fastFood", count: "31", src: Svg5 },
-    { id: 6, text: "snacks", count: "45", src: Svg6 },
+    { id: 1, text: "vegetables", src: Svg1 },
+    { id: 2, text: "fruits", src: Svg2 },
+    { id: 3, text: "coldDrinks", src: Svg3 },
+    { id: 4, text: "bakery", src: Svg4 },
+    { id: 5, text: "fastFood", src: Svg5 },
+    { id: 6, text: "snack", src: Svg6 },
   ];
 
   const containerRef = useRef(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useLayoutEffect(() => {
     if (!containerRef.current) return;
@@ -82,47 +86,78 @@ export default function Categories() {
           disableOnInteraction: false,
         }}
         speed={800}
-        grabCursor
         className="duration-0"
       >
-        {categoriesArray.map((category) => {
-          let id = category.id;
-          return (
-            <SwiperSlide key={category.id}>
-              <article
-                className={`h-40 rounded-3xl flex flex-col items-center select-none
+        {loading
+          ? categoriesArray.map((_, i) => {
+              return (
+                <SwiperSlide key={i}>
+                  <div
+                    className="select-non h-40 rounded-3xl bg-secondary/50
+                    dark:bg-secondary-D/50 animate-pulse"
+                  ></div>
+                </SwiperSlide>
+              );
+            })
+          : categoriesArray.map((category) => {
+              let id = category.id;
+
+              const count = products.filter(
+                (product) => product.category_en.toLowerCase() === category.text
+              ).length;
+
+              return (
+                <SwiperSlide key={category.id}>
+                  <Link
+                    to={`${
+                      count === 0
+                        ? "#"
+                        : `/shop?category=${category.text.toLocaleLowerCase()}`
+                    }`}
+                  >
+                    <article
+                      className={`h-40 rounded-3xl flex flex-col items-center select-none
                     justify-center gap-y-1.5 duration-0
                     ${
                       id === 1 || id === 5
                         ? "bg-pink-100"
                         : id === 2 || id === 6
-                          ? "bg-emerald-100"
-                          : id === 3
-                            ? "bg-purple-100"
-                            : "bg-yellow-100"
+                        ? "bg-emerald-100"
+                        : id === 3
+                        ? "bg-purple-100"
+                        : "bg-yellow-100"
                     }`}
-              >
-                <div>
-                  <img
-                    src={category.src}
-                    alt={`svg-${id}`}
-                    className="w-14 h-14"
-                  />
-                </div>
+                    >
+                      <div className="w-14 h-14">
+                        <img
+                          src={category.src}
+                          alt={`svg-${id}`}
+                          className="w-full h-full"
+                        />
+                      </div>
 
-                <div className="flex flex-col gap-y-0.5 items-center">
-                  <span className="text-lg text-TB">
-                    {t(`categories.${category.text}`)}
-                  </span>
+                      <div className="flex flex-col gap-y-0.5 items-center">
+                        <span className="text-lg text-TB">
+                          {t(`categories.${category.text}`)}
+                        </span>
 
-                  <span className="font-normal text-secondary text-sm">
-                    {category.count} {t("categories.items")}
-                  </span>
-                </div>
-              </article>
-            </SwiperSlide>
-          );
-        })}
+                        <span
+                          className={`font-normal text-sm ${
+                            error
+                              ? "text-red-500 tracking-wider"
+                              : "text-secondary"
+                          }`}
+                        >
+                          {error
+                            ? `${i18n.language === "de" ? "Fehler" : "Error"}`
+                            : `${count} ${t("categories.items")}`}
+                        </span>
+                      </div>
+                    </article>
+                  </Link>
+                </SwiperSlide>
+              );
+            })}
       </Swiper>
     </div>
   );

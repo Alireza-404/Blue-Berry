@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { useTranslation } from "react-i18next";
 import { useLayoutEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,11 +74,14 @@ export default function OrganicComponent() {
 
           <PrimaryButton
             type={"button"}
-            className={
-              "py-2 px-4 w-fit dark:text-secondary-D mt-2 sm:mt-1 md:mt-0"
-            }
+            className={"dark:text-secondary-D w-28 h-11 mt-2 sm:mt-1 md:mt-0"}
           >
-            {t("organicSection.btnText")}
+            <Link
+              to={"/shop?category=vegetables"}
+              className="w-full h-full duration-0 flex items-center justify-center"
+            >
+              {t("organicSection.btnText")}
+            </Link>
           </PrimaryButton>
         </div>
 

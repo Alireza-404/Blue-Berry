@@ -43,6 +43,7 @@ export default function ContactPage() {
         });
     }, containerRef);
 
+    window.scrollTo(0, 0);
     return () => ctx.revert();
   }, []);
 
