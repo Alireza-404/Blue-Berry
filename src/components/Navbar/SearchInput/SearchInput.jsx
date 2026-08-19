@@ -11,8 +11,10 @@ export default function SearchInput() {
   const [searchBlur, setSearchBlur] = useState(true);
   const { products, loading, error } = useProducts();
 
-  const filteredProducts = products.filter((product) =>
-    product.title_en.toLowerCase().includes(value.toLowerCase())
+  const filteredProducts = products.filter(
+    (product) =>
+      product.title_en.toLowerCase().includes(value.toLowerCase()) ||
+      product.title_de.toLowerCase().includes(value.toLowerCase())
   );
 
   return (
@@ -69,7 +71,7 @@ export default function SearchInput() {
                   : "Products couldn’t be loaded."}
               </p>
             ) : filteredProducts.length === 0 ? (
-              <p className="text-2xl font-bold text-TB dark:text-white">
+              <p className="text-2xl text-center font-bold text-TB dark:text-white">
                 {i18n.language === "de"
                   ? "Keine Produkte gefunden."
                   : "No products found."}

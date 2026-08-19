@@ -11,6 +11,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const slideDur = 4500;
 
@@ -21,18 +22,21 @@ export default function HeroSection() {
       src: Img1,
       text: "heroSection.text1",
       discountText: "heroSection.discountText1",
+      to: "/shop?category=fruits",
     },
     {
       id: 2,
       src: Img2,
       text: "heroSection.text2",
       discountText: "heroSection.discountText2",
+      to: "/shop?category=snack",
     },
     {
       id: 3,
       src: Img3,
       text: "heroSection.text3",
       discountText: "heroSection.discountText3",
+      to: "/shop?category=vegetables",
     },
   ];
 
@@ -122,9 +126,14 @@ export default function HeroSection() {
 
                 <PrimaryButton
                   type={"button"}
-                  className={"py-2 px-4 dark:text-secondary-D"}
+                  className={"dark:text-secondary-D w-28 h-11"}
                 >
-                  {t("heroSection.btnText")}
+                  <Link
+                    to={slidesArray[index].to}
+                    className="w-full h-full duration-0 flex items-center justify-center"
+                  >
+                    {t("heroSection.btnText")}
+                  </Link>
                 </PrimaryButton>
               </motion.div>
 
