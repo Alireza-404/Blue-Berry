@@ -42,6 +42,10 @@ export default function HomePageProducts() {
   useEffect(() => {
     if (!loading && products.length) {
       ScrollTrigger.refresh(true);
+
+      setTimeout(() => {
+        ScrollTrigger.refresh(true);
+      }, 500);
     }
   }, [loading, products]);
 
@@ -56,7 +60,7 @@ export default function HomePageProducts() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {loading ? (
-        <ProductsSkeleton />
+        <ProductsSkeleton homeProducts={true} />
       ) : error ? (
         <ProductsError
           className={"h-72 justify-center"}

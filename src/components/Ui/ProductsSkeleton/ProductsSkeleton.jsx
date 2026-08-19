@@ -1,5 +1,5 @@
-export default function ProductsSkeleton() {
-  return Array.from({ length: 4 }).map((_, i) => {
+export default function ProductsSkeleton({ homeProducts = false }) {
+  return Array.from({ length: homeProducts ? 8 : 4 }).map((_, i) => {
     return (
       <div
         key={i}
