@@ -38,6 +38,7 @@
         "exploreCategories2": "Categories"
     },
     "dayOfTheDealSection": {
+        "limitedTime": "Limited Time Deals",
         "text": "Day of the <1>deal</1>",
         "secondaryText": "Don’t wait. The time will never be just right."
     },

@@ -38,6 +38,7 @@
         "exploreCategories2": "Erkunden"
     },
     "dayOfTheDealSection": {
+        "limitedTime": "Angebote für kurze Zeit",
         "text": "Tag des <1>Angebots</1>",
         "secondaryText": "Warte nicht. Die Zeit wird nie genau richtig sein."
     },

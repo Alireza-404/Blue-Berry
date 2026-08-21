@@ -3,6 +3,7 @@ import Categories from "../components/Home/Categories/Categories";
 import CategoryImage from "../components/Home/CategoryImage/CategoryImage";
 import CategoryText from "../components/Home/CategoryText/CategoryText";
 import DOTDText from "../components/Home/DOTDText/DOTDText";
+import DOTDProducts from "../components/Home/DOTDProducts/DOTDProducts";
 import Footer from "../components/Layout/Footer/Footer";
 import HeroSection from "../components/Home/HeroSection/HeroSection";
 import HomePageProducts from "../components/Home/HomePageProducts/HomePageProducts";
@@ -29,8 +30,8 @@ export default function HomePage() {
       <main className="overflow-hidden">
         <section id="categories-section">
           <div
-            className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
-            lg:py-28 flex items-center"
+            className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 pt-20 
+            lg:pt-28 lg:pb-44 flex items-center"
           >
             <CategoryImage />
 
@@ -42,13 +43,21 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* <section id="day-of-the-deal-section">
-          <div className="container mx-auto px-4 py-20 lg:py-28">
+        <section
+          id="day-of-the-deal-section"
+          className="relative overflow-hidden border-y border-primary bg-primary/5"
+        >
+          <div className="relative z-20 container mx-auto px-4 py-20 lg:py-28">
             <DOTDText />
 
             <DOTDProducts />
           </div>
-        </section> */}
+
+          <div
+            className="w-[404px] h-[404px] bg-primary/15 rounded-full absolute top-0 left-1/2
+            -translate-x-1/2 blur-3xl z-10"
+          ></div>
+        </section>
 
         <section id="special-categories-section">
           <div className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 lg:py-28">

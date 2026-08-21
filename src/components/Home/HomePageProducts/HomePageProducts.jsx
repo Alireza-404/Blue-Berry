@@ -60,7 +60,7 @@ export default function HomePageProducts() {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       {loading ? (
-        <ProductsSkeleton homeProducts={true} />
+        <ProductsSkeleton />
       ) : error ? (
         <ProductsError
           className={"h-72 justify-center"}
@@ -79,7 +79,7 @@ export default function HomePageProducts() {
                   relative dark:border-box-border-D"
               >
                 <div className="divide-y divide-TB/15 dark:divide-box-border-D">
-                  <div className="overflow-hidden relative flex justify-center items-center">
+                  <div className="aspect-square overflow-hidden relative flex justify-center items-center">
                     <img
                       src={product.image}
                       alt={`product-${product.id}`}

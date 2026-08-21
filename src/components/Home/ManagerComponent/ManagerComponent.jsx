@@ -97,12 +97,14 @@ export default function ManagerComponent() {
             </span>
           </div>
 
-          <img
-            src={ManagerImg}
-            alt="manager-image"
-            className="w-16 h-16 rounded-2xl md:w-56 md:h-56 lg:w-64 lg:h-64 select-none
+          <div className="aspect-square">
+            <img
+              src={ManagerImg}
+              alt="manager-image"
+              className="w-16 h-16 rounded-2xl md:w-56 md:h-56 lg:w-64 lg:h-64 select-none
             xl:w-72 xl:h-72 lg:border-4 lg:border-primary"
-          />
+            />
+          </div>
         </div>
 
         <div

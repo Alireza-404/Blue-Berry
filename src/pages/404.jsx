@@ -16,6 +16,7 @@ export default function NotFoundPage() {
   return (
     <div className="relative min-h-screen w-full overflow-hidden bg-white dark:bg-body">
       <Particles
+        init={particlesInit}
         options={{
           background: {
             color: {
@@ -36,9 +37,10 @@ export default function NotFoundPage() {
 
             modes: {
               grab: {
-                distance: 240,
+                distance: 220,
                 links: {
-                  opacity: 0.15,
+                  color: "#3D5CFF",
+                  opacity: 0.5,
                 },
               },
             },
@@ -49,12 +51,12 @@ export default function NotFoundPage() {
               value: 90,
               density: {
                 enable: true,
-                area: 1000,
+                area: 900,
               },
             },
 
             color: {
-              value: ["#3D5CFF", "#6D83FF", "#858597", "#B8B8D2"],
+              value: "#3D5CFF",
             },
 
             shape: {
@@ -63,29 +65,29 @@ export default function NotFoundPage() {
 
             opacity: {
               value: {
-                min: 0.15,
-                max: 0.45,
+                min: 0.3,
+                max: 0.75,
               },
               random: true,
               animation: {
                 enable: true,
                 speed: 0.5,
-                minimumValue: 0.08,
+                minimumValue: 0.15,
                 sync: false,
               },
             },
 
             size: {
               value: {
-                min: 1,
-                max: 3,
+                min: 1.5,
+                max: 3.5,
               },
               random: true,
             },
 
             move: {
               enable: true,
-              speed: 0.6,
+              speed: 0.7,
               direction: "none",
               random: true,
               straight: false,
@@ -101,7 +103,6 @@ export default function NotFoundPage() {
 
           detectRetina: true,
         }}
-        init={particlesInit}
       />
 
       <main className="relative z-10 flex min-h-screen items-center justify-center px-6">
