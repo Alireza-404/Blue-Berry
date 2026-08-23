@@ -296,7 +296,7 @@ export default function ShopProducts() {
           {filteredProducts.length} items
         </span>
 
-        <div className="flex items-center gap-2 mt-8">
+        <div className="flex items-center gap-2">
           {Array.from({ length: totalPages }, (_, index) => {
             const page = index + 1;
 

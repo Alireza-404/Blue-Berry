@@ -31,6 +31,7 @@ import { useTranslation } from "react-i18next";
 import "./App.css";
 import Blogs from "./pages/Panel/Blogs";
 import UpdateBlog from "./pages/Panel/UpdateBlog";
+import BlogPage from "./pages/Blog";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -185,6 +186,8 @@ function App() {
             </AdminRoute>
           }
         />
+
+        <Route path="/blog" element={<BlogPage />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
