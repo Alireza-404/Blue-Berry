@@ -79,7 +79,7 @@ export default function ShopProducts() {
                       relative dark:border-box-border-D"
                 >
                   <div className="divide-y divide-TB/15 dark:divide-box-border-D">
-                    <div className="overflow-hidden relative flex justify-center items-center">
+                    <div className="aspect-square overflow-hidden relative flex justify-center items-center">
                       <img
                         src={product.image}
                         alt={`product-${product.id}`}
