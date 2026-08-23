@@ -1,9 +1,9 @@
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
-import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useProducts from "../../../hooks/useProducts";
 import useWishlist from "../../../hooks/useWishlist";
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import useCart from "../../../hooks/useCart";
+import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
 
 import {
   AiFillStar,
@@ -17,10 +17,10 @@ import { useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/autoplay";
-import { Autoplay, FreeMode } from "swiper/modules";
 
 export default function RelatedProducts({ productCategory }) {
   const { t, i18n } = useTranslation();
@@ -53,10 +53,10 @@ export default function RelatedProducts({ productCategory }) {
       {loading ? (
         <ProductsSkeleton />
       ) : error ? (
-        <ProductsError
+        <ErrorSkeleton
           className={"h-72 justify-center"}
           text={t("homePageProducts.productsLoadError")}
-          getProducts={handleGetProducts}
+          get={handleGetProducts}
         />
       ) : (
         <Swiper

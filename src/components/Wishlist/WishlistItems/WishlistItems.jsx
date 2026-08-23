@@ -2,8 +2,8 @@ import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import useCart from "../../../hooks/useCart";
 import useWishlist from "../../../hooks/useWishlist";
-import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useUserData from "../../../hooks/useUserData";
+import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
 
 import {
   AiFillCloseCircle,
@@ -37,9 +37,9 @@ export default function WishlistItems() {
       {loading ? (
         <ProductsSkeleton />
       ) : error ? (
-        <ProductsError
+        <ErrorSkeleton
           text={t("wishlist.wishlistLoadError")}
-          getProducts={getWishlist}
+          get={getWishlist}
           className={"h-80 justify-center"}
         />
       ) : items.length > 0 ? (

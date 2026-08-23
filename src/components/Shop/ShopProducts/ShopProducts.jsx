@@ -1,5 +1,3 @@
-import useProducts from "../../../hooks/useProducts";
-
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
@@ -10,13 +8,14 @@ import {
   AiOutlineShopping,
   AiOutlineStar,
 } from "react-icons/ai";
+import { useTranslation } from "react-i18next";
 
+import useProducts from "../../../hooks/useProducts";
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
-import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useWishlist from "../../../hooks/useWishlist";
-import { useTranslation } from "react-i18next";
 import useCart from "../../../hooks/useCart";
+import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -63,10 +62,10 @@ export default function ShopProducts() {
         {loading ? (
           <ProductsSkeleton />
         ) : error ? (
-          <ProductsError
+          <ErrorSkeleton
             className={"h-72 justify-center"}
             text={t("homePageProducts.productsLoadError")}
-            getProducts={handleGetProducts}
+            get={handleGetProducts}
           />
         ) : (
           <>

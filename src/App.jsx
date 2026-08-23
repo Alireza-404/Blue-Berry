@@ -9,16 +9,6 @@ import CartPage from "./pages/CartPage";
 import AboutPage from "./pages/AboutPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import SingleProduct from "./pages/SingleProduct";
-
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { setTheme } from "./redux/Slices/ThemeSlice";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { supabase } from "./lib/supabase";
-import { clearUser, setUser } from "./redux/Slices/AuthSlice";
-import { useTranslation } from "react-i18next";
-import "./App.css";
 import useUserData from "./hooks/useUserData";
 import WishlistPage from "./pages/WishlistPage";
 import useAuthSession from "./hooks/useAuthSession";
@@ -26,9 +16,21 @@ import AdminRoute from "./routes/AdminRoute";
 import Panel from "./pages/Panel/Panel";
 import AddProduct from "./pages/Panel/AddProduct";
 import Products from "./pages/Panel/Products";
-import EditPage from "./pages/Panel/EditPage";
 import ShopPage from "./pages/ShopPage";
 import NotFoundPage from "./pages/404";
+import AddBlog from "./pages/Panel/AddBlog";
+import UpdateProduct from "./pages/Panel/UpdateProduct";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setTheme } from "./redux/Slices/ThemeSlice";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useTranslation } from "react-i18next";
+
+import "./App.css";
+import Blogs from "./pages/Panel/Blogs";
+import UpdateBlog from "./pages/Panel/UpdateBlog";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -150,12 +152,39 @@ function App() {
           path="/panel/products/:id/edit"
           element={
             <AdminRoute>
-              <EditPage />
+              <UpdateProduct />
             </AdminRoute>
           }
         />
 
         <Route path="/shop" element={<ShopPage />} />
+
+        <Route
+          path="/panel/blogs/new"
+          element={
+            <AdminRoute>
+              <AddBlog />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/panel/blogs"
+          element={
+            <AdminRoute>
+              <Blogs />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/panel/blogs/:id/edit"
+          element={
+            <AdminRoute>
+              <UpdateBlog />
+            </AdminRoute>
+          }
+        />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

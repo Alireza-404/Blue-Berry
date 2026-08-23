@@ -1,9 +1,9 @@
 import { useState } from "react";
 import PanelLayout from "../../components/Layout/PanelLayout/PanelLayout";
 import PanelFooter from "../../components/Panel/Footer/Footer";
-import ProductForm from "../../components/Panel/ProductForm/ProductForm";
+import PanelBlogs from "../../components/Panel/PanelBlogs/PanelBlogs";
 
-export default function AddProduct() {
+export default function Blogs() {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -11,22 +11,21 @@ export default function AddProduct() {
       <div className="relative w-full px-7 py-8 xl:px-14 xl:pt-16 pb-12 lg:ml-72 xl:ml-80">
         <div
           className="w-11/12 absolute -top-32 left-1/2 -translate-x-1/2 bg-blue-600/40
-                h-32 rounded-full blur-2xl"
+              h-32 rounded-full blur-2xl"
         ></div>
 
         <header>
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-y-2.5">
-              <h1 className="text-4xl font-bold text-white">Add Product</h1>
+              <h1 className="text-4xl font-bold text-white">Blogs</h1>
 
               <p className="text-zinc-500">
-                Add a new product to your store and provide its essential
-                details.
+                Manage your blog posts and keep your content organized.
               </p>
 
               <span
                 className="text-zinc-500 mt-4 cursor-pointer border-b border-blue-600
-                w-fit pb-2 lg:hidden block"
+                  w-fit pb-2 lg:hidden block"
                 onClick={() => setShowMenu(true)}
               >
                 Open Main Menu
@@ -40,12 +39,12 @@ export default function AddProduct() {
         </header>
 
         <main>
-          <section id="products-form-section">
+          <section id="products-section">
             <div
-              className="container mx-auto px-4 sm:px-8 md:px-10 lg:px-4 py-20 
-                flex items-center"
+              className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
+                      lg:pt-28 lg:pb-8"
             >
-              <ProductForm />
+              <PanelBlogs />
             </div>
           </section>
         </main>

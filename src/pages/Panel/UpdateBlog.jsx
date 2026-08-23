@@ -1,23 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import useProducts from "../../hooks/useProducts";
+
+import useBlog from "../../hooks/useBlog";
+import BlogForm from "../../components/Panel/BlogForm/BlogForm";
 import PanelLayout from "../../components/Layout/PanelLayout/PanelLayout";
 import PanelFooter from "../../components/Panel/Footer/Footer";
-import ProductForm from "../../components/Panel/ProductForm/ProductForm";
-import ProductsError from "../../components/Ui/ProductsError/ProductsError";
+import ErrorSkeleton from "../../components/Ui/ErrorSkeleton/ErrorSkeleton";
 
-export default function EditPage() {
+export default function UpdateBlog() {
   const { id } = useParams();
   const [showMenu, setShowMenu] = useState(false);
   const {
-    handleGetProductById,
-    singleProductForEdit,
-    getProductByIdError,
-    getProductByIdLoading,
-  } = useProducts();
+    handleGetBlogById,
+    singleBlog,
+    getBlogByIdError,
+    getBlogByIdLoading,
+  } = useBlog();
 
   useEffect(() => {
-    handleGetProductById(id);
+    handleGetBlogById(id);
   }, [id]);
 
   return (
@@ -31,10 +32,10 @@ export default function EditPage() {
         <header>
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-y-2.5">
-              <h1 className="text-4xl font-bold text-white">Edit Product</h1>
+              <h1 className="text-4xl font-bold text-white">Edit Blog</h1>
 
               <p className="text-zinc-500">
-                Update your product details and information.
+                Update your blog details and information.
               </p>
 
               <span
@@ -58,13 +59,13 @@ export default function EditPage() {
               className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20 
                       lg:pt-28 lg:pb-8 flex items-center"
             >
-              {getProductByIdError ? (
-                <ProductsError
+              {getBlogByIdError ? (
+                <ErrorSkeleton
                   className={"h-72 justify-center"}
                   text={"Failed to load product."}
-                  getProducts={handleGetProductById(id)}
+                  get={handleGetBlogById(id)}
                 />
-              ) : getProductByIdLoading ? (
+              ) : getBlogByIdLoading ? (
                 <div className="flex justify-center items-center w-full h-72">
                   <span
                     className="animate-spin border-x-2 border-t-2 border-white/20
@@ -72,7 +73,7 @@ export default function EditPage() {
                   ></span>
                 </div>
               ) : (
-                <ProductForm mode="update" product={singleProductForEdit} />
+                <BlogForm mode="update" blog={singleBlog} />
               )}
             </div>
           </section>

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import PrimaryButton from "../PrimaryButton/PrimaryButton";
 
-export default function ProductsError({ getProducts, text, className }) {
+export default function ErrorSkeleton({ get, text, className }) {
   const { t } = useTranslation();
 
   return (
@@ -15,7 +15,7 @@ export default function ProductsError({ getProducts, text, className }) {
       <PrimaryButton
         type={"button"}
         className={"px-6 py-3 dark:text-secondary-D w-fit"}
-        click={getProducts}
+        click={get}
       >
         {t("retry")}
       </PrimaryButton>

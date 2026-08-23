@@ -379,5 +379,8 @@
             "leaves": "Leaves",
             "fruits": "Fruits"
         }
+    },
+    "blogs": {
+        "blogsLoadError": "Failed to load blogs."
     }
 }

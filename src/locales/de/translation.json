@@ -379,5 +379,8 @@
             "leaves": "Blätter",
             "fruits": "Obst"
         }
+    },
+    "blogs": {
+        "blogsLoadError": "Blogs konnten nicht geladen werden."
     }
 }

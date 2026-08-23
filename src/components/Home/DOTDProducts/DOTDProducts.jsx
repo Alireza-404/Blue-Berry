@@ -11,11 +11,11 @@ import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import ShowProductModal from "../ShowProductModal/ShowProductModal";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
-import ProductsError from "../../Ui/ProductsError/ProductsError";
 import useCart from "../../../hooks/useCart";
 import useWishlist from "../../../hooks/useWishlist";
 import useProducts from "../../../hooks/useProducts";
 import { Link } from "react-router-dom";
+import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
 
 export default function DOTDProducts() {
   const { t, i18n } = useTranslation();
@@ -65,10 +65,10 @@ export default function DOTDProducts() {
       {loading ? (
         <ProductsSkeleton />
       ) : error ? (
-        <ProductsError
+        <ErrorSkeleton
           className={"h-72 justify-center"}
           text={t("homePageProducts.productsLoadError")}
-          getProducts={handleGetProducts}
+          get={handleGetProducts}
         />
       ) : (
         <>

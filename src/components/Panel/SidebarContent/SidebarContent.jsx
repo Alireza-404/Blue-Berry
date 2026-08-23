@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import { AiFillHome, AiFillProduct } from "react-icons/ai";
+import { AiFillBook, AiFillHome, AiFillProduct } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useSelector } from "react-redux";
 import PanelButton from "../PanelButton/PanelButton";
@@ -46,7 +46,9 @@ export default function SidebarContent() {
                         }`}
                   >
                     <span
-                      className={`text-xl ${isActive ? "text-blue-600" : "text-zinc-500"}`}
+                      className={`text-xl ${
+                        isActive ? "text-blue-600" : "text-zinc-500"
+                      }`}
                     >
                       <AiFillHome />
                     </span>
@@ -81,7 +83,9 @@ export default function SidebarContent() {
                         }`}
                   >
                     <span
-                      className={`text-xl ${isActive ? "text-blue-600" : "text-zinc-500"}`}
+                      className={`text-xl ${
+                        isActive ? "text-blue-600" : "text-zinc-500"
+                      }`}
                     >
                       <AiFillProduct />
                     </span>
@@ -94,6 +98,43 @@ export default function SidebarContent() {
                       }`}
                     >
                       Products
+                    </span>
+                  </div>
+                )}
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to={"/panel/blogs"} end>
+                {({ isActive }) => (
+                  <div
+                    className={`group relative flex items-center gap-x-4 py-4 px-6 rounded-xl 
+                        hover:translate-x-1.5 overflow-hidden
+                        ${
+                          isActive
+                            ? `bg-gradient-to-r from-blue-600/30 to-blue-600/5 after:w-3
+                            after:h-10 after:absolute after:left-0 after:top-1/2 after:-translate-x-1/2
+                            after:-translate-y-1/2 after:bg-blue-500 after:rounded-lg
+                            after:shadow-[0_0_20px_6px_rgba(59,130,246,0.3)]`
+                            : "bg-transparent hover:bg-white/5"
+                        }`}
+                  >
+                    <span
+                      className={`text-xl ${
+                        isActive ? "text-blue-600" : "text-zinc-500"
+                      }`}
+                    >
+                      <AiFillBook />
+                    </span>
+
+                    <span
+                      className={`text-lg ${
+                        isActive
+                          ? "text-white"
+                          : "text-zinc-500 group-hover:text-white"
+                      }`}
+                    >
+                      Blogs
                     </span>
                   </div>
                 )}

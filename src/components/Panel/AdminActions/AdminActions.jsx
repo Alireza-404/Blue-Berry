@@ -1,4 +1,4 @@
-import { LuPackagePlus } from "react-icons/lu";
+import { LuNotebookPen, LuPackagePlus } from "react-icons/lu";
 import { Link } from "react-router-dom";
 
 export default function AdminActions() {
@@ -8,6 +8,14 @@ export default function AdminActions() {
       title: "Add Product",
       description: "Add a new product to your store",
       link: "/panel/products/new",
+      icon: <LuPackagePlus className="text-blue-600 text-2xl" />,
+    },
+    {
+      id: 2,
+      title: "Add Blog",
+      description: "Create a new blog post for your store",
+      link: "/panel/blogs/new",
+      icon: <LuNotebookPen className="text-blue-600 text-2xl" />,
     },
   ];
 
@@ -25,14 +33,12 @@ export default function AdminActions() {
             className="rounded-lg bg-blue-500/10 w-12 h-12 mb-3 flex items-center 
             justify-center"
           >
-            <LuPackagePlus className="text-blue-600 text-2xl" />
+            {item.icon}
           </span>
 
-          <strong className="text-white">Add Product</strong>
+          <strong className="text-white">{item.title}</strong>
 
-          <span className="text-zinc-500 text-sm">
-            Add a new product to your store
-          </span>
+          <span className="text-zinc-500 text-sm">{item.description}</span>
         </Link>
       ))}
     </div>

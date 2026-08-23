@@ -30,7 +30,7 @@ export default function HomePage() {
       <main className="overflow-hidden">
         <section id="categories-section">
           <div
-            className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 pt-20 
+            className="container mx-auto px-4 sm:px-14 md:px-10 lg:px-4 py-20
             lg:pt-28 lg:pb-44 flex items-center"
           >
             <CategoryImage />
@@ -45,7 +45,7 @@ export default function HomePage() {
 
         <section
           id="day-of-the-deal-section"
-          className="relative overflow-hidden border-y border-primary bg-primary/5"
+          className="relative overflow-hidden border-y border-primary/50 bg-primary/5"
         >
           <div className="relative z-20 container mx-auto px-4 py-20 lg:py-28">
             <DOTDText />

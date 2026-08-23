@@ -3,8 +3,8 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 import useProducts from "../../../hooks/useProducts";
-import ProductsError from "../../Ui/ProductsError/ProductsError";
 import PanelButton from "../PanelButton/PanelButton";
+import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
 
 export default function PanelProducts() {
   const { t, i18n } = useTranslation();
@@ -27,10 +27,10 @@ export default function PanelProducts() {
           ></span>
         </div>
       ) : error ? (
-        <ProductsError
+        <ErrorSkeleton
           className={"h-72 justify-center"}
           text={t("homePageProducts.productsLoadError")}
-          getProducts={handleGetProducts}
+          get={handleGetProducts}
         />
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">

@@ -94,11 +94,11 @@ export default function FAQPage() {
           </div>
 
           <div className="flex flex-col gap-y-8 items-center lg:flex-row lg:gap-x-8 lg:items-start">
-            <div>
+            <div className="w-[600px] lg:w-[800px]">
               <img
                 src={Img}
                 alt="FAQ-image"
-                className="w-[600px] lg:w-[800px] rounded-3xl select-none duration-0"
+                className="w-full h-full rounded-3xl select-none duration-0"
                 id="faq-image"
               />
             </div>
