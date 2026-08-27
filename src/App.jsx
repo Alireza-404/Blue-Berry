@@ -32,6 +32,7 @@ import "./App.css";
 import Blogs from "./pages/Panel/Blogs";
 import UpdateBlog from "./pages/Panel/UpdateBlog";
 import BlogPage from "./pages/Blog";
+import SingleBlog from "./pages/SingleBlog";
 
 function App() {
   const currentTheme = useSelector((state) => state.theme.theme);
@@ -188,6 +189,8 @@ function App() {
         />
 
         <Route path="/blog" element={<BlogPage />} />
+
+        <Route path="/blog/:title" element={<SingleBlog />} />
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

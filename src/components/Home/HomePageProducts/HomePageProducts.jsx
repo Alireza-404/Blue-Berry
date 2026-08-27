@@ -209,15 +209,15 @@ export default function HomePageProducts() {
                     </div>
 
                     <h3>
-                      <a
+                      <Link
                         className="text-TB dark:text-white lg:text-lg line-clamp-1 tracking-widest
                         hover:text-primary"
-                        href={`/products/${product.id}`}
+                        to={`/products/${product.id}`}
                       >
                         {i18n.language === "en" || i18n.language === "en-US"
                           ? product.title_en
                           : product.title_de}
-                      </a>
+                      </Link>
                     </h3>
 
                     <div className="flex items-center justify-between">

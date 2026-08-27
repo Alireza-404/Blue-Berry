@@ -124,7 +124,7 @@
             "text": "Business ideas to grow your business."
         },
         "box4": {
-            "text": "31 customer stats know in 2020."
+            "text": "31 customer stats know in 2026."
         },
         "organic": "organic"
     },
@@ -381,6 +381,10 @@
         }
     },
     "blogs": {
-        "blogsLoadError": "Failed to load blogs."
+        "blogsLoadError": "Failed to load blogs.",
+        "singleBlog": {
+            "connectionError": "We couldn’t load the blogs. Please check your connection and try again",
+            "recentArticles": "Recent Articles"
+        }
     }
 }

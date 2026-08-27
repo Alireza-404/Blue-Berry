@@ -124,7 +124,7 @@
             "text": "Geschäftsideen, um Ihr Unternehmen zu wachsen."
         },
         "box4": {
-            "text": "31 Kundenstatistiken, die Sie 2020 kennen sollten."
+            "text": "31 Kundenstatistiken, die Sie 2026 kennen sollten."
         },
         "organic": "Organisch"
     },
@@ -381,6 +381,10 @@
         }
     },
     "blogs": {
-        "blogsLoadError": "Blogs konnten nicht geladen werden."
+        "blogsLoadError": "Blogs konnten nicht geladen werden.",
+        "singleBlog": {
+            "connectionError": "Die Blogs konnten nicht geladen werden. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+            "recentArticles": "Neueste Artikel"
+        }
     }
 }

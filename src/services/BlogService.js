@@ -84,7 +84,7 @@ export const getSignleBlog = async (blogTitle) => {
       .from("blogs")
       .select("*")
       .eq("title_en", blogTitle)
-      .single();
+      .maybeSingle();
 
     if (error) {
       return { data: null, success: false, error: "fetch_error" };

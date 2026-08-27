@@ -33,15 +33,15 @@ export default function BlogItems() {
             get={handleGetBlogs}
           />
         ) : (
-          blogs.map((blog, i) => (
+          paginationBlogs.map((blog, i) => (
             <div
               key={i}
               className="group rounded-3xl overflow-hidden flex flex-col border border-TB/15
                 dark:border-box-border-D bg-gray-200/85 dark:bg-box-D"
             >
-              <div className="overflow-hidden">
+              <div className="overflow-hidden h-60 sm:h-68 md:h-52 lg:h-48 xl:h-[250px]">
                 <img
-                  className="w-full group-hover:scale-110"
+                  className="w-full group-hover:scale-110 h-full object-cover md:object-fill"
                   src={blog.image}
                   alt={`blog-image-${i + 1}`}
                 />

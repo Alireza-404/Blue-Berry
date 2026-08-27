@@ -13,6 +13,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import "swiper/css";
 import "swiper/css/autoplay";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -20,27 +21,31 @@ export default function Articles() {
   const articlesArray = [
     {
       id: 1,
-      date: "June 12, 2025",
+      label: "Guide",
       src: Img1,
       text: "articlesSection.box1.text",
+      title_en: "Marketing Guide: 5 Steps to Success",
     },
     {
       id: 2,
-      date: "May 21, 2024",
+      label: "Business",
       src: Img2,
       text: "articlesSection.box2.text",
+      title_en: "Best Way to Solve Business Deal Issues",
     },
     {
       id: 3,
-      date: "Jan 24, 2023",
+      label: "Growth",
       src: Img3,
       text: "articlesSection.box3.text",
+      title_en: "Business Ideas to Grow Your Business",
     },
     {
       id: 4,
-      date: "Feb 14, 2023",
+      label: "Trends",
       src: Img4,
       text: "articlesSection.box4.text",
+      title_en: "31 Customer Trends to Know in 2026",
     },
   ];
 
@@ -155,11 +160,15 @@ export default function Articles() {
                     className="absolute bottom-1.5 left-1.5 right-1.5 bg-gray-100/85 rounded-3xl p-4 
                     flex flex-col gap-y-1"
                   >
-                    <span className="text-secondary text-sm">
-                      {article.date} - {t("articlesSection.organic")}
+                    <span className="text-secondary text-sm font-medium">
+                      {article.label}
                     </span>
 
-                    <h4 className="text-TB">{t(article.text)}</h4>
+                    <h4 className="text-TB">
+                      <Link to={`/blog/${article.title_en}`}>
+                        {t(article.text)}
+                      </Link>
+                    </h4>
                   </div>
                 </div>
               </article>
@@ -186,8 +195,8 @@ export default function Articles() {
                 className="absolute bottom-1.5 left-1.5 right-1.5 bg-gray-100/85 rounded-3xl p-4 
                 flex flex-col gap-y-1"
               >
-                <span className="text-secondary text-sm">
-                  {article.date} - {t("articlesSection.organic")}
+                <span className="text-secondary text-sm font-medium">
+                  {article.label}
                 </span>
 
                 <h4
@@ -198,7 +207,9 @@ export default function Articles() {
                       : "pr-0"
                   }`}
                 >
-                  {t(article.text)}
+                  <Link to={`/blog/${article.title_en}`}>
+                    {t(article.text)}
+                  </Link>
                 </h4>
               </div>
             </div>
