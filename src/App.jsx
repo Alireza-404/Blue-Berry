@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import HomePage from "./pages/HomePage";
 
@@ -42,6 +42,8 @@ const UpdateBlog = lazy(() => import("./pages/Panel/UpdateBlog"));
 function App() {
   const { i18n } = useTranslation();
   const currentTheme = useSelector((state) => state.theme.theme);
+  const user = useSelector((state) => state.auth.user);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", currentTheme === "dark");
@@ -49,7 +51,7 @@ function App() {
 
   useEffect(() => {
     ScrollTrigger.refresh();
-  }, [i18n.language]);
+  }, [i18n.language, user, dispatch]);
 
   useAuthSession();
   useUserData();
