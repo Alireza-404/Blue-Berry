@@ -78,7 +78,13 @@ export default function HomePageProducts() {
 
   useEffect(() => {
     ScrollTrigger.refresh();
-  }, [loading]);
+
+    const timeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [loading, products]);
 
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));

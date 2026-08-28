@@ -108,8 +108,8 @@ export default function Navbar() {
                     flex items-center gap-x-1.5 h-full animate-pulse"
                 >
                   <div
-                    className="w-10 h-10 bg-secondary/50 dark:bg-secondary-D/50
-                      rounded-lg"
+                    className="w-7 h-7 lg:w-10 lg:h-10 bg-secondary/50
+                     dark:bg-secondary-D/50 rounded-lg"
                   ></div>
 
                   <div className="hidden xl:flex flex-col gap-y-1">
