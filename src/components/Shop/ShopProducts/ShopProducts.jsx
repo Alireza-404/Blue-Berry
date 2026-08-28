@@ -1,5 +1,5 @@
 import { Link, useSearchParams } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   AiFillStar,
@@ -16,6 +16,7 @@ import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import useWishlist from "../../../hooks/useWishlist";
 import useCart from "../../../hooks/useCart";
 import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
+import gsap from "gsap";
 
 const PRODUCTS_PER_PAGE = 12;
 
@@ -31,6 +32,7 @@ export default function ShopProducts() {
   const [currentPage, setCurrentPage] = useState(1);
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
+  const containerRef = useRef(null);
 
   const activeCategory = searchParams.get("category") || "all";
 
@@ -43,10 +45,30 @@ export default function ShopProducts() {
 
   const totalPages = Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE);
   const startIndex = (currentPage - 1) * PRODUCTS_PER_PAGE;
+  const endIndex = Math.min(
+    startIndex + PRODUCTS_PER_PAGE,
+    filteredProducts.length
+  );
   const paginationProducts = filteredProducts.slice(
     startIndex,
     startIndex + PRODUCTS_PER_PAGE
   );
+
+  useLayoutEffect(() => {
+    if (loading || !products.length) return;
+
+    const ctx = gsap.context((self) => {
+      gsap.from(self.selector(".product-box"), {
+        y: -150,
+        opacity: 0,
+        ease: "power3.out",
+        duration: 0.6,
+        stagger: 0.2,
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [products, loading, currentPage, searchParams]);
 
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
@@ -58,7 +80,10 @@ export default function ShopProducts() {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+      <div
+        ref={containerRef}
+        className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+      >
         {loading ? (
           <ProductsSkeleton />
         ) : error ? (
@@ -75,8 +100,8 @@ export default function ShopProducts() {
               return (
                 <div
                   key={product.id}
-                  className="group rounded-3xl overflow-hidden border border-TB/15
-                      relative dark:border-box-border-D"
+                  className="group product-box rounded-3xl overflow-hidden border border-TB/15
+                      relative dark:border-box-border-D duration-0"
                 >
                   <div className="divide-y divide-TB/15 dark:divide-box-border-D">
                     <div className="aspect-square overflow-hidden relative flex justify-center items-center">
@@ -292,7 +317,7 @@ export default function ShopProducts() {
 
       <div className="flex items-center justify-between">
         <span className="text-secondary dark:text-secondary-D font-normal">
-          Showing {startIndex + 1}-{filteredProducts.length} of{" "}
+          Showing {filteredProducts.length ? startIndex + 1 : 0}-{endIndex} of{" "}
           {filteredProducts.length} items
         </span>
 

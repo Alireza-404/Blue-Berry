@@ -94,7 +94,7 @@ export default function TopVendors() {
             ease: "power3.out",
             duration: 0.3,
           },
-          "<",
+          "<"
         );
 
       mm.add("(min-width: 1024px)", () => {
@@ -111,7 +111,7 @@ export default function TopVendors() {
         });
       });
 
-      mm.add("(max-width: 1024px)", () => {
+      mm.add("(max-width: 1023px)", () => {
         gsap.from(self.selector(".vendor-box"), {
           scrollTrigger: {
             trigger: containerRef.current,
@@ -167,6 +167,7 @@ export default function TopVendors() {
                 <img
                   src={topVendorsImagesArray[index].mainImg}
                   alt={`main-image-${index + 1}`}
+                  loading="lazy"
                   className="rounded-3xl sm:rounded-none object-cover select-none h-full w-full"
                 />
               </div>

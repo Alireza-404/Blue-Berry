@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import useBlog from "../../../hooks/useBlog";
 import BlogsSkeleton from "../../Ui/BlogsSkeleton/BlogsSkeleton";
 import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
-import { useTranslation } from "react-i18next";
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
-import { Link } from "react-router-dom";
+import gsap from "gsap";
 
 const BLOGS_PER_PAGE = 6;
 
@@ -12,10 +14,28 @@ export default function BlogItems() {
   const { t, i18n } = useTranslation();
   const { handleGetBlogs, blogs, error, loading } = useBlog();
   const [currentPage, setCurrentPage] = useState(1);
+  const containerRef = useRef(null);
 
   const totalPages = Math.ceil(blogs.length / BLOGS_PER_PAGE);
   const startIndex = (currentPage - 1) * BLOGS_PER_PAGE;
+  const endIndex = Math.min(startIndex + BLOGS_PER_PAGE, blogs.length);
   const paginationBlogs = blogs.slice(startIndex, startIndex + BLOGS_PER_PAGE);
+
+  useLayoutEffect(() => {
+    if (loading || !blogs.length) return;
+
+    const ctx = gsap.context((self) => {
+      gsap.from(self.selector(".blog-box"), {
+        y: -150,
+        opacity: 0,
+        ease: "power3.out",
+        duration: 0.6,
+        stagger: 0.2,
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [blogs, loading]);
 
   useEffect(() => {
     handleGetBlogs();
@@ -23,21 +43,24 @@ export default function BlogItems() {
 
   return (
     <div className="flex flex-col gap-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        ref={containerRef}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {loading ? (
           <BlogsSkeleton />
         ) : error ? (
           <ErrorSkeleton
             className={"h-72 justify-center"}
-            text={"Hello world"}
+            text={t("blogs.blogItemsLoadError")}
             get={handleGetBlogs}
           />
         ) : (
           paginationBlogs.map((blog, i) => (
             <div
               key={i}
-              className="group rounded-3xl overflow-hidden flex flex-col border border-TB/15
-                dark:border-box-border-D bg-gray-200/85 dark:bg-box-D"
+              className="group blog-box rounded-3xl overflow-hidden flex flex-col border border-TB/15
+                dark:border-box-border-D bg-gray-200/85 dark:bg-box-D duration-0"
             >
               <div className="overflow-hidden h-60 sm:h-68 md:h-52 lg:h-48 xl:h-[250px]">
                 <img
@@ -74,7 +97,8 @@ export default function BlogItems() {
 
       <div className="flex items-center justify-between">
         <span className="text-secondary dark:text-secondary-D font-normal">
-          Showing {startIndex + 1}-{blogs.length} of {blogs.length} items
+          Showing {blogs.length ? startIndex + 1 : 0}-{endIndex} of{" "}
+          {blogs.length} items
         </span>
 
         <div className="flex items-center gap-2">

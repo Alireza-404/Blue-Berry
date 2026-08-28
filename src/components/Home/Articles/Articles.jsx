@@ -152,6 +152,7 @@ export default function Articles() {
                 <img
                   src={article.src}
                   alt={`article-image-${article.id}`}
+                  loading="lazy"
                   className="group-hover:rotate-6 group-hover:scale-[1.15] select-none"
                 />
 
@@ -187,6 +188,7 @@ export default function Articles() {
             <img
               src={article.src}
               alt={`article-image-${article.id}`}
+              loading="lazy"
               className="group-hover:rotate-6 group-hover:scale-[1.15] select-none"
             />
 

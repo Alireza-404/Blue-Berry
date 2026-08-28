@@ -103,6 +103,7 @@ export default function Services() {
             <img
               src={item.src}
               alt={`service-${item.id}`}
+              loading="lazy"
               className="w-16 select-none"
             />
 

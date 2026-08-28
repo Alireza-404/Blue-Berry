@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   AiFillStar,
@@ -17,6 +17,9 @@ import useCart from "../../../hooks/useCart";
 import useWishlist from "../../../hooks/useWishlist";
 import useProducts from "../../../hooks/useProducts";
 import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
+import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function HomePageProducts() {
   const { t, i18n } = useTranslation();
@@ -27,27 +30,50 @@ export default function HomePageProducts() {
   const { items: wishlist, loading: wishlistLoading } = useSelector(
     (state) => state.wishlist
   );
+
+  const containerRef = useRef(null);
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
 
-  useEffect(() => {
-    const handleLoad = () => {
-      ScrollTrigger.refresh();
-    };
+  useLayoutEffect(() => {
+    if (loading || !products.length) return;
 
-    window.addEventListener("load", handleLoad);
+    const ctx = gsap.context((self) => {
+      const mm = gsap.matchMedia();
 
-    return () => window.removeEventListener("load", handleLoad);
-  }, []);
+      mm.add("(max-width: 639px)", () => {
+        gsap.utils.toArray(self.selector(".product-box")).forEach((box) => {
+          gsap.from(box, {
+            scrollTrigger: {
+              trigger: box,
+              start: "bottom bottom",
+              toggleActions: "play none none reverse",
+            },
+            y: -150,
+            opacity: 0,
+            ease: "power3.out",
+            duration: 0.6,
+          });
+        });
+      });
 
-  useEffect(() => {
-    if (!loading && products.length) {
-      ScrollTrigger.refresh(true);
+      mm.add("(min-width: 640px)", () => {
+        gsap.from(self.selector(".product-box"), {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top center",
+            toggleActions: "play none none reverse",
+          },
+          y: -150,
+          opacity: 0,
+          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.2,
+        });
+      });
+    }, containerRef);
 
-      setTimeout(() => {
-        ScrollTrigger.refresh(true);
-      }, 500);
-    }
+    return () => ctx.revert();
   }, [loading, products]);
 
   useEffect(() => {
@@ -59,9 +85,12 @@ export default function HomePageProducts() {
   }, [wishlist]);
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div
+      ref={containerRef}
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
       {loading ? (
-        <ProductsSkeleton />
+        <ProductsSkeleton eightBox={true} />
       ) : error ? (
         <ErrorSkeleton
           className={"h-72 justify-center"}
@@ -76,14 +105,15 @@ export default function HomePageProducts() {
             return (
               <div
                 key={product.id}
-                className="group rounded-3xl overflow-hidden border border-TB/15
-                  relative dark:border-box-border-D"
+                className="product-box group rounded-3xl overflow-hidden border border-TB/15
+                  relative dark:border-box-border-D duration-0"
               >
                 <div className="divide-y divide-TB/15 dark:divide-box-border-D">
                   <div className="aspect-square overflow-hidden relative flex justify-center items-center">
                     <img
                       src={product.image}
                       alt={`product-${product.id}`}
+                      loading="lazy"
                       className={`select-none ${
                         product.second_image
                           ? "group-hover:opacity-0 group-hover:invisible opacity-100 visible"
@@ -95,6 +125,7 @@ export default function HomePageProducts() {
                       <img
                         src={product.second_image}
                         alt={`product-${product.id}`}
+                        loading="lazy"
                         className="select-none group-hover:scale-110 group-hover:opacity-100
                         group-hover:visible opacity-0 invisible absolute top-0 left-0 h-full"
                       />

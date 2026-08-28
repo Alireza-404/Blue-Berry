@@ -1,9 +1,15 @@
+import { useEffect } from "react";
+
 import Footer from "../components/Layout/Footer/Footer";
 import Navbar from "../components/Layout/Navbar/Navbar";
 import ShopCategory from "../components/Shop/Category/Category";
 import ShopProducts from "../components/Shop/ShopProducts/ShopProducts";
 
 export default function ShopPage() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <>
       <header>

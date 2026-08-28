@@ -1,25 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   clearCart,
   setCartError,
   setCartItems,
   setCartLoading,
 } from "../redux/Slices/CartItemsSlice";
+
 import { getCartItems } from "../services/CartService";
+
 import {
   clearWishlist,
   setWishlistError,
   setWishlistItem,
   setWishlistLoading,
 } from "../redux/Slices/WishlistSlice";
+
 import { getWishlistItems } from "../services/WishlistService";
 
 export default function useUserData() {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
-  const getCart = async () => {
+  const previousUserId = useRef(null);
+
+  const getCart = useCallback(async () => {
     if (!user) {
       dispatch(clearCart());
       return;
@@ -35,9 +41,9 @@ export default function useUserData() {
     }
 
     dispatch(setCartItems(data));
-  };
+  }, [user, dispatch]);
 
-  const getWishlist = async () => {
+  const getWishlist = useCallback(async () => {
     if (!user) {
       dispatch(clearWishlist());
       return;
@@ -53,12 +59,26 @@ export default function useUserData() {
     }
 
     dispatch(setWishlistItem(data));
-  };
-
-  useEffect(() => {
-    getCart();
-    getWishlist();
   }, [user, dispatch]);
 
-  return { getCart, getWishlist };
+  useEffect(() => {
+    if (!user) {
+      previousUserId.current = null;
+      getCart();
+      getWishlist();
+      return;
+    }
+
+    if (previousUserId.current === user.id) return;
+
+    previousUserId.current = user.id;
+
+    getCart();
+    getWishlist();
+  }, [user, getCart, getWishlist]);
+
+  return {
+    getCart,
+    getWishlist,
+  };
 }

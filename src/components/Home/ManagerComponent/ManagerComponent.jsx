@@ -101,8 +101,9 @@ export default function ManagerComponent() {
             <img
               src={ManagerImg}
               alt="manager-image"
+              loading="lazy"
               className="w-16 h-16 rounded-2xl md:w-56 md:h-56 lg:w-64 lg:h-64 select-none
-            xl:w-72 xl:h-72 lg:border-4 lg:border-primary"
+              xl:w-72 xl:h-72 lg:border-4 lg:border-primary"
             />
           </div>
         </div>

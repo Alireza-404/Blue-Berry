@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   AiFillStar,
@@ -9,13 +9,17 @@ import {
 } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import ShowProductModal from "../ShowProductModal/ShowProductModal";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import useCart from "../../../hooks/useCart";
 import useWishlist from "../../../hooks/useWishlist";
 import useProducts from "../../../hooks/useProducts";
-import { Link } from "react-router-dom";
 import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
+import gsap from "gsap";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function DOTDProducts() {
   const { t, i18n } = useTranslation();
@@ -26,32 +30,66 @@ export default function DOTDProducts() {
   const { items: wishlist, loading: wishlistLoading } = useSelector(
     (state) => state.wishlist
   );
+
+  const containerRef = useRef(null);
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
 
-  useEffect(() => {
-    const handleLoad = () => {
-      ScrollTrigger.refresh();
-    };
+  useLayoutEffect(() => {
+    if (loading || !products.length) return;
 
-    window.addEventListener("load", handleLoad);
+    const ctx = gsap.context((self) => {
+      const mm = gsap.matchMedia();
 
-    return () => window.removeEventListener("load", handleLoad);
-  }, []);
+      mm.add("(max-width: 639px)", () => {
+        gsap.utils.toArray(self.selector(".DOTD-box")).forEach((box) => {
+          gsap.from(box, {
+            scrollTrigger: {
+              trigger: box,
+              start: "bottom bottom",
+              toggleActions: "play none none reverse",
+            },
+            y: -150,
+            opacity: 0,
+            ease: "power3.out",
+            duration: 0.6,
+          });
+        });
+      });
 
-  useEffect(() => {
-    if (!loading && products.length) {
-      ScrollTrigger.refresh(true);
+      mm.add("(min-width: 640px) and (max-width:1023px)", () => {
+        gsap.from(self.selector(".DOTD-box"), {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 70%",
+            toggleActions: "play none none reverse",
+          },
+          y: -150,
+          opacity: 0,
+          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.2,
+        });
+      });
 
-      setTimeout(() => {
-        ScrollTrigger.refresh(true);
-      }, 500);
-    }
+      mm.add("(min-width: 1024px)", () => {
+        gsap.from(self.selector(".DOTD-box"), {
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "bottom bottom",
+            toggleActions: "play none none reverse",
+          },
+          y: -150,
+          opacity: 0,
+          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.2,
+        });
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, [loading, products]);
-
-  useEffect(() => {
-    ScrollTrigger.refresh();
-  }, [loading]);
 
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
@@ -59,6 +97,7 @@ export default function DOTDProducts() {
 
   return (
     <div
+      ref={containerRef}
       className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 
         mt-6 lg:mt-12"
     >
@@ -74,14 +113,16 @@ export default function DOTDProducts() {
         <>
           {products
             .filter((product) => product.is_deal)
-            .map((product) => {
+            .map((product, i) => {
               const isWishlisted = wishlistIds.has(product.id);
 
               return (
                 <div
                   key={product.id}
-                  className="group rounded-3xl overflow-hidden border border-TB/15
-                    relative dark:border-box-border-D"
+                  className={`DOTD-box DOTD-box-${
+                    i + 1
+                  } group rounded-3xl overflow-hidden border border-TB/15
+                    relative dark:border-box-border-D duration-0`}
                 >
                   <div className="divide-y divide-TB/15 dark:divide-box-border-D">
                     <div className="aspect-square overflow-hidden relative flex justify-center items-center">
@@ -99,14 +140,15 @@ export default function DOTDProducts() {
                         <img
                           src={product.second_image}
                           alt={`product-${product.id}`}
+                          loading="lazy"
                           className="select-none group-hover:scale-110 group-hover:opacity-100
-                    group-hover:visible opacity-0 invisible absolute top-0 left-0 h-full"
+                          group-hover:visible opacity-0 invisible absolute top-0 left-0 h-full"
                         />
                       )}
 
                       <ul
                         className="flex items-center gap-x-1.5 absolute bottom-5 left-1/2
-                  -translate-x-1/2"
+                        -translate-x-1/2"
                       >
                         <li>
                           <button

@@ -2,8 +2,9 @@ import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import ProductsSkeleton from "../../Ui/ProductsSkeleton/ProductsSkeleton";
 import useCart from "../../../hooks/useCart";
 import useWishlist from "../../../hooks/useWishlist";
-import useUserData from "../../../hooks/useUserData";
+import useUserActions from "../../../hooks/useUserActions";
 import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
+import gsap from "gsap";
 
 import {
   AiFillCloseCircle,
@@ -14,7 +15,7 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { useTranslation } from "react-i18next";
-import { useMemo, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -23,17 +24,37 @@ export default function WishlistItems() {
   const { items, loading, error } = useSelector((state) => state.wishlist);
   const { handleAddToCart, addToCartLoading } = useCart();
   const { handleToggleWishlist, heartLoading } = useWishlist();
-  const { getWishlist } = useUserData();
+  const { getWishlist } = useUserActions();
 
   const [showProduct, setShowProduct] = useState(false);
   const [productForShow, setProductForShow] = useState([]);
+  const containerRef = useRef(null);
 
   const wishlistIds = useMemo(() => {
     return new Set(items.map((item) => item.product_id));
   }, [items]);
 
+  useLayoutEffect(() => {
+    if (loading || !items.length) return;
+
+    const ctx = gsap.context((self) => {
+      gsap.from(self.selector(".wishlist-item"), {
+        y: -150,
+        opacity: 0,
+        ease: "power3.out",
+        duration: 0.6,
+        stagger: 0.2,
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, [loading, items]);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div
+      ref={containerRef}
+      className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
       {loading ? (
         <ProductsSkeleton />
       ) : error ? (
@@ -50,8 +71,8 @@ export default function WishlistItems() {
             return (
               <div
                 key={item.id}
-                className="group rounded-3xl overflow-hidden border border-TB/15
-                  relative dark:border-box-border-D"
+                className="group wishlist-item rounded-3xl overflow-hidden border border-TB/15
+                  relative dark:border-box-border-D duration-0"
               >
                 <div className="divide-y divide-TB/15 dark:divide-box-border-D">
                   <div className="aspect-square overflow-hidden relative flex justify-center items-center">

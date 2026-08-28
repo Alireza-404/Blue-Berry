@@ -28,6 +28,10 @@ export default function SingleBlog() {
     handleGetBlogById(title);
   }, [title]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   if (getBlogByIdLoading || loading) return <FullScreenLoader />;
 
   return (

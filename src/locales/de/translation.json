@@ -382,6 +382,7 @@
     },
     "blogs": {
         "blogsLoadError": "Blogs konnten nicht geladen werden.",
+        "blogItemsLoadError": "Die Blogbeiträge konnten leider nicht geladen werden. Bitte versuchen Sie es später erneut.",
         "singleBlog": {
             "connectionError": "Die Blogs konnten nicht geladen werden. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
             "recentArticles": "Neueste Artikel"

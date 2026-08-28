@@ -74,6 +74,7 @@ export default function RelatedProducts({ productCategory }) {
             1024: { slidesPerView: 4 },
           }}
           freeMode={true}
+          loop={true}
           autoplay={{
             delay: 2000,
             disableOnInteraction: false,

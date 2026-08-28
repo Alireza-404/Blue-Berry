@@ -10,7 +10,9 @@ export default function ErrorSkeleton({ get, text, className }) {
         className || ""
       }`}
     >
-      <h4 className="text-3xl text-red-500 dark:text-red-600">{text}</h4>
+      <h4 className="text-3xl text-red-500 dark:text-red-600 text-center">
+        {text}
+      </h4>
 
       <PrimaryButton
         type={"button"}

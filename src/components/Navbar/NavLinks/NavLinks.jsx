@@ -24,7 +24,7 @@ export default function NavLinks() {
           <li key={link.id} className="select-none">
             <Link
               to={link.path}
-              className={`px-1 transition-colors duration-200 ${
+              className={`px-1 transition-colors duration-200 block lg:inline ${
                 link.path === location.pathname
                   ? "text-primary"
                   : "text-TB dark:text-white hover:text-primary dark:hover:text-primary"

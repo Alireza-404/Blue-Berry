@@ -165,11 +165,16 @@ export default function HeroSection() {
               transition={{ duration: 0.6 }}
               className=" relative duration-0"
             >
-              <img
-                src={slidesArray[index].src}
-                alt={t(slidesArray[index].text)}
-                className="relative z-10 px-2 xs:px-10 sm:px-2 sm:w-[500px] md:w-[550px] lg:w-[580px] lg:h-auto mx-auto select-none"
-              />
+              <div className="aspect-[1/0.6]">
+                <img
+                  src={slidesArray[index].src}
+                  alt={t(slidesArray[index].text)}
+                  loading="eager"
+                  fetchPriority="high"
+                  className="relative z-10 px-2 xs:px-10 sm:px-2 sm:w-[500px] md:w-[550px] 
+                  lg:w-[580px] lg:h-auto mx-auto select-none"
+                />
+              </div>
 
               <div
                 className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2

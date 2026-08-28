@@ -134,6 +134,7 @@ export default function SpecialCategories() {
             <img
               src={Img1}
               alt="special-categories-img-1"
+              loading="lazy"
               className="w-60 sm:w-52 md:w-72 select-none"
             />
           </div>
@@ -186,7 +187,8 @@ export default function SpecialCategories() {
           <div>
             <img
               src={Img2}
-              alt="special-categories-img-1"
+              alt="special-categories-img-2"
+              loading="lazy"
               className="w-60 sm:w-52 md:w-72 select-none"
             />
           </div>

@@ -11,10 +11,10 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useLayoutEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { AiOutlineInstagram } from "react-icons/ai";
 
 import "swiper/css";
 import "swiper/css/autoplay";
-import { AiOutlineInstagram } from "react-icons/ai";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -120,6 +120,7 @@ export default function InstaCompontnt() {
                 <img
                   src={src}
                   alt={`insta-image-${i + 1}`}
+                  loading="lazy"
                   className="select-none"
                 />
 

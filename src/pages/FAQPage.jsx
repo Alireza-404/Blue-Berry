@@ -94,7 +94,7 @@ export default function FAQPage() {
           </div>
 
           <div className="flex flex-col gap-y-8 items-center lg:flex-row lg:gap-x-8 lg:items-start">
-            <div className="w-[600px] lg:w-[800px]">
+            <div className="md:w-[600px] lg:w-[800px]">
               <img
                 src={Img}
                 alt="FAQ-image"

@@ -18,18 +18,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-import useUserData from "../../../hooks/useUserData";
 import useAuth from "../../../hooks/useAuth";
 import useAuthSession from "../../../hooks/useAuthSession";
 import SearchInput from "../../Navbar/SearchInput/SearchInput";
+import useUserActions from "../../../hooks/useUserActions";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
-  const {
-    user,
-    initialized,
-    loading: authLoading,
-  } = useSelector((state) => state.auth);
+  const { user, loading: authLoading } = useSelector((state) => state.auth);
   const {
     cartItems,
     loading: cartLoading,
@@ -40,7 +36,7 @@ export default function Navbar() {
     loading: wishlistLoading,
     error: wishlistError,
   } = useSelector((state) => state.wishlist);
-  const { getCart, getWishlist } = useUserData();
+  const { getCart, getWishlist } = useUserActions();
   const { handleLogout } = useAuth();
   const { sessionError } = useAuthSession();
 
