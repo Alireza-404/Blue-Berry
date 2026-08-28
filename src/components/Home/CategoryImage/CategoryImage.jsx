@@ -25,13 +25,7 @@ export default function CategoryImage() {
       });
     }, containerRef.current);
 
-    ScrollTrigger.refresh();
-    const refreshTimeout = setTimeout(() => ScrollTrigger.refresh(), 300);
-
-    return () => {
-      clearTimeout(refreshTimeout);
-      ctx.revert();
-    };
+    return () => ctx.revert();
   }, []);
 
   return (

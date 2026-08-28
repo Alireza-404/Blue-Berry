@@ -31,7 +31,7 @@ export default function OurTeam() {
   ];
 
   useLayoutEffect(() => {
-    const ctx = gsap.context((self) => {
+    const ctx = gsap.context(() => {
       gsap.from(containerRef.current, {
         scrollTrigger: {
           trigger: containerRef.current,

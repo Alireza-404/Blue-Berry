@@ -49,8 +49,6 @@ export default function Navbar() {
     } else {
       document.documentElement.classList.remove("overflow-y-hidden");
     }
-
-    ScrollTrigger.refresh();
   }, [menu]);
 
   const changeLanguageHandler = (lng) => {

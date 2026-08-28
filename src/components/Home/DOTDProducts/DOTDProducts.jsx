@@ -95,16 +95,6 @@ export default function DOTDProducts() {
     return new Set(wishlist.map((item) => item.product_id));
   }, [wishlist]);
 
-  useEffect(() => {
-    ScrollTrigger.refresh();
-
-    const timeout = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 200);
-
-    return () => clearTimeout(timeout);
-  }, [products, loading]);
-
   return (
     <div
       ref={containerRef}

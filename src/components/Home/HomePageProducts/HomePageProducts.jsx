@@ -76,16 +76,6 @@ export default function HomePageProducts() {
     return () => ctx.revert();
   }, [loading, products]);
 
-  useEffect(() => {
-    ScrollTrigger.refresh();
-
-    const timeout = setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 500);
-
-    return () => clearTimeout(timeout);
-  }, [loading, products]);
-
   const wishlistIds = useMemo(() => {
     return new Set(wishlist.map((item) => item.product_id));
   }, [wishlist]);

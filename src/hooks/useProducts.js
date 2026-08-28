@@ -10,7 +10,6 @@ import { useDispatch } from "react-redux";
 import { showToast } from "../redux/Slices/ToastSlice";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 export default function useProducts() {
   const { t } = useTranslation();
@@ -188,8 +187,6 @@ export default function useProducts() {
     setGetProductByIdError(false);
     setGetProductByIdLoading(false);
   };
-
-  ScrollTrigger.refresh();
 
   useEffect(() => {
     handleGetProducts();

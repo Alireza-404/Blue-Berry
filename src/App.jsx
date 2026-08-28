@@ -1,8 +1,7 @@
 import { lazy, Suspense, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
 
 import HomePage from "./pages/HomePage";
 
@@ -40,18 +39,48 @@ const Blogs = lazy(() => import("./pages/Panel/Blogs"));
 const UpdateBlog = lazy(() => import("./pages/Panel/UpdateBlog"));
 
 function App() {
-  const { i18n } = useTranslation();
   const currentTheme = useSelector((state) => state.theme.theme);
-  const user = useSelector((state) => state.auth.user);
-  const dispatch = useDispatch();
-
   useEffect(() => {
     document.documentElement.classList.toggle("dark", currentTheme === "dark");
   }, [currentTheme]);
 
   useEffect(() => {
-    ScrollTrigger.refresh();
-  }, [i18n.language, user, dispatch]);
+    let timeout;
+
+    const refresh = () => {
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        requestAnimationFrame(() => {
+          ScrollTrigger.refresh(true);
+        });
+      }, 100);
+    };
+
+    refresh();
+
+    window.addEventListener("resize", refresh);
+    window.addEventListener("load", refresh);
+    window.addEventListener("orientationchange", refresh);
+    window.visualViewport?.addEventListener("resize", refresh);
+
+    const observer = new ResizeObserver(() => {
+      refresh();
+    });
+
+    observer.observe(document.body);
+
+    return () => {
+      clearTimeout(timeout);
+
+      window.removeEventListener("resize", refresh);
+      window.removeEventListener("load", refresh);
+      window.removeEventListener("orientationchange", refresh);
+      window.visualViewport?.removeEventListener("resize", refresh);
+
+      observer.disconnect();
+    };
+  }, []);
 
   useAuthSession();
   useUserData();
