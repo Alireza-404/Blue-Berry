@@ -165,7 +165,7 @@ export default function HeroSection() {
               transition={{ duration: 0.6 }}
               className=" relative duration-0"
             >
-              <div className="aspect-[1/0.6]">
+              <div className="aspect-[1/0.95] sm:aspect-[1/0.6]">
                 <img
                   src={slidesArray[index].src}
                   alt={t(slidesArray[index].text)}
