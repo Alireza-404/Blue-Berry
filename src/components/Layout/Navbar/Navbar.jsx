@@ -17,6 +17,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import useAuth from "../../../hooks/useAuth";
 import useAuthSession from "../../../hooks/useAuthSession";
@@ -44,10 +45,12 @@ export default function Navbar() {
 
   useEffect(() => {
     if (menu) {
-      window.document.documentElement.classList.add("overflow-y-hidden");
+      document.documentElement.classList.add("overflow-y-hidden");
     } else {
-      window.document.documentElement.classList.remove("overflow-y-hidden");
+      document.documentElement.classList.remove("overflow-y-hidden");
     }
+
+    ScrollTrigger.refresh();
   }, [menu]);
 
   const changeLanguageHandler = (lng) => {
@@ -126,7 +129,6 @@ export default function Navbar() {
                 </span>
               ) : sessionError ? (
                 <div
-                  to={"/auth/login"}
                   className="text-primary text-[26px] md:text-[28px] lg:text-3xl xl:text-[38px]
                       flex items-end gap-x-1.5"
                 >
@@ -302,11 +304,11 @@ export default function Navbar() {
                 </span>
               </div>
 
-              <span className="h-px w-full inlint-block bg-TB/15 dark:bg-box-border-D"></span>
+              <span className="h-px w-full inline-block bg-TB/15 dark:bg-box-border-D"></span>
 
               <NavLinks />
 
-              <span className="h-px w-full inlint-block bg-TB/15 dark:bg-box-border-D"></span>
+              <span className="h-px w-full inline-block bg-TB/15 dark:bg-box-border-D"></span>
 
               <div className="flex items-center gap-x-4">
                 <ToggleTheme />
