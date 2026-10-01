@@ -1,4 +1,4 @@
-import Img from "../assets/images/TopVendors/img-1.jpg";
+import Img from "../assets/images/TopVendors/img-1.webp";
 
 import Footer from "../components/Layout/Footer/Footer";
 import Navbar from "../components/Layout/Navbar/Navbar";
