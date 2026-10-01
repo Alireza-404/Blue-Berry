@@ -1,4 +1,4 @@
-import Img from "../../../assets/images/Organic/banner.jpg";
+import Img from "../../../assets/images/Organic/banner.webp";
 
 import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
 import gsap from "gsap";

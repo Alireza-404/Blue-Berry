@@ -1,5 +1,5 @@
-import Img1 from "../../../assets/images/SpecialCategories/one.png";
-import Img2 from "../../../assets/images/SpecialCategories/two.png";
+import Img1 from "../../../assets/images/SpecialCategories/one.webp";
+import Img2 from "../../../assets/images/SpecialCategories/two.webp";
 
 import gsap from "gsap";
 import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";

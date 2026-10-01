@@ -1,4 +1,4 @@
-import Loading from "../../../assets/images/loading.png";
+import Loading from "../../../assets/images/loading.webp";
 
 export default function FullScreenLoader() {
   return (

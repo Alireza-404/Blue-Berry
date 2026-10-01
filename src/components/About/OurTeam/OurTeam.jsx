@@ -1,11 +1,11 @@
-import Img1 from "../../../assets/images/About/1.jpg";
-import Img2 from "../../../assets/images/About/2.jpg";
-import Img3 from "../../../assets/images/About/3.jpg";
-import Img4 from "../../../assets/images/About/4.jpg";
-import TopShape from "../../../assets/images/About/top-shape.png";
-import BottomShape from "../../../assets/images/About/bottom-shape.png";
-import TopShapeDark from "../../../assets/images/About/top-shape-dark.png";
-import BottomShapeDark from "../../../assets/images/About/bottom-shape-dark.png";
+import Img1 from "../../../assets/images/About/1.webp";
+import Img2 from "../../../assets/images/About/2.webp";
+import Img3 from "../../../assets/images/About/3.webp";
+import Img4 from "../../../assets/images/About/4.webp";
+import TopShape from "../../../assets/images/About/top-shape.webp";
+import BottomShape from "../../../assets/images/About/bottom-shape.webp";
+import TopShapeDark from "../../../assets/images/About/top-shape-dark.webp";
+import BottomShapeDark from "../../../assets/images/About/bottom-shape-dark.webp";
 
 import gsap from "gsap";
 

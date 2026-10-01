@@ -1,7 +1,7 @@
-import Img1 from "../../../assets/images/Articles/1.jpg";
-import Img2 from "../../../assets/images/Articles/2.jpg";
-import Img3 from "../../../assets/images/Articles/3.jpg";
-import Img4 from "../../../assets/images/Articles/4.jpg";
+import Img1 from "../../../assets/images/Articles/1.webp";
+import Img2 from "../../../assets/images/Articles/2.webp";
+import Img3 from "../../../assets/images/Articles/3.webp";
+import Img4 from "../../../assets/images/Articles/4.webp";
 
 import gsap from "gsap";
 
@@ -93,7 +93,7 @@ export default function Articles() {
               ease: "power3.out",
               duration: 0.5,
             },
-            "<"
+            "<",
           )
           .from(self.selector(".article-box-2"), {
             x: -150,

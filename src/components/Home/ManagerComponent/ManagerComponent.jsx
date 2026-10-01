@@ -1,4 +1,4 @@
-import ManagerImg from "../../../assets/images/Manager/manager.jpg";
+import ManagerImg from "../../../assets/images/Manager/manager.webp";
 
 import gsap from "gsap";
 

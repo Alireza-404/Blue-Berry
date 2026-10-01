@@ -1,7 +1,7 @@
-import Img1 from "../../../assets/images/Header/h-1.png";
-import Img2 from "../../../assets/images/Header/h-2.png";
-import Img3 from "../../../assets/images/Header/h-3.png";
-import Effect from "../../../assets/images/Header/effect.png";
+import Img1 from "../../../assets/images/Header/h-1.webp";
+import Img2 from "../../../assets/images/Header/h-2.webp";
+import Img3 from "../../../assets/images/Header/h-3.webp";
+import Effect from "../../../assets/images/Header/effect.webp";
 
 import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
 import ScrollPage from "../../Ui/ScrollPage/ScrollPage";

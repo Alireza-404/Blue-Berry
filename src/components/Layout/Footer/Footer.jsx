@@ -1,5 +1,5 @@
-import Logo from "../../../assets/images/logo.png";
-import DarkLogo from "../../../assets/images/logo-dark.png";
+import Logo from "../../../assets/images/logo.webp";
+import DarkLogo from "../../../assets/images/logo-dark.webp";
 import AndroidImg from "../../../assets/images/Footer/android.png";
 import AppleImg from "../../../assets/images/Footer/apple.png";
 

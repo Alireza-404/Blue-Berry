@@ -1,10 +1,10 @@
-import Vendor1 from "../../../assets/images/TopVendors/vendor-1.jpg";
-import Vendor2 from "../../../assets/images/TopVendors/vendor-2.jpg";
-import Vendor3 from "../../../assets/images/TopVendors/vendor-3.jpg";
-import Img1 from "../../../assets/images/TopVendors/img-1.jpg";
-import Img2 from "../../../assets/images/TopVendors/img-2.jpg";
-import Img3 from "../../../assets/images/TopVendors/img-3.jpg";
-import Img4 from "../../../assets/images/TopVendors/img-4.jpg";
+import Vendor1 from "../../../assets/images/TopVendors/vendor-1.webp";
+import Vendor2 from "../../../assets/images/TopVendors/vendor-2.webp";
+import Vendor3 from "../../../assets/images/TopVendors/vendor-3.webp";
+import Img1 from "../../../assets/images/TopVendors/img-1.webp";
+import Img2 from "../../../assets/images/TopVendors/img-2.webp";
+import Img3 from "../../../assets/images/TopVendors/img-3.webp";
+import Img4 from "../../../assets/images/TopVendors/img-4.webp";
 
 import gsap from "gsap";
 
@@ -94,7 +94,7 @@ export default function TopVendors() {
             ease: "power3.out",
             duration: 0.3,
           },
-          "<"
+          "<",
         );
 
       mm.add("(min-width: 1024px)", () => {

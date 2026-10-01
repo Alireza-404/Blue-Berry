@@ -1,9 +1,9 @@
-import Img1 from "../../../assets/images/Insta/1.jpg";
-import Img2 from "../../../assets/images/Insta/2.jpg";
-import Img3 from "../../../assets/images/Insta/3.jpg";
-import Img4 from "../../../assets/images/Insta/4.jpg";
-import Img5 from "../../../assets/images/Insta/5.jpg";
-import Img6 from "../../../assets/images/Insta/6.jpg";
+import Img1 from "../../../assets/images/Insta/1.webp";
+import Img2 from "../../../assets/images/Insta/2.webp";
+import Img3 from "../../../assets/images/Insta/3.webp";
+import Img4 from "../../../assets/images/Insta/4.webp";
+import Img5 from "../../../assets/images/Insta/5.webp";
+import Img6 from "../../../assets/images/Insta/6.webp";
 
 import gsap from "gsap";
 

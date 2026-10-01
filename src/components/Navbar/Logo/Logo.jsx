@@ -1,5 +1,5 @@
-import LogoSrc from "../../../assets/images/logo.png";
-import LogoDarkrc from "../../../assets/images/logo-dark.png";
+import LogoSrc from "../../../assets/images/logo.webp";
+import LogoDarkrc from "../../../assets/images/logo-dark.webp";
 
 export default function Logo({ className }) {
   return (

@@ -1,4 +1,4 @@
-import CategoryImg from "../../../assets/images/Categories/category.jpg";
+import CategoryImg from "../../../assets/images/Categories/category.webp";
 
 import gsap from "gsap";
 

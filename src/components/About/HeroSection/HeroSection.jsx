@@ -1,5 +1,5 @@
 import gsap from "gsap";
-import HeroSectionImage from "../../../assets/images/About/hero-section-image.png";
+import HeroSectionImage from "../../../assets/images/About/hero-section-image.webp";
 import Counter from "../../Ui/Counter/Counter";
 
 import { Trans, useTranslation } from "react-i18next";
