@@ -1,16 +1,117 @@
-# React + Vite
+# 🫐 Blue Berry
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Blue Berry** is a modern and fully responsive **e-commerce application** built with **React** and **Vite**, integrated with **Supabase** for backend services and data management.
 
-Currently, two official plugins are available:
+The project features a clean shopping experience with **English and German language support**, **Light and Dark themes**, product discovery, authentication, wishlist and cart functionality, blog pages, and a dedicated **Admin Dashboard**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## ✨ Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🛍️ Shopping Experience
 
-## Expanding the ESLint configuration
+- 🛒 Shopping cart
+- ❤️ Wishlist
+- 👀 Quick View
+- 🔎 Product search
+- 🏷️ Product filtering
+- 🔗 Related products
+- 📦 Single product pages
+- 🛍️ Shop page
+- 📱 Fully responsive design
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🌍 Languages & Themes
+
+- 🇬🇧 English
+- 🇩🇪 German
+- ☀️ Light Mode
+- 🌙 Dark Mode
+- 📱 Responsive Design
+
+### 🔐 Authentication
+
+- 🔑 Login
+- 📝 Register
+- 🚪 Logout
+- 🔒 Authentication powered by Supabase
+
+### 📰 Blog
+
+- 📝 Blog page
+- 📖 Single blog posts
+- 🔎 Individual article viewing
+
+### 📄 Additional Pages
+
+- 🏠 Home
+- 🛍️ Shop
+- ❤️ Wishlist
+- 🛒 Cart
+- 📦 Product Details
+- ⚡ Quick View
+- 📰 Blog
+- 📖 Single Blog
+- ℹ️ About
+- 📞 Contact
+- ❓ FAQ
+
+---
+
+## 🛡️ Admin Dashboard
+
+Blue Berry includes a **separate Admin Dashboard** for managing the application.
+
+Dashboard access is **role-based**, allowing only users with an **admin role** to access the management panel.
+
+---
+
+## 🖼️ Screenshots
+
+### Admin Dashboard
+
+![Admin Dashboard](./my-app/src/assets/screenshots/panel-dashboard.webp)
+
+![Admin Products](./my-app/src/assets/screenshots/panel-products.webp)
+
+![Admin Blogs](./my-app/src/assets/screenshots/panel-blogs.webp)
+
+---
+
+## 🛠️ Tech Stack
+
+- **React**
+- **Vite**
+- **JavaScript**
+- **Tailwind CSS**
+- **Redux**
+- **Supabase**
+- **React Router**
+- **Framer Motion**
+- **GSAP**
+- **i18next**
+- **Responsive Design**
+- **Dark Mode**
+
+---
+
+## 🌐 Live Demo
+
+[**🫐 Blue Berry — Live Demo**](https://blue-berry-404.vercel.app/)
+
+---
+
+## 💙 Explore the Experience
+
+Take a look around the store, switch between **Light & Dark Mode**, try both available languages, browse the products, and explore the different shopping features.
+
+And when you're done...
+
+**Don't forget to pay a little visit to the `404` page. 👀🫐**
+
+---
+
+## 👨‍💻 Author
+
+**Alireza**
+
+[**GitHub — Alireza-404**](https://github.com/Alireza-404)
