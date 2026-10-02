@@ -69,11 +69,11 @@ Dashboard access is **role-based**, allowing only users with an **admin role** t
 
 ### Admin Dashboard
 
-![Admin Dashboard](./my-app/src/assets/screenshots/panel-dashboard.webp)
+![Admin Dashboard](./src/assets/screenshots/panel-dashboard.webp)
 
-![Admin Products](./my-app/src/assets/screenshots/panel-products.webp)
+![Admin Products](./src/assets/screenshots/panel-products.webp)
 
-![Admin Blogs](./my-app/src/assets/screenshots/panel-blogs.webp)
+![Admin Blogs](./src/assets/screenshots/panel-blogs.webp)
 
 ---
 
