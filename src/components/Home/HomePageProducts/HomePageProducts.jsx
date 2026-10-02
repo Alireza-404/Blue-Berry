@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   AiFillStar,
@@ -28,7 +28,7 @@ export default function HomePageProducts() {
   const { handleGetProducts, products, loading, error } = useProducts();
 
   const { items: wishlist, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist
+    (state) => state.wishlist,
   );
 
   const containerRef = useRef(null);
@@ -254,7 +254,7 @@ export default function HomePageProducts() {
                             $
                             {Math.floor(
                               product.price -
-                                (product.price * product.discount) / 100
+                                (product.price * product.discount) / 100,
                             ).toFixed(2)}
                           </span>
 

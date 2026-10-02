@@ -6,17 +6,17 @@ import Svg5 from "../../../assets/images/Categories/5.svg";
 import Svg6 from "../../../assets/images/Categories/6.svg";
 
 import gsap from "gsap";
+import useProducts from "../../../hooks/useProducts";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import { useTranslation } from "react-i18next";
 import { useLayoutEffect, useRef } from "react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 import "swiper/css";
 import "swiper/css/autoplay";
-import useProducts from "../../../hooks/useProducts";
-import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -97,7 +97,8 @@ export default function Categories() {
               let id = category.id;
 
               const count = products.filter(
-                (product) => product.category_en.toLowerCase() === category.text
+                (product) =>
+                  product.category_en.toLowerCase() === category.text,
               ).length;
 
               return (
@@ -116,10 +117,10 @@ export default function Categories() {
                       id === 1 || id === 5
                         ? "bg-pink-100"
                         : id === 2 || id === 6
-                        ? "bg-emerald-100"
-                        : id === 3
-                        ? "bg-purple-100"
-                        : "bg-yellow-100"
+                          ? "bg-emerald-100"
+                          : id === 3
+                            ? "bg-purple-100"
+                            : "bg-yellow-100"
                     }`}
                     >
                       <div className="w-14 h-14">

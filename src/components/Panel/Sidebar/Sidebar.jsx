@@ -1,6 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
 import SidebarContent from "../SidebarContent/SidebarContent";
 import Overlay from "../../Ui/Overlay/Overlay";
+
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Sidebar({ showMenu, setShowMenu }) {
   return (

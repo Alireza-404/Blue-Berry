@@ -1,4 +1,5 @@
 import gsap from "gsap";
+
 import { useLayoutEffect, useRef } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ScrollTrigger } from "gsap/ScrollTrigger";

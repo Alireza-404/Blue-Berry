@@ -2,10 +2,10 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 import "swiper/css";
 import "swiper/css/navigation";
-import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 
 export default function Image({ src, title }) {
   const [index, setIndex] = useState(0);

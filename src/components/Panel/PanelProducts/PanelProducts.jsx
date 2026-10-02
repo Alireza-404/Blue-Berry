@@ -7,7 +7,7 @@ import PanelButton from "../PanelButton/PanelButton";
 import ErrorSkeleton from "../../Ui/ErrorSkeleton/ErrorSkeleton";
 
 export default function PanelProducts() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const {
     handleGetProducts,
     handleDeleteProduct,
@@ -96,8 +96,8 @@ export default function PanelProducts() {
                       product.country === "Germany"
                         ? "text-yellow-300"
                         : product.country === "England"
-                        ? "text-blue-300"
-                        : "text-white"
+                          ? "text-blue-300"
+                          : "text-white"
                     }
                   >
                     {product.country}

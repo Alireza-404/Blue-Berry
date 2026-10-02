@@ -221,5 +221,3 @@ function App() {
 }
 
 export default App;
-
-// (Get-ChildItem .\src -Recurse -File -Include *.js,*.jsx,*.css,*.json | Get-Content | Measure-Object -Line).Lines

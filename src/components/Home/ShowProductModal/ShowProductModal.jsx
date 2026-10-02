@@ -1,3 +1,4 @@
+import useCart from "../../../hooks/useCart";
 import Overlay from "../../Ui/Overlay/Overlay";
 import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
 
@@ -12,7 +13,6 @@ import { BiX } from "react-icons/bi";
 import { AnimatePresence, motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import useCart from "../../../hooks/useCart";
 import { useSelector } from "react-redux";
 
 export default function ShowProductModal({
@@ -132,7 +132,7 @@ export default function ShowProductModal({
                         $
                         {Math.floor(
                           product.price -
-                            (product.price * product.discount) / 100
+                            (product.price * product.discount) / 100,
                         ).toFixed(2)}
                       </span>
 

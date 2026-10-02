@@ -4,6 +4,11 @@ import NavLocation from "../../Navbar/NavLocation/NavLocation";
 import ToggleTheme from "../../Navbar/ToggleTheme/ToggleTheme";
 import Overlay from "../../Ui/Overlay/Overlay";
 
+import useAuth from "../../../hooks/useAuth";
+import useAuthSession from "../../../hooks/useAuthSession";
+import SearchInput from "../../Navbar/SearchInput/SearchInput";
+import useUserActions from "../../../hooks/useUserActions";
+
 import {
   AiOutlineUser,
   AiOutlineStar,
@@ -17,12 +22,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-import useAuth from "../../../hooks/useAuth";
-import useAuthSession from "../../../hooks/useAuthSession";
-import SearchInput from "../../Navbar/SearchInput/SearchInput";
-import useUserActions from "../../../hooks/useUserActions";
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();

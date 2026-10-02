@@ -1,4 +1,3 @@
-import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -10,6 +9,8 @@ import {
   AiOutlineStar,
 } from "react-icons/ai";
 import { useSelector } from "react-redux";
+
+import PrimaryButton from "../../Ui/PrimaryButton/PrimaryButton";
 import ShowProductModal from "../../Home/ShowProductModal/ShowProductModal";
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
 import useCart from "../../../hooks/useCart";
@@ -20,7 +21,7 @@ export default function Product({ product }) {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
   const { items: wishlist, loading: wishlistLoading } = useSelector(
-    (state) => state.wishlist
+    (state) => state.wishlist,
   );
   const {
     handleAddToCart,
@@ -92,7 +93,7 @@ export default function Product({ product }) {
               <span className="text-TB dark:text-white font-bold text-2xl">
                 $
                 {Math.floor(
-                  product.price - (product.price * product.discount) / 100
+                  product.price - (product.price * product.discount) / 100,
                 ).toFixed(2)}
               </span>
             </div>
@@ -113,12 +114,12 @@ export default function Product({ product }) {
                   ? "Out of stock"
                   : "Nicht auf Lager"
                 : product.stock >= 3
-                ? i18n.language === "en" || i18n.language === "en-US"
-                  ? "In stock"
-                  : "Auf Lager"
-                : i18n.language === "en" || i18n.language === "en-US"
-                ? `Only ${product.stock} left`
-                : `Nur noch ${product.stock} Stück übrig`}
+                  ? i18n.language === "en" || i18n.language === "en-US"
+                    ? "In stock"
+                    : "Auf Lager"
+                  : i18n.language === "en" || i18n.language === "en-US"
+                    ? `Only ${product.stock} left`
+                    : `Nur noch ${product.stock} Stück übrig`}
             </span>
           </div>
         </div>

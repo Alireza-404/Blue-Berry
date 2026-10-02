@@ -1,6 +1,6 @@
 import SecondaryButton from "../../Ui/SecondaryButton/SecondaryButton";
+import useCart from "../../../hooks/useCart";
 
-import { useEffect, useState } from "react";
 import {
   AiOutlineMinus,
   AiOutlinePlus,
@@ -8,17 +8,8 @@ import {
 } from "react-icons/ai";
 import { IoTrashOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  getCartItems,
-  updateCartItemQuantity,
-} from "../../../services/CartService";
-import {
-  setCartItems,
-  updateQuantity,
-} from "../../../redux/Slices/CartItemsSlice";
-import { showToast } from "../../../redux/Slices/ToastSlice";
-import useCart from "../../../hooks/useCart";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function CartProducts() {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -113,7 +104,10 @@ export default function CartProducts() {
                   <tr key={item.id}>
                     <td>
                       <div>
-                        <a href="#" className="flex items-center gap-x-2.5 p-4">
+                        <Link
+                          to={`/products/${item.product_id}`}
+                          className="flex items-center gap-x-2.5 p-4"
+                        >
                           <img
                             src={item.product.image}
                             alt="product-1"
@@ -123,7 +117,7 @@ export default function CartProducts() {
                           <span className="line-clamp-1 text-secondary dark:text-secondary-D">
                             {item.product.title}
                           </span>
-                        </a>
+                        </Link>
                       </div>
                     </td>
 
@@ -133,7 +127,8 @@ export default function CartProducts() {
                           $
                           {Math.floor(
                             item.product.price -
-                              (item.product.price * item.product.discount) / 100
+                              (item.product.price * item.product.discount) /
+                                100,
                           )}
                         </span>
                       </div>
@@ -190,7 +185,7 @@ export default function CartProducts() {
                             Math.floor(
                               item.product.price -
                                 (item.product.price * item.product.discount) /
-                                  100
+                                  100,
                             )}
                         </span>
                       </div>

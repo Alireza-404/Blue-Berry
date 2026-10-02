@@ -1,8 +1,9 @@
+import useProducts from "../../../hooks/useProducts";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AiOutlineSearch } from "react-icons/ai";
-import useProducts from "../../../hooks/useProducts";
 import { Link } from "react-router-dom";
 
 export default function SearchInput() {
@@ -14,7 +15,7 @@ export default function SearchInput() {
   const filteredProducts = products.filter(
     (product) =>
       product.title_en.toLowerCase().includes(value.toLowerCase()) ||
-      product.title_de.toLowerCase().includes(value.toLowerCase())
+      product.title_de.toLowerCase().includes(value.toLowerCase()),
   );
 
   return (

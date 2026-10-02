@@ -1,8 +1,9 @@
-import { useFormik } from "formik";
-import { BiChevronDown } from "react-icons/bi";
 import PanelButton from "../PanelButton/PanelButton";
 import useProducts from "../../../hooks/useProducts";
 import * as Yup from "yup";
+
+import { useFormik } from "formik";
+import { BiChevronDown } from "react-icons/bi";
 
 export default function ProductForm({ mode = "create", product = null }) {
   const {

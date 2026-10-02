@@ -1,8 +1,9 @@
+import PanelButton from "../PanelButton/PanelButton";
+
 import { Link, NavLink } from "react-router-dom";
 import { AiFillBook, AiFillHome, AiFillProduct } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 import { useSelector } from "react-redux";
-import PanelButton from "../PanelButton/PanelButton";
 
 export default function SidebarContent() {
   const user = useSelector((state) => state.auth.user);
